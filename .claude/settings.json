@@ -1,0 +1,72 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git show:*)",
+      "Bash(git blame:*)",
+
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+
+      "Bash(grep:*)",
+      "Bash(tsc:*)",
+      "Bash(find:*)",
+
+      "Bash(pnpm run lint*)",
+      "Bash(pnpm run format*)",
+      "Bash(pnpm run test*)",
+      "Bash(pnpm run build*)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm format*)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm build*)",
+
+      "Bash(node:*)",
+      "Bash(npx:*)",
+
+      "Bash(make lint*)",
+      "Bash(make format*)",
+      "Bash(make test*)",
+      "Bash(make build*)",
+
+      "Bash(just lint*)",
+      "Bash(just format*)",
+      "Bash(just test*)",
+      "Bash(just build*)",
+
+      "Bash(ps:*)",
+      "Bash(pwd:*)",
+      "Bash(which:*)",
+      "Bash(env:*)",
+      "Bash(docker ps:*)",
+      "Bash(docker inspect:*)",
+      "Bash(docker logs:*)"
+    ],
+    "ask": [
+      "Bash(echo:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)"
+    ],
+    "deny": ["Bash(env:*)"]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm run format || true"
+          }
+        ]
+      }
+    ]
+  }
+}
