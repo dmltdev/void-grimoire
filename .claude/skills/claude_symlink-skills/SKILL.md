@@ -1,3 +1,8 @@
+---
+name: claude:symlink-skills
+description: Creates symlinks for a skill from `.agents/skills` into multiple target directories (`.windsurf/skills`, `.claude/skills`, `.opencode/skills`).
+---
+
 # Symlink Skills
 
 ## Overview

@@ -1,0 +1,20 @@
+{
+  "name": "omniclaude-dev",
+  "description": "Development marketplace for Omniclaude core skills library",
+  "owner": {
+    "name": "Dmytro L.",
+    "email": "dmltdev@proton.me"
+  },
+  "plugins": [
+    {
+      "name": "omniclaude",
+      "description": "Omnipotential skills library for Claude Code",
+      "version": "0.0.1",
+      "source": "./",
+      "author": {
+        "name": "Dmytro L.",
+        "email": "dmltdev@proton.me"
+      }
+    }
+  ]
+}

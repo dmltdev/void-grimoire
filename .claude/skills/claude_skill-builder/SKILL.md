@@ -1,5 +1,5 @@
 ---
-name: skill-builder
+name: claude:skill-builder
 description: Guide for creating and managing Claude skills - modular packages that extend Claude's capabilities with specialized knowledge, workflows, and tools. Use when: (1) Creating a new skill from scratch, (2) Structuring skill components (SKILL.md, scripts/, references/, assets/), (3) Designing skill architecture with progressive disclosure, (4) Following skill creation workflow (understand, plan, initialize, edit, package, iterate), (5) Validating and packaging skills for distribution, (6) Understanding skill anatomy and core principles
 ---
 
@@ -183,4 +183,3 @@ Use skill on real tasks → notice struggles → identify improvements → imple
 - Use assets for output files (templates, images)
 - Progressive disclosure: metadata → body → resources
 - Only include files Claude needs to do the job
-

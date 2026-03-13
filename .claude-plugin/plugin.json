@@ -1,0 +1,20 @@
+{
+  "name": "omniclaude",
+  "description": "Omnipotential skills library for Claude Code",
+  "version": "0.0.1",
+  "author": {
+    "name": "Dmytro L.",
+    "email": "dmltdev@proton.me"
+  },
+  "homepage": "https://github.com/dmltdev/omniclaude",
+  "repository": "https://github.com/dmltdev/omniclaude",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "tdd",
+    "debugging",
+    "collaboration",
+    "best-practices",
+    "workflows"
+  ]
+}

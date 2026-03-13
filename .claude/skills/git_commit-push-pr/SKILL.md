@@ -1,5 +1,5 @@
 ---
-name: commit-push-pr
+name: git:commit-push-pr
 description: Commit changes, push to GitHub, and open a PR. Includes quality checks (security, patterns, simplification). Use --quick to skip checks.
 allowed-tools: Bash, Read, Write, Edit, Grep, Glob, AskUserQuestion
 ---

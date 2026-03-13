@@ -1,5 +1,5 @@
 ---
-name: release-safety
+name: npm:release-safety
 description: Release safety rules. INVOKE WHEN: yarn release, npm publish, release canary, release packages, publishing, skip checks, skip tests. NEVER skip checks or tests without explicit permission.
 ---
 
