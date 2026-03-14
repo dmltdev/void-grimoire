@@ -27,8 +27,8 @@ Before ANY code change or implementation action, you MUST run these gates in ord
 ### Gate 1: Rules Gate (always runs)
 Read `rules/global.md`. Additionally read `rules/{domain}.md` for each domain matched by the task. These are learned corrections from prior sessions — follow them.
 
-### Gate 2: Doc Gate
-Invoke `docs:lookup` with the task context. This checks for relevant documentation (via qmd or local file fallback). Even "no docs found" is a valid result — the point is you looked.
+### Gate 2: Docs & Codebase Gate
+Invoke `docs:lookup` and `codebase:service-map` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
 
 ### Gate 3: Domain Gate
 Invoke `claude:route` with the user's request. It matches against the registry and returns applicable skills. Invoke those skills before acting.
