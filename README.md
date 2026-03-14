@@ -16,12 +16,12 @@ Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **workflow** | brainstorm, write-plan, execute-plan, subagent-dev, parallel-agents, verify-before-completion | End-to-end development lifecycle |
+| **workflow** | brainstorm, write-plan, execute-plan, subagent-dev, parallel-agents, verify-before-completion, prepare-compact | End-to-end development lifecycle |
 | **design** | 18 skills (frontend-design, audit, critique, polish, animate, etc.) | UI/UX design and implementation |
 | **dev** | tdd, debug | Test-driven development and systematic debugging |
 | **git** | worktrees, request-review, receive-review, finish-branch, commit-push-pr, safety | Git workflow and code review |
 | **docs** | lookup, index | Documentation search and indexing |
-| **claude** | entry-point, route, expand-prompt, learn, write-skill, symlink-skills | Plugin meta-skills and self-learning |
+| **claude** | entry-point, route, expand-prompt, learn, write-skill | Plugin meta-skills and self-learning |
 | **npm** | release-safety | Package publishing safety |
 
 **41 skills** total across 7 domains.

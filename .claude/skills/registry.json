@@ -3,7 +3,7 @@
     "claude": {
       "description": "Meta skills — plugin management, skill authoring, self-learning",
       "triggers": ["skill", "plugin", "claude", "remember", "learn", "rule"],
-      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill", "claude:symlink-skills"],
+      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill"],
       "docs": []
     },
     "docs": {
@@ -14,8 +14,8 @@
     },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
-      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship"],
-      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion"],
+      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
+      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion", "workflow:prepare-compact"],
       "docs": []
     },
     "dev": {
