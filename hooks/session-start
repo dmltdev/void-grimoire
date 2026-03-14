@@ -8,10 +8,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Read entry-point skill content
-entry_point_content=$(cat "${PLUGIN_ROOT}/.claude/skills/claude_entry-point/SKILL.md" 2>&1 || echo "Error reading entry-point skill")
+entry_point_content=$(cat "${PLUGIN_ROOT}/skills/claude_entry-point/SKILL.md" 2>&1 || echo "Error reading entry-point skill")
 
 # Read registry
-REGISTRY=$(cat "$PLUGIN_ROOT/.claude/skills/registry.json")
+REGISTRY=$(cat "$PLUGIN_ROOT/skills/registry.json")
 
 # Escape string for JSON embedding using bash parameter substitution.
 # Each ${s//old/new} is a single C-level pass - orders of magnitude
