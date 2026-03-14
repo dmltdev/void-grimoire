@@ -1,9 +1,36 @@
 # Void Grimoire
 
-Domain-organized skill system for Claude Code with three-gate flow, self-learning, and prompt expansion.
+![Void Grimoire](void-grimoire.webp)
+
+A skill system for Claude Code that enforces structured workflows, learns your conventions, and prevents the most common failure modes of AI-assisted development.
+
+## Why
+
+AI coding assistants are powerful but undisciplined. They skip research, forget context, ignore your team's patterns, and claim things work without checking. Void Grimoire adds guardrails.
+
+### What It Solves
+
+| Problem | How Void Grimoire Addresses It |
+|---------|-------------------------------|
+| **AI doesn't understand intent** — jumps to code without grasping the business goal | `workflow:brainstorm` gates all work behind intent exploration, clarifying questions, and design approval before any code is written |
+| **Workflow sequencing** — AI codes when it should be researching or planning | Hard-chained pipeline: brainstorm → plan → implement → verify → finish. Skills enforce phase order via `chains-to`; no skipping allowed |
+| **Codebase conventions ignored** — AI defaults to generic patterns instead of yours | Three-tier rule system (global → domain → project). `claude:learn` captures corrections mid-session and persists them for future sessions |
+| **Verification gap** — AI writes code but never proves it works | `workflow:verify-before-completion` enforces an iron law: no completion claims without fresh evidence (test run, build, lint). `dev:tdd` enforces red-green-refactor |
+| **Scope creep & over-engineering** — AI refactors things you didn't ask about | TDD enforces minimal code. Brainstorm decomposes large scopes. Spec compliance reviews catch additions not in the plan |
+| **Prompt drift** — instructions degrade over long sessions | Rules are reloaded from disk on every turn via the entry-point gate. Learned corrections persist across sessions, not just within them |
+| **Stale mental model** — AI forgets decisions made 20 messages ago | Design specs, implementation plans, and session summaries are written to disk. Decisions survive `/compact` and session boundaries |
+| **Handoff friction** — re-establishing context between sessions or tools | `workflow:prepare-compact` generates a session summary with a ready-to-paste continuation prompt. Plans are structured with chunk boundaries for parallel handoff |
+| **Topology awareness** — AI doesn't know how services relate | `codebase:service-map` auto-discovers workspace dependencies (pnpm, lerna, Go workspaces), caches a bidirectional graph, and expands task scope to include affected services |
+
+### Known Limitations
+
+| Problem | Status |
+|---------|--------|
+| **Context window saturation** — large codebases exceed what AI can hold | Partially addressed. Session preservation and on-demand skill loading help, but there's no automatic selective code loading for very large codebases |
+| **Multi-repo blindness** — AI only sees the repo it's in | Partially addressed. Service-map covers monorepo workspaces but doesn't span separate Git repositories or trace cross-repo contracts |
 
 ## How It Works
- 
+
 Before any code action, three gates fire in order:
 
 1. **Rules Gate** — reads learned rules (`rules/global.md` + `rules/{domain}.md`)
@@ -11,6 +38,30 @@ Before any code action, three gates fire in order:
 3. **Domain Gate** — matches request against registry triggers, returns applicable skills
 
 Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-to` (hard successor), `suggests` (soft recommendation).
+
+## Usage
+
+### Workflow Pipeline
+
+For any non-trivial task, the plugin enforces this sequence:
+
+```
+brainstorm → write-plan → execute-plan / subagent-dev → verify → finish-branch
+```
+
+You can enter at any stage if prior artifacts exist (e.g., you already have a spec).
+
+### Self-Learning
+
+When you correct the AI — "don't mock the database", "always use snake_case for API fields" — the `claude:learn` skill detects the correction and persists it to the appropriate rule file. Next session, that rule loads automatically via Gate 1.
+
+### Service Topology
+
+On first run in a workspace, `codebase:service-map` scans for workspace configs and builds `.service-map.json`. When you touch a service, the plugin expands scope to include its dependents and dependencies so nothing breaks silently.
+
+### Session Continuity
+
+Before running `/compact` or ending a session, invoke `workflow:prepare-compact`. It saves a session summary to `docs/sessions/` with a continuation prompt you can paste into the next session.
 
 ## Domains
 
