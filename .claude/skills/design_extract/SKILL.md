@@ -6,6 +6,9 @@ args:
   - name: target
     description: The feature, component, or area to extract from (optional)
     required: false
+depends-on: []
+chains-to: null
+suggests: []
 ---
 
 Identify reusable patterns, components, and design tokens, then extract and consolidate them into the design system for systematic reuse.

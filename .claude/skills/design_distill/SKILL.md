@@ -6,6 +6,9 @@ args:
   - name: target
     description: The feature or component to distill (optional)
     required: false
+depends-on: []
+chains-to: null
+suggests: []
 ---
 
 Remove unnecessary complexity from designs, revealing the essential elements and creating clarity through ruthless simplification.

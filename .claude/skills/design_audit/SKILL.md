@@ -6,6 +6,9 @@ args:
   - name: area
     description: The feature or area to audit (optional)
     required: false
+depends-on: []
+chains-to: null
+suggests: []
 ---
 
 Run systematic quality checks and generate a comprehensive audit report with prioritized issues and actionable recommendations. Don't fix issues - document them for other commands to address.

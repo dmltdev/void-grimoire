@@ -6,6 +6,9 @@ args:
   - name: target
     description: The feature or area to harden (optional)
     required: false
+depends-on: []
+chains-to: null
+suggests: []
 ---
 
 Strengthen interfaces against edge cases, errors, internationalization issues, and real-world usage scenarios that break idealized designs.

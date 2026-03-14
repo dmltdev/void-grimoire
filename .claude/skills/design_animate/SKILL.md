@@ -6,6 +6,9 @@ args:
   - name: target
     description: The feature or component to animate (optional)
     required: false
+depends-on: []
+chains-to: null
+suggests: []
 ---
 
 Analyze a feature and strategically add animations and micro-interactions that enhance understanding, provide feedback, and create delight.

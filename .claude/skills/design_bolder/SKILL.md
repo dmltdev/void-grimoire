@@ -6,6 +6,9 @@ args:
   - name: target
     description: The feature or component to make bolder (optional)
     required: false
+depends-on: []
+chains-to: null
+suggests: []
 ---
 
 Increase visual impact and personality in designs that are too safe, generic, or visually underwhelming, creating more engaging and memorable experiences.
