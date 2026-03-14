@@ -7,7 +7,7 @@ Domain-organized skill system for Claude Code with three-gate flow, self-learnin
 Before any code action, three gates fire in order:
 
 1. **Rules Gate** — reads learned rules (`rules/global.md` + `rules/{domain}.md`)
-2. **Doc Gate** — searches for relevant documentation via [qmd](https://github.com/tobi/qmd) or local file fallback
+2. **Docs & Codebase Gate** — searches for documentation via [qmd](https://github.com/tobi/qmd) and discovers service topology in parallel
 3. **Domain Gate** — matches request against registry triggers, returns applicable skills
 
 Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-to` (hard successor), `suggests` (soft recommendation).
@@ -21,10 +21,11 @@ Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-
 | **dev** | tdd, debug | Test-driven development and systematic debugging |
 | **git** | worktrees, request-review, receive-review, finish-branch, commit-push-pr, safety | Git workflow and code review |
 | **docs** | lookup, index | Documentation search and indexing |
+| **codebase** | service-map | Codebase structure awareness and service topology |
 | **claude** | entry-point, route, expand-prompt, learn, write-skill | Plugin meta-skills and self-learning |
 | **npm** | release-safety | Package publishing safety |
 
-**41 skills** total across 7 domains.
+**42 skills** total across 8 domains.
 
 ## Installation
 
