@@ -1,0 +1,46 @@
+{
+  "domains": {
+    "claude": {
+      "description": "Meta skills — plugin management, skill authoring, self-learning",
+      "triggers": ["skill", "plugin", "claude", "remember", "learn", "rule"],
+      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill", "claude:symlink-skills"],
+      "docs": []
+    },
+    "docs": {
+      "description": "Documentation lookup and indexing via qmd",
+      "triggers": ["docs", "documentation", "reference", "API docs", "lookup"],
+      "skills": ["docs:lookup", "docs:index"],
+      "docs": []
+    },
+    "workflow": {
+      "description": "Development pipeline — brainstorm, plan, execute, verify",
+      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship"],
+      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion"],
+      "docs": []
+    },
+    "dev": {
+      "description": "Development techniques — TDD, debugging, error handling",
+      "triggers": ["test", "TDD", "debug", "bug", "error", "fail", "broken", "crash"],
+      "skills": ["dev:tdd", "dev:debug"],
+      "docs": []
+    },
+    "git": {
+      "description": "Git workflow — commits, branches, PRs, reviews",
+      "triggers": ["commit", "push", "PR", "pull request", "branch", "merge", "review", "rebase"],
+      "skills": ["git:safety", "git:commit-push-pr", "git:worktrees", "git:request-review", "git:receive-review", "git:finish-branch"],
+      "docs": []
+    },
+    "design": {
+      "description": "UI/UX design — frontend, accessibility, visual quality",
+      "triggers": ["UI", "UX", "component", "layout", "CSS", "responsive", "a11y", "animation", "color", "design", "frontend", "page", "screen"],
+      "skills": ["design:frontend-design", "design:audit", "design:critique", "design:adapt", "design:animate", "design:bolder", "design:clarify", "design:colorize", "design:delight", "design:distill", "design:extract", "design:harden", "design:normalize", "design:onboard", "design:optimize", "design:polish", "design:quieter", "design:teach-design"],
+      "docs": []
+    },
+    "npm": {
+      "description": "NPM package management and publishing safety",
+      "triggers": ["npm", "publish", "release", "package", "version"],
+      "skills": ["npm:release-safety"],
+      "docs": []
+    }
+  }
+}
