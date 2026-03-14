@@ -87,7 +87,7 @@ void-grimoire/
 └── .gitignore
 ```
 
-**42 skills across 8 domains:** claude (5), docs (2), codebase (1), workflow (6), dev (2), git (6), design (18), npm (1). `claude:entry-point` is excluded from the count — it is loaded via hook, not routed.
+**41 skills across 8 domains:** claude (4), docs (2), codebase (1), workflow (7), dev (2), git (6), design (18), npm (1). `claude:entry-point` is excluded from the count — it is loaded via hook, not routed.
 
 Skill directories use underscore separator: `{domain}_{skill-name}`. Skill names in frontmatter use colon: `{domain}:{skill-name}`.
 
@@ -107,7 +107,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
     "claude": {
       "description": "Meta skills — plugin management, skill authoring, self-learning",
       "triggers": ["skill", "plugin", "claude", "remember", "learn", "rule"],
-      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill", "claude:symlink-skills"],
+      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill"],
       "docs": []
     },
     "docs": {
@@ -116,10 +116,16 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
       "skills": ["docs:lookup", "docs:index"],
       "docs": []
     },
+    "codebase": {
+      "description": "Codebase structure awareness — service topology, dependency graphs",
+      "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
+      "skills": ["codebase:service-map"],
+      "docs": []
+    },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
-      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship"],
-      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion"],
+      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
+      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion", "workflow:prepare-compact"],
       "docs": []
     },
     "dev": {
@@ -159,8 +165,8 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 ### Gate 1: Rules Gate
 Always reads `rules/global.md`. Additionally reads `rules/{domain}.md` for each domain matched by the task. Injects learned corrections into context. Always runs (just file reads, no skill invocation).
 
-### Gate 2: Doc Gate
-Invoke `docs:lookup`. If qmd is available, search indexed docs. If not, fall back to Grep/Read on local docs (README, docs/, inline comments). If qmd is not installed and user hasn't made a choice yet, ask once and save to CLAUDE.md as `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`.
+### Gate 2: Docs & Codebase Gate
+Invoke `docs:lookup` and `codebase:service-map` in parallel. `docs:lookup` searches indexed docs via qmd (or falls back to local Grep/Read). `codebase:service-map` checks for `.service-map.json` cache (or runs discovery) and expands task scope to include affected services. Merge both outputs before Gate 3.
 
 ### Gate 3: Domain Gate
 Invoke `claude:route`. Match user request against registry triggers. Return list of applicable skills. Agent invokes those skills before acting.
@@ -170,7 +176,7 @@ Invoke `claude:route`. Match user request against registry triggers. Return list
 ```
 User message
   → Gate 1: Read rules/{matched domains}.md
-  → Gate 2: docs:lookup (qmd or fallback)
+  → Gate 2: docs:lookup ‖ codebase:service-map
   → Gate 3: claude:route → invoke matched skills
   → Proceed with task
 ```

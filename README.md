@@ -25,7 +25,7 @@ Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-
 | **claude** | entry-point, route, expand-prompt, learn, write-skill | Plugin meta-skills and self-learning |
 | **npm** | release-safety | Package publishing safety |
 
-**42 skills** total across 8 domains.
+**41 skills** total across 8 domains.
 
 ## Installation
 
