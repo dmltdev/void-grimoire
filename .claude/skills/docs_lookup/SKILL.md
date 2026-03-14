@@ -13,7 +13,7 @@ Check for relevant documentation before writing code. This is Gate 2 of the thre
 ## Process
 
 ### 1. Check qmd preference
-Read the project's CLAUDE.md for `<!-- omniclaude:qmd:enabled -->` or `<!-- omniclaude:qmd:disabled -->`.
+Read the project's CLAUDE.md for `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`.
 
 ### 2. If no preference found
 Check if qmd is installed: `which qmd`
@@ -24,7 +24,7 @@ If qmd is NOT installed, ask the user ONCE:
 > - **Skip:** I'll search local docs only (README, docs/, inline comments)"
 
 Save their choice to the project's CLAUDE.md as an HTML comment:
-- `<!-- omniclaude:qmd:enabled -->` or `<!-- omniclaude:qmd:disabled -->`
+- `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`
 
 ### 3. Search for docs
 

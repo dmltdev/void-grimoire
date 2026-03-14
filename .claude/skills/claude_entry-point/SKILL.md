@@ -17,7 +17,7 @@ If you think there is even a 1% chance a skill might apply to what you are doing
 ## Instruction Priority
 
 1. **User's explicit instructions** (CLAUDE.md, GEMINI.md, AGENTS.md, direct requests) — highest priority
-2. **Omniclaude skills** — override default system behavior where they conflict
+2. **Void Grimoire skills** — override default system behavior where they conflict
 3. **Default system prompt** — lowest priority
 
 ## Three-Gate Flow

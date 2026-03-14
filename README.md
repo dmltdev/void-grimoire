@@ -1,9 +1,9 @@
-# Omniclaude
+# Void Grimoire
 
 Domain-organized skill system for Claude Code with three-gate flow, self-learning, and prompt expansion.
 
 ## How It Works
-
+ 
 Before any code action, three gates fire in order:
 
 1. **Rules Gate** — reads learned rules (`rules/global.md` + `rules/{domain}.md`)
@@ -31,19 +31,23 @@ Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-
 ### Claude Code (Marketplace)
 
 ```bash
-/plugin install omniclaude@claude-plugins-official
+/plugin install void-grimoire@claude-plugins-official
 ```
 
 ### Claude Code (Manual)
 
 ```bash
-/plugin marketplace add dmltdev/omniclaude-marketplace
-/plugin install dmltdev@omniclaude-marketplace
+/plugin marketplace add dmltdev/void-grimoire-marketplace
+/plugin install dmltdev@void-grimoire-marketplace
 ```
 
 ## Architecture
 
-See the full spec: [`docs/specs/2026-03-14-omniclaude-architecture-design.md`](docs/specs/2026-03-14-omniclaude-architecture-design.md)
+See the full spec: [`docs/specs/2026-03-14-void-grimoire-architecture-design.md`](docs/specs/2026-03-14-void-grimoire-architecture-design.md)
+
+## Lore
+
+If you're into fantasy, see [`docs/LORE.md`](docs/LORE.md) for why this plugin is a grimoire.
 
 ## License
 

@@ -1,4 +1,4 @@
-# Omniclaude Architecture Design
+# Void Grimoire Architecture Design
 
 > **For agentic workers:** REQUIRED: Use workflow:write-plan to create an implementation plan from this spec.
 
@@ -11,7 +11,7 @@
 ## 1. Plugin Structure
 
 ```
-omniclaude/
+void-grimoire/
 ├── .claude/
 │   ├── settings.json
 │   └── skills/
@@ -158,7 +158,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 Always reads `rules/global.md`. Additionally reads `rules/{domain}.md` for each domain matched by the task. Injects learned corrections into context. Always runs (just file reads, no skill invocation).
 
 ### Gate 2: Doc Gate
-Invoke `docs:lookup`. If qmd is available, search indexed docs. If not, fall back to Grep/Read on local docs (README, docs/, inline comments). If qmd is not installed and user hasn't made a choice yet, ask once and save to CLAUDE.md as `<!-- omniclaude:qmd:enabled -->` or `<!-- omniclaude:qmd:disabled -->`.
+Invoke `docs:lookup`. If qmd is available, search indexed docs. If not, fall back to Grep/Read on local docs (README, docs/, inline comments). If qmd is not installed and user hasn't made a choice yet, ask once and save to CLAUDE.md as `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`.
 
 ### Gate 3: Domain Gate
 Invoke `claude:route`. Match user request against registry triggers. Return list of applicable skills. Agent invokes those skills before acting.
@@ -290,7 +290,7 @@ Gate 1 (rules gate) reads `rules/` files matching the task's domain(s) at sessio
 
 ### `docs:lookup` (automatic, via gate 2)
 
-1. Check CLAUDE.md for `<!-- omniclaude:qmd:enabled -->` or `<!-- omniclaude:qmd:disabled -->`
+1. Check CLAUDE.md for `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`
 2. If no preference found → check if qmd is installed (`which qmd`)
 3. If qmd missing → ask user: "qmd is not installed. Want me to set it up, or continue without it?"
 4. Save choice to project CLAUDE.md
@@ -309,11 +309,11 @@ User runs `/docs:index <url>` or `/docs:index <local-path>`.
 ### CLAUDE.md Persistence
 
 ```markdown
-<!-- omniclaude:qmd:enabled -->
+<!-- void-grimoire:qmd:enabled -->
 ```
 or
 ```markdown
-<!-- omniclaude:qmd:disabled -->
+<!-- void-grimoire:qmd:disabled -->
 ```
 
 HTML comment format — invisible in rendered markdown, parseable by skills.
@@ -396,9 +396,9 @@ SessionStart hook reads `claude:entry-point` SKILL.md + `registry.json` and inje
 
 ## 9. Ported Superpowers Skills
 
-All 14 superpowers skills are absorbed into omniclaude namespaces:
+All 14 superpowers skills are absorbed into void-grimoire namespaces:
 
-| Superpowers | Omniclaude | Supporting files |
+| Superpowers | Void Grimoire | Supporting files |
 |---|---|---|
 | `brainstorming` | `workflow:brainstorm` | spec-document-reviewer-prompt.md, visual-companion.md |
 | `writing-plans` | `workflow:write-plan` | plan-document-reviewer-prompt.md |
@@ -413,9 +413,9 @@ All 14 superpowers skills are absorbed into omniclaude namespaces:
 | `receiving-code-review` | `git:receive-review` | — |
 | `finishing-a-development-branch` | `git:finish-branch` | — |
 | `writing-skills` | `claude:write-skill` | anthropic-best-practices.md, persuasion-principles.md, testing-skills-with-subagents.md |
-| `using-superpowers` | `claude:entry-point` | Rewritten for omniclaude (registry-aware, three-gate flow) |
+| `using-superpowers` | `claude:entry-point` | Rewritten for void-grimoire (registry-aware, three-gate flow) |
 
-Skills are ported with content intact. Frontmatter updated to new format (adding `depends-on`, `chains-to`, `suggests`). Internal references to superpowers skill names updated to omniclaude names.
+Skills are ported with content intact. Frontmatter updated to new format (adding `depends-on`, `chains-to`, `suggests`). Internal references to superpowers skill names updated to void-grimoire names.
 
 ---
 

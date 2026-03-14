@@ -1,13 +1,13 @@
-# Omniclaude v1 — Session Summary
+# Void Grimoire v1 — Session Summary
 
 ## What Was Done
 
-Built the omniclaude Claude Code plugin from scratch. It absorbs superpowers into namespaced domains and adds three new systems: doc gating, domain routing, and self-learning.
+Built the void-grimoire Claude Code plugin from scratch. It absorbs superpowers into namespaced domains and adds three new systems: doc gating, domain routing, and self-learning.
 
 ### Completed
 
-1. **Spec written & reviewed** — `docs/specs/2026-03-14-omniclaude-architecture-design.md`
-2. **Plan written & reviewed** — `docs/plans/2026-03-14-omniclaude-v1.md`
+1. **Spec written & reviewed** — `docs/specs/2026-03-14-void-grimoire-architecture-design.md`
+2. **Plan written & reviewed** — `docs/plans/2026-03-14-void-grimoire-v1.md`
 3. **All 12 implementation tasks executed:**
    - Task 1: Infrastructure (registry.json, 8 rule files, hooks)
    - Tasks 2-6: New skills (entry-point, route, expand-prompt, learn, docs:lookup, docs:index)
@@ -36,8 +36,8 @@ Built the omniclaude Claude Code plugin from scratch. It absorbs superpowers int
 
 ## Key Files
 
-- Spec: `docs/specs/2026-03-14-omniclaude-architecture-design.md`
-- Plan: `docs/plans/2026-03-14-omniclaude-v1.md`
+- Spec: `docs/specs/2026-03-14-void-grimoire-architecture-design.md`
+- Plan: `docs/plans/2026-03-14-void-grimoire-v1.md`
 - Registry: `.claude/skills/registry.json`
 - Entry point: `.claude/skills/claude_entry-point/SKILL.md`
 - Hooks: `hooks/hooks.json`, `hooks/session-start`

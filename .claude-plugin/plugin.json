@@ -1,13 +1,13 @@
 {
-  "name": "omniclaude",
+  "name": "void-grimoire",
   "description": "Domain-organized skill system with three-gate flow, self-learning, and prompt expansion for Claude Code",
   "version": "1.0.0",
   "author": {
     "name": "Dmytro L.",
     "email": "dmltdev@proton.me"
   },
-  "homepage": "https://github.com/dmltdev/omniclaude",
-  "repository": "https://github.com/dmltdev/omniclaude",
+  "homepage": "https://github.com/dmltdev/void-grimoire",
+  "repository": "https://github.com/dmltdev/void-grimoire",
   "license": "MIT",
   "keywords": [
     "skills",

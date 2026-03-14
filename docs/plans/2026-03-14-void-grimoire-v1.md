@@ -1,20 +1,20 @@
-# Omniclaude v1 Implementation Plan
+# Void Grimoire v1 Implementation Plan
 
 > **For Claude:** REQUIRED: Use workflow:execute-plan or workflow:subagent-dev to implement this plan task-by-task.
 
-**Goal:** Build the omniclaude Claude Code plugin — a domain-organized skill system with three-gate flow (rules → docs → routing), self-learning, and prompt expansion.
+**Goal:** Build the void-grimoire Claude Code plugin — a domain-organized skill system with three-gate flow (rules → docs → routing), self-learning, and prompt expansion.
 
 **Architecture:** Thin entry point injected at session start with registry. Three gates (rules, docs, routing) fire before code actions. Skills declare composition via `depends-on`, `chains-to`, `suggests` frontmatter. Superpowers workflow ported into namespaced domains.
 
 **Tech Stack:** Markdown (SKILL.md), JSON (registry), Bash (hooks), qmd (doc indexing)
 
-**Spec:** `docs/specs/2026-03-14-omniclaude-architecture-design.md`
+**Spec:** `docs/specs/2026-03-14-void-grimoire-architecture-design.md`
 
 **Source for porting:** `/Users/dmytro.l/dmltdev/skills/superpowers/`
 
 ---
 
-## Reference: Skill Name Mapping (Superpowers → Omniclaude)
+## Reference: Skill Name Mapping (Superpowers → Void Grimoire)
 
 All ported skills must replace these references throughout their content:
 
@@ -53,7 +53,7 @@ All ported skills must replace these references throughout their content:
 - Create: `hooks/run-hook.cmd`
 - Create: `hooks/session-start`
 
-All paths relative to `/Users/dmytro.l/dmltdev/skills/omniclaude/`.
+All paths relative to `/Users/dmytro.l/dmltdev/skills/void-grimoire/`.
 
 - [ ] **Step 1: Create `registry.json`**
 
@@ -107,7 +107,7 @@ Copy from `/Users/dmytro.l/dmltdev/skills/superpowers/hooks/session-start`. Then
   CONTENT="$SKILL_CONTENT\n\n## Domain Registry\n\n\`\`\`json\n$REGISTRY\n\`\`\`"
   ```
   Append the registry to the same `hookSpecificOutput` additionalContext string
-- Update any references to "superpowers" in output messages to "omniclaude"
+- Update any references to "superpowers" in output messages to "void-grimoire"
 - Keep platform detection logic (Claude Code vs others) intact
 
 Make the script executable: `chmod +x hooks/session-start`
@@ -161,7 +161,7 @@ If you think there is even a 1% chance a skill might apply to what you are doing
 ## Instruction Priority
 
 1. **User's explicit instructions** (CLAUDE.md, GEMINI.md, AGENTS.md, direct requests) — highest priority
-2. **Omniclaude skills** — override default system behavior where they conflict
+2. **Void Grimoire skills** — override default system behavior where they conflict
 3. **Default system prompt** — lowest priority
 
 ## Three-Gate Flow
@@ -321,7 +321,7 @@ Check for relevant documentation before writing code. This is Gate 2 of the thre
 ## Process
 
 ### 1. Check qmd preference
-Read the project's CLAUDE.md for `<!-- omniclaude:qmd:enabled -->` or `<!-- omniclaude:qmd:disabled -->`.
+Read the project's CLAUDE.md for `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`.
 
 ### 2. If no preference found
 Check if qmd is installed: `which qmd`
@@ -332,7 +332,7 @@ If qmd is NOT installed, ask the user ONCE:
 > - **Skip:** I'll search local docs only (README, docs/, inline comments)"
 
 Save their choice to the project's CLAUDE.md as an HTML comment:
-- `<!-- omniclaude:qmd:enabled -->` or `<!-- omniclaude:qmd:disabled -->`
+- `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`
 
 ### 3. Search for docs
 
@@ -599,7 +599,7 @@ For each skill, copy the entire directory contents (SKILL.md + all supporting fi
 
 ```bash
 SP="/Users/dmytro.l/dmltdev/skills/superpowers/skills"
-OC="/Users/dmytro.l/dmltdev/skills/omniclaude/.claude/skills"
+OC="/Users/dmytro.l/dmltdev/skills/void-grimoire/.claude/skills"
 
 # brainstorming → workflow_brainstorm
 mkdir -p "$OC/workflow_brainstorm"
@@ -706,7 +706,7 @@ suggests: []
 
 - [ ] **Step 3: Update all internal references**
 
-In each SKILL.md and supporting file, replace ALL superpowers skill references with omniclaude equivalents. Use the mapping table at the top of this plan. Key replacements per file:
+In each SKILL.md and supporting file, replace ALL superpowers skill references with void-grimoire equivalents. Use the mapping table at the top of this plan. Key replacements per file:
 
 **workflow_brainstorm/SKILL.md:**
 - `writing-plans` → `workflow:write-plan` (ALL occurrences)
@@ -738,7 +738,7 @@ In each SKILL.md and supporting file, replace ALL superpowers skill references w
 **workflow_parallel-agents/SKILL.md:**
 - No internal superpowers references to update.
 
-Also update supporting prompt files (spec-document-reviewer-prompt.md, implementer-prompt.md, etc.) — search for any `superpowers:` references and replace with the omniclaude equivalents.
+Also update supporting prompt files (spec-document-reviewer-prompt.md, implementer-prompt.md, etc.) — search for any `superpowers:` references and replace with the void-grimoire equivalents.
 
 - [ ] **Step 4: Verify no stale references remain**
 
@@ -764,7 +764,7 @@ git commit -m "feat: port 6 workflow skills from superpowers — brainstorm, wri
 
 ```bash
 SP="/Users/dmytro.l/dmltdev/skills/superpowers/skills"
-OC="/Users/dmytro.l/dmltdev/skills/omniclaude/.claude/skills"
+OC="/Users/dmytro.l/dmltdev/skills/void-grimoire/.claude/skills"
 
 # test-driven-development → dev_tdd
 mkdir -p "$OC/dev_tdd"
@@ -836,7 +836,7 @@ git commit -m "feat: port dev:tdd and dev:debug skills from superpowers"
 
 ```bash
 SP="/Users/dmytro.l/dmltdev/skills/superpowers/skills"
-OC="/Users/dmytro.l/dmltdev/skills/omniclaude/.claude/skills"
+OC="/Users/dmytro.l/dmltdev/skills/void-grimoire/.claude/skills"
 
 mkdir -p "$OC/git_worktrees"
 cp "$SP/using-git-worktrees/SKILL.md" "$OC/git_worktrees/"
@@ -938,7 +938,7 @@ Rename the directory from `claude_skill-builder` to `claude_write-skill` (matchi
 
 ```bash
 SP="/Users/dmytro.l/dmltdev/skills/superpowers/skills"
-OC="/Users/dmytro.l/dmltdev/skills/omniclaude/.claude/skills"
+OC="/Users/dmytro.l/dmltdev/skills/void-grimoire/.claude/skills"
 
 # Rename directory to match spec
 mv "$OC/claude_skill-builder" "$OC/claude_write-skill"
@@ -1078,7 +1078,7 @@ Update version and description:
 
 ```json
 {
-  "name": "omniclaude",
+  "name": "void-grimoire",
   "version": "1.0.0",
   "description": "Domain-organized skill system with three-gate flow, self-learning, and prompt expansion for Claude Code",
   "author": {
@@ -1088,7 +1088,7 @@ Update version and description:
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmltdev/omniclaude"
+    "url": "https://github.com/dmltdev/void-grimoire"
   },
   "keywords": [
     "skills",
@@ -1106,7 +1106,7 @@ Update version and description:
 - [ ] **Step 3: Update README.md**
 
 Update the README to reflect the new architecture:
-- Plugin name: Omniclaude
+- Plugin name: Void Grimoire
 - Description: Domain-organized skill system with three-gate flow
 - List all 7 domains with brief descriptions
 - Installation instructions (marketplace + manual)

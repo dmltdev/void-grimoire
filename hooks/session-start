@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart hook for omniclaude plugin
+# SessionStart hook for void-grimoire plugin
 
 set -euo pipefail
 
@@ -28,7 +28,7 @@ escape_for_json() {
 
 entry_point_escaped=$(escape_for_json "$entry_point_content")
 registry_escaped=$(escape_for_json "$REGISTRY")
-session_context="<EXTREMELY_IMPORTANT>\nYou have omniclaude.\n\n**Below is the full content of your 'omniclaude:entry-point' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${entry_point_escaped}\n\n**Skill Registry:**\n\n${registry_escaped}\n</EXTREMELY_IMPORTANT>"
+session_context="<EXTREMELY_IMPORTANT>\nYou have void-grimoire.\n\n**Below is the full content of your 'void-grimoire:entry-point' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${entry_point_escaped}\n\n**Skill Registry:**\n\n${registry_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context.

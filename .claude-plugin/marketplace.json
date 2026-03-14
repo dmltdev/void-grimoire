@@ -1,13 +1,13 @@
 {
-  "name": "omniclaude-dev",
-  "description": "Development marketplace for Omniclaude core skills library",
+  "name": "void-grimoire-dev",
+  "description": "Development marketplace for Void Grimoire core skills library",
   "owner": {
     "name": "Dmytro L.",
     "email": "dmltdev@proton.me"
   },
   "plugins": [
     {
-      "name": "omniclaude",
+      "name": "void-grimoire",
       "description": "Domain-organized skill system with three-gate flow, self-learning, and prompt expansion for Claude Code",
       "version": "1.0.0",
       "source": "./",
