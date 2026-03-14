@@ -4,6 +4,55 @@
 
 A skill system for Claude Code that enforces structured workflows, learns your conventions, and prevents the most common failure modes of AI-assisted development.
 
+## Installation
+
+### Claude Code (Marketplace)
+
+```bash
+/plugin install void-grimoire@claude-plugins-official
+```
+
+### Claude Code (Manual)
+
+```bash
+/plugin marketplace add dmltdev/void-grimoire-marketplace
+/plugin install dmltdev@void-grimoire-marketplace
+```
+
+## Get Started
+
+The plugin activates automatically. On every message, `claude:entry-point` runs three gates (rules → docs → routing) before any action is taken — you don't need to invoke it manually.
+
+**To build something new**, just describe what you want:
+
+```
+I want to add a dark mode toggle to the settings page
+```
+
+The plugin will route you through `workflow:brainstorm` — exploring your intent, asking clarifying questions, and producing a design spec before any code is written. From there, the pipeline chains automatically:
+
+```
+brainstorm → write-plan → execute-plan → verify → finish-branch
+```
+
+**To fix a bug**, describe the symptom:
+
+```
+The sidebar collapses on page refresh
+```
+
+The plugin routes to `dev:debug` for systematic root-cause analysis before proposing fixes.
+
+**To invoke a skill directly**, use its full name:
+
+```
+/skill workflow:brainstorm
+/skill dev:tdd
+/skill design:frontend-design
+```
+
+**Self-learning** happens automatically. When you correct the AI mid-session ("don't use mocks here", "always use camelCase"), `claude:learn` persists the correction. Next session, it loads automatically.
+
 ## Why
 
 AI coding assistants are powerful but undisciplined. They skip research, forget context, ignore your team's patterns, and claim things work without checking. Void Grimoire adds guardrails.
@@ -77,21 +126,6 @@ Before running `/compact` or ending a session, invoke `workflow:prepare-compact`
 | **npm** | release-safety | Package publishing safety |
 
 **41 skills** total across 8 domains.
-
-## Installation
-
-### Claude Code (Marketplace)
-
-```bash
-/plugin install void-grimoire@claude-plugins-official
-```
-
-### Claude Code (Manual)
-
-```bash
-/plugin marketplace add dmltdev/void-grimoire-marketplace
-/plugin install dmltdev@void-grimoire-marketplace
-```
 
 ## Architecture
 
