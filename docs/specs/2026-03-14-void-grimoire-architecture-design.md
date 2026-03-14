@@ -27,6 +27,8 @@ void-grimoire/
 │       ├── docs_lookup/
 │       ├── docs_index/
 │       │
+│       ├── codebase_service-map/
+│       │
 │       ├── workflow_brainstorm/
 │       ├── workflow_write-plan/
 │       ├── workflow_execute-plan/
@@ -85,7 +87,7 @@ void-grimoire/
 └── .gitignore
 ```
 
-**41 skills across 7 domains:** claude (5), docs (2), workflow (6), dev (2), git (6), design (18), npm (1). `claude:entry-point` is excluded from the count — it is loaded via hook, not routed.
+**42 skills across 8 domains:** claude (5), docs (2), codebase (1), workflow (6), dev (2), git (6), design (18), npm (1). `claude:entry-point` is excluded from the count — it is loaded via hook, not routed.
 
 Skill directories use underscore separator: `{domain}_{skill-name}`. Skill names in frontmatter use colon: `{domain}:{skill-name}`.
 
@@ -437,6 +439,9 @@ claude:symlink-skills    → depends-on: [], chains-to: null, suggests: []
 # docs domain
 docs:lookup              → depends-on: [], chains-to: null, suggests: []
 docs:index               → depends-on: [], chains-to: null, suggests: []
+
+# codebase domain
+codebase:service-map    → depends-on: [], chains-to: null, suggests: [docs:lookup]
 
 # workflow domain
 workflow:brainstorm          → depends-on: [], chains-to: "workflow:write-plan", suggests: [design:critique, design:frontend-design]
