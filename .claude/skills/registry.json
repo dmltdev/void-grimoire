@@ -12,6 +12,12 @@
       "skills": ["docs:lookup", "docs:index"],
       "docs": []
     },
+    "codebase": {
+      "description": "Codebase structure awareness — service topology, dependency graphs",
+      "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
+      "skills": ["codebase:service-map"],
+      "docs": []
+    },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
       "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
