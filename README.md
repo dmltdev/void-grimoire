@@ -112,6 +112,32 @@ On first run in a workspace, `codebase:service-map` scans for workspace configs 
 
 Before running `/compact` or ending a session, invoke `workflow:prepare-compact`. It saves a session summary to `docs/sessions/` with a continuation prompt you can paste into the next session.
 
+## Project Configuration
+
+Initialize void-grimoire in your project to unlock per-project config, learned rules, and decision history:
+
+```
+/skill claude:init
+```
+
+This creates a `.void-grimoire/` directory with:
+
+- **`config.json`** — feature toggles and tool configuration
+- **`rules/`** — learned rules from your sessions (populated by `claude:learn`)
+- **`history/`** — decision artifacts grouped by initiative (brainstorms, plans, implementation records)
+- **`service-map.json`** — cached workspace topology (gitignored)
+
+### Configurable Features
+
+| Feature | Default | Description |
+|---------|---------|-------------|
+| `qmd` | disabled | Local hybrid search for markdown notes and docs |
+| `logAccess` | disabled | AI queries project logs during debugging (supports MCP tools like Sentry, Axiom) |
+| `decisionHistory` | enabled | Stores brainstorms, plans, and implementation records in `.void-grimoire/history/` |
+| `serviceMap` | enabled | Auto-discovers workspace topology and caches to `.void-grimoire/service-map.json` |
+
+Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centralized-config-and-features-design.md` for details.
+
 ## Domains
 
 | Domain | Skills | Description |
@@ -122,10 +148,10 @@ Before running `/compact` or ending a session, invoke `workflow:prepare-compact`
 | **git** | worktrees, request-review, receive-review, finish-branch, commit-push-pr, safety | Git workflow and code review |
 | **docs** | lookup, index | Documentation search and indexing |
 | **codebase** | service-map | Codebase structure awareness and service topology |
-| **claude** | entry-point, route, expand-prompt, learn, write-skill | Plugin meta-skills and self-learning |
+| **claude** | entry-point, route, expand-prompt, learn, write-skill, init | Plugin meta-skills and self-learning |
 | **npm** | release-safety | Package publishing safety |
 
-**41 skills** total across 8 domains.
+**42 skills** total across 8 domains.
 
 ## Architecture
 
