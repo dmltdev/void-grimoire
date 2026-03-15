@@ -24,11 +24,25 @@ If you think there is even a 1% chance a skill might apply to what you are doing
 
 Before ANY code change or implementation action, you MUST run these gates in order:
 
-### Gate 1: Rules Gate (always runs)
-Read `rules/global.md`. Additionally read `rules/{domain}.md` for each domain matched by the task. These are learned corrections from prior sessions — follow them.
+### Gate 1: Rules & Config Gate (always runs)
+
+**Config loading:**
+1. Check if `.void-grimoire/config.json` exists at project root
+2. If yes — read it. If it fails to parse or doesn't match the schema, warn the user and continue with defaults (do not halt).
+3. Config stays in context for downstream skills to reference.
+
+**Rules loading:**
+1. If `.void-grimoire/rules/` exists — read `rules/global.md` + `rules/{domain}.md` for each domain matched by the task
+2. If `.void-grimoire/rules/` does NOT exist — fall back to plugin's own `rules/global.md` + `rules/{domain}.md`
+
+These are learned corrections from prior sessions — follow them.
 
 ### Gate 2: Docs & Codebase Gate
-Invoke `docs:lookup` and `codebase:service-map` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
+Invoke the following in parallel, then merge outputs:
+- `docs:lookup` — always runs
+- `codebase:service-map` — runs unless config has `features.serviceMap.enabled: false`
+
+Wait for both (or just docs:lookup if service-map is skipped). Documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
 
 ### Gate 3: Domain Gate
 Invoke `claude:route` with the user's request. It matches against the registry and returns applicable skills. Invoke those skills before acting.
