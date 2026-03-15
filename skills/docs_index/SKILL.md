@@ -23,6 +23,9 @@ go install github.com/tobi/qmd@latest
 ```
 See https://github.com/tobi/qmd for alternative installation methods.
 
+**Config:** If `.void-grimoire/config.json` exists and `features.qmd.enabled` is `false`, warn the user:
+> "qmd is disabled in your config. Enable it in `.void-grimoire/config.json` under `features.qmd` to use indexed documentation with `docs:lookup`."
+
 ## Process
 
 1. **Fetch the documentation:**
