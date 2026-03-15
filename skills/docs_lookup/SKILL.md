@@ -12,25 +12,27 @@ Check for relevant documentation before writing code. This is Gate 2 of the thre
 
 ## Process
 
-### 1. Check qmd preference
-Read the project's CLAUDE.md for `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`.
+### 1. Check qmd config
+If `.void-grimoire/config.json` was loaded in Gate 1, read `features.qmd`:
+- `enabled: true` → use qmd with the configured `command`
+- `enabled: false` or config absent → skip qmd, use local search only
 
-### 2. If no preference found
+**Deprecated:** The `<!-- void-grimoire:qmd:enabled -->` HTML comment approach in CLAUDE.md is no longer used. If encountered, ignore it and follow config.json.
+
+**Intentional behavior change:** The old interactive "install qmd?" prompt is removed. qmd is now configured explicitly via `claude:init` + config.json. This avoids prompting users who don't want qmd on every first run.
+
+### 2. If no config exists and qmd status is unknown
 Check if qmd is installed: `which qmd`
 
-If qmd is NOT installed, ask the user ONCE:
-> "qmd is not installed. It enables searching indexed documentation (API docs, framework guides, etc.). Want me to set it up, or continue without it?
-> - **Install:** I'll run `go install github.com/tobi/qmd@latest` (requires Go)
-> - **Skip:** I'll search local docs only (README, docs/, inline comments)"
+If qmd is NOT installed, skip it silently. If installed but no config, use `qmd search` as default command.
 
-Save their choice to the project's CLAUDE.md as an HTML comment:
-- `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`
+**Note:** To configure qmd, run `/skill claude:init` and set `features.qmd.enabled: true` in `.void-grimoire/config.json`.
 
 ### 3. Search for docs
 
 **If qmd enabled:**
 ```bash
-qmd search "<task keywords>"
+{configured command} "<task keywords>"
 ```
 If qmd returns results, read the most relevant ones.
 If no results, fall through to local search.
