@@ -1,0 +1,25 @@
+{
+  "$schema": "./config.schema.json",
+  "version": 1,
+  "features": {
+    "qmd": {
+      "enabled": false,
+      "command": "qmd search",
+      "description": "Local hybrid search for markdown notes and docs"
+    },
+    "logAccess": {
+      "enabled": false,
+      "tool": "",
+      "usage": "",
+      "description": "How the AI accesses project logs during debugging"
+    },
+    "decisionHistory": {
+      "enabled": true,
+      "description": "Store brainstorms, plans, and implementation records in .void-grimoire/history/"
+    },
+    "serviceMap": {
+      "enabled": true,
+      "description": "Auto-discover workspace topology and cache to .void-grimoire/service-map.json"
+    }
+  }
+}
