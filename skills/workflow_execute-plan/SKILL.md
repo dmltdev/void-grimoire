@@ -32,6 +32,31 @@ For each task:
 3. Run verifications as specified
 4. Mark as completed
 
+### Step 2.5: Record Implementation (if decision history enabled)
+
+If `.void-grimoire/config.json` has `features.decisionHistory.enabled: true` and the plan was saved under `.void-grimoire/history/<initiative>/plan.md`:
+
+Write a brief implementation record to `.void-grimoire/history/<initiative>/implementation.md`:
+
+```markdown
+# Implementation Record: <initiative name>
+
+**Date:** YYYY-MM-DD
+**Plan:** plan.md
+**Brainstorm:** brainstorm.md
+
+## What Was Built
+- {bullet list of what was implemented}
+
+## Deviations from Plan
+- {any changes made during implementation that differed from the plan, or "None"}
+
+## Key Decisions Made During Implementation
+- {decisions that came up during coding that weren't in the plan}
+```
+
+This record completes the decision chain: brainstorm → plan → implementation.
+
 ### Step 3: Complete Development
 
 After all tasks complete and verified:
