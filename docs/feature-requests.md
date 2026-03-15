@@ -52,3 +52,51 @@ Currently, the three-gate flow checks rules, docs, and routing — but it doesn'
 3. Should repeated YOLOs for the same category auto-reduce guardian sensitivity (self-learning), or is that dangerous?
 4. How to distinguish "the user knows what they're doing and wants speed" from "the user doesn't realize they're about to break something"?
 5. Should the model also self-verify on *deletions* (removing code, dropping features, removing dependencies)?
+
+---
+
+## FR-002: Debug Log Access
+
+**Status:** Approved (part of centralized config spec)
+**Priority:** Medium
+**Date:** 2026-03-15
+
+### Intent
+
+AI should have query access to project logs during debugging. Configured per-project via `config.features.logAccess` with tool name and usage instructions. Supports MCP tools (Sentry, Axiom) or local CLI tools.
+
+### Design
+
+See `docs/specs/2026-03-15-centralized-config-and-features-design.md`
+
+---
+
+## FR-003: Decision History
+
+**Status:** Approved (part of centralized config spec)
+**Priority:** Medium
+**Date:** 2026-03-15
+
+### Intent
+
+Make existing artifacts (brainstorms, plans, implementations) discoverable across sessions. Artifacts stored in `.void-grimoire/history/<initiative>/` grouped by initiative. Value: context recovery after `/compact`, prevents re-litigating rejected approaches.
+
+### Design
+
+See `docs/specs/2026-03-15-centralized-config-and-features-design.md`
+
+---
+
+## FR-004: Centralized Project Config (`.void-grimoire/`)
+
+**Status:** Approved
+**Priority:** High
+**Date:** 2026-03-15
+
+### Intent
+
+Unified per-project directory for all plugin state: config, rules, decision history, service map. Replaces scattered locations (root `rules/`, root `.service-map.json`, `docs/specs/`, CLAUDE.md HTML comments). Initialized via `claude:init` skill. Loaded in Gate 1.
+
+### Design
+
+See `docs/specs/2026-03-15-centralized-config-and-features-design.md`
