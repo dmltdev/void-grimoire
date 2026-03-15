@@ -12,7 +12,7 @@ Discovers services in multi-service codebases, maps their dependencies, and ensu
 
 ### On Invocation
 
-1. **Check cache:** Read `.service-map.json` at project root.
+1. **Check cache:** Read `.void-grimoire/service-map.json` if `.void-grimoire/` exists, otherwise `.service-map.json` at project root.
    - If it exists → skip to **Scope Expansion**.
    - If not → run **Discovery**.
 
@@ -23,7 +23,7 @@ Discovers services in multi-service codebases, maps their dependencies, and ensu
      - Both present → load both, merge results
      - Neither present (single-service project) → output nothing, done
    - Follow the loaded reference(s) to enumerate services and detect dependencies
-   - Write results to `.service-map.json`:
+   - Write results to `.void-grimoire/service-map.json` if `.void-grimoire/` exists, otherwise `.service-map.json` at project root:
      ```json
      {
        "version": 1,
@@ -58,7 +58,7 @@ When you encounter evidence of a dependency NOT in `.service-map.json` during po
 - A new service directory with its own `package.json` or `go.mod`
 - A `replace` directive or workspace entry not in the map
 
-**Action:** Update `.service-map.json` — add the new service or edge. Update both `dependsOn` and `dependedOnBy` for bidirectional consistency. Set `updatedAt` to current timestamp. Inform the user:
+**Action:** Update `.void-grimoire/service-map.json` (or `.service-map.json` if no `.void-grimoire/` exists) — add the new service or edge. Update both `dependsOn` and `dependedOnBy` for bidirectional consistency. Set `updatedAt` to current timestamp. Inform the user:
 
 > Discovered new dependency: `<source>` now depends on `<target>`. Updated `.service-map.json`.
 
@@ -66,7 +66,7 @@ Self-learning only **adds** services and edges. It does not remove them.
 
 ### Forced Re-scan
 
-If user says "re-scan services", "rebuild service map", or similar: delete `.service-map.json` and re-run Discovery from scratch.
+If user says "re-scan services", "rebuild service map", or similar: delete `.void-grimoire/service-map.json` (or `.service-map.json`) and re-run Discovery from scratch.
 
 ### Known Limitations
 
