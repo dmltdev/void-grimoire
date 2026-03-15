@@ -18,8 +18,10 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
-**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
-- (User preferences for plan location override this default)
+**Save plans to:**
+- **If decision history enabled** (`.void-grimoire/config.json` → `features.decisionHistory.enabled: true`): `.void-grimoire/history/<initiative>/plan.md` — use the same initiative directory created by workflow:brainstorm
+- **Otherwise:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
+- (User preferences for plan location override both defaults)
 
 ## Scope Check
 
