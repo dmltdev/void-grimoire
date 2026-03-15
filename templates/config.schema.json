@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "void-grimoire project config",
+  "description": "Per-project configuration for the void-grimoire Claude Code plugin",
+  "type": "object",
+  "required": ["version", "features"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "const": 1,
+      "description": "Config schema version. Enables future migrations."
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "qmd": {
+          "type": "object",
+          "required": ["enabled", "description"],
+          "properties": {
+            "enabled": { "type": "boolean", "default": false },
+            "command": { "type": "string", "default": "qmd search", "description": "CLI command to run for qmd searches" },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "logAccess": {
+          "type": "object",
+          "required": ["enabled", "description"],
+          "properties": {
+            "enabled": { "type": "boolean", "default": false },
+            "tool": { "type": "string", "description": "Name of the MCP tool or CLI tool for log access" },
+            "usage": { "type": "string", "description": "Freeform instructions for how the AI should use the tool" },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "decisionHistory": {
+          "type": "object",
+          "required": ["enabled", "description"],
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "serviceMap": {
+          "type": "object",
+          "required": ["enabled", "description"],
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
