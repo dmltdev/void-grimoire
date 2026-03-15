@@ -24,6 +24,7 @@ Analyze the current conversation and identify:
 3. **What's in progress** — unfinished work, current blockers
 4. **What's next** — immediate next steps the agent should pick up
 5. **Key context** — important decisions, constraints, or gotchas that would be lost
+6. **Decision history** — if `.void-grimoire/history/` exists, note which initiative(s) were worked on and include their paths in "Key Context" so the next session can read them for full decision chain context
 
 ### Step 2: Create Session Summary File
 
