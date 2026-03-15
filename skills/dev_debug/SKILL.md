@@ -60,6 +60,14 @@ You MUST complete each phase before proceeding to the next.
    - Read stack traces completely
    - Note line numbers, file paths, error codes
 
+1b. **Query Project Logs (if configured)**
+   If `.void-grimoire/config.json` has `features.logAccess.enabled: true`:
+   - Use the configured `tool` and follow the `usage` instructions to query relevant logs
+   - Search for error messages, stack traces, or keywords related to the bug
+   - This runs BEFORE attempting reproduction — logs may already contain the evidence you need
+
+   If logAccess is not configured, rely on user-provided logs or terminal output as usual.
+
 2. **Reproduce Consistently**
    - Can you trigger it reliably?
    - What are the exact steps?
