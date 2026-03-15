@@ -138,7 +138,9 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Ready to execute?"**
+**"Plan complete and saved to `<plan path>`. Ready to execute?"**
+
+(Use the actual save path — `.void-grimoire/history/<initiative>/plan.md` if decision history is enabled, otherwise `docs/plans/<filename>.md`.)
 
 **Execution path depends on harness capabilities:**
 

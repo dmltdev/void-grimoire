@@ -60,7 +60,7 @@ When you encounter evidence of a dependency NOT in `.service-map.json` during po
 
 **Action:** Update `.void-grimoire/service-map.json` (or `.service-map.json` if no `.void-grimoire/` exists) — add the new service or edge. Update both `dependsOn` and `dependedOnBy` for bidirectional consistency. Set `updatedAt` to current timestamp. Inform the user:
 
-> Discovered new dependency: `<source>` now depends on `<target>`. Updated `.service-map.json`.
+> Discovered new dependency: `<source>` now depends on `<target>`. Updated service map.
 
 Self-learning only **adds** services and edges. It does not remove them.
 
