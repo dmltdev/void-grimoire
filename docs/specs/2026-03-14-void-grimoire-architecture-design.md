@@ -163,6 +163,9 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 `claude:entry-point` is injected at session start via SessionStart hook. It defines three gates that fire before any code action:
 
 ### Gate 1: Rules Gate
+
+> **Superseded by:** `2026-03-15-centralized-config-and-features-design.md` — Gate 1 now loads config from `.void-grimoire/config.json`, rules from `.void-grimoire/rules/` (with plugin fallback). HTML comment qmd detection is deprecated.
+
 Always reads `rules/global.md`. Additionally reads `rules/{domain}.md` for each domain matched by the task. Injects learned corrections into context. Always runs (just file reads, no skill invocation).
 
 ### Gate 2: Docs & Codebase Gate
@@ -258,6 +261,8 @@ The skill invokes the chosen successor directly. This is the one place in the pi
 
 ### Storage Tiers
 
+> **Superseded by:** `2026-03-15-centralized-config-and-features-design.md` — Gate 1 now loads config from `.void-grimoire/config.json`, rules from `.void-grimoire/rules/` (with plugin fallback). HTML comment qmd detection is deprecated.
+
 ```
 Correction detected
   → Specific to this project? → Save to project CLAUDE.md
@@ -297,6 +302,8 @@ Gate 1 (rules gate) reads `rules/` files matching the task's domain(s) at sessio
 ## 6. Doc Gate & QMD Integration
 
 ### `docs:lookup` (automatic, via gate 2)
+
+> **Superseded by:** `2026-03-15-centralized-config-and-features-design.md` — Gate 1 now loads config from `.void-grimoire/config.json`, rules from `.void-grimoire/rules/` (with plugin fallback). HTML comment qmd detection is deprecated.
 
 1. Check CLAUDE.md for `<!-- void-grimoire:qmd:enabled -->` or `<!-- void-grimoire:qmd:disabled -->`
 2. If no preference found → check if qmd is installed (`which qmd`)
@@ -434,6 +441,16 @@ Complete frontmatter for all skills with composition relationships:
 ```yaml
 # claude domain (not in registry — loaded via hook)
 claude:entry-point       → depends-on: [], chains-to: null, suggests: []
+
+# claude:init (user-invokable setup skill)
+---
+name: claude:init
+description: Use when setting up void-grimoire in a new project — scaffolds .void-grimoire/ directory with config, schema, and rule templates
+depends-on: []
+chains-to: null
+suggests: []
+user-invokable: true
+---
 
 # claude domain (in registry)
 claude:route             → depends-on: [], chains-to: null, suggests: []
