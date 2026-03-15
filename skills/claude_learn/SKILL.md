@@ -27,14 +27,20 @@ Persist user corrections as rules so the same mistake is not repeated in future 
 ```
 Correction detected
   ├─ Specific to THIS project/codebase? → Append to project's CLAUDE.md
-  ├─ Specific to a domain (design, git, dev, etc.)? → Append to rules/{domain}.md
-  └─ General behavior? → Append to rules/global.md
+  ├─ Specific to a domain (design, git, dev, etc.)?
+  │     ├─ .void-grimoire/rules/ exists? → Append to .void-grimoire/rules/{domain}.md
+  │     └─ No .void-grimoire/? → Append to plugin's rules/{domain}.md
+  └─ General behavior?
+        ├─ .void-grimoire/rules/ exists? → Append to .void-grimoire/rules/global.md
+        └─ No .void-grimoire/? → Append to plugin's rules/global.md
 ```
 
 **Decision heuristics:**
 - Mentions specific files, paths, or project names → project CLAUDE.md
 - About a technology, pattern, or domain practice → rules/{domain}.md
 - About communication style, output format, general approach → rules/global.md
+
+**Path resolution:** Always check for `.void-grimoire/rules/` first. If it exists, write there. If not, fall back to the plugin's `rules/` directory. This ensures projects that have run `claude:init` get project-scoped rules, while uninitialised projects still work.
 
 ## Rule Format
 
