@@ -10,7 +10,7 @@ Built the void-grimoire Claude Code plugin from scratch. It absorbs superpowers 
 2. **Plan written & reviewed** — `docs/plans/2026-03-14-void-grimoire-v1.md`
 3. **All 12 implementation tasks executed:**
    - Task 1: Infrastructure (registry.json, 8 rule files, hooks)
-   - Tasks 2-6: New skills (entry-point, route, expand-prompt, learn, docs:lookup, docs:index)
+   - Tasks 2-6: New skills (using-void-grimoire, route, expand-prompt, learn, docs:lookup, docs:index)
    - Tasks 7-10: Ported 13 skills from superpowers (6 workflow, 2 dev, 4 git, 1 claude:write-skill)
    - Task 11: Updated frontmatter on all 22 existing skills (added depends-on, chains-to, suggests)
    - Task 12: Cleanup (.tmp files removed, plugin.json updated to v1.0.0)
@@ -26,7 +26,7 @@ Built the void-grimoire Claude Code plugin from scratch. It absorbs superpowers 
 1. **Update README.md** — Current README is outdated ("Omniclode Plugin"). Needs rewrite with new architecture description, domain list, installation instructions.
 2. **Commit all changes** — Nothing has been committed yet (agents were told not to commit). All files are staged-ready.
 3. **Test the plugin** — Install in a test project and verify:
-   - SessionStart hook fires and injects entry-point + registry
+   - SessionStart hook fires and injects using-void-grimoire + registry
    - Three-gate flow works (rules → docs → route)
    - Skills invoke correctly via `/skill-name`
    - `chains-to` and `depends-on` are respected
@@ -39,6 +39,6 @@ Built the void-grimoire Claude Code plugin from scratch. It absorbs superpowers 
 - Spec: `docs/specs/2026-03-14-void-grimoire-architecture-design.md`
 - Plan: `docs/plans/2026-03-14-void-grimoire-v1.md`
 - Registry: `.claude/skills/registry.json`
-- Entry point: `.claude/skills/claude_entry-point/SKILL.md`
+- Entry point: `.claude/skills/claude_using-void-grimoire/SKILL.md`
 - Hooks: `hooks/hooks.json`, `hooks/session-start`
 - Rules: `rules/*.md`

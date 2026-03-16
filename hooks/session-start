@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 # Read entry-point skill content
-entry_point_content=$(cat "${PLUGIN_ROOT}/skills/claude_entry-point/SKILL.md" 2>&1 || echo "Error reading entry-point skill")
+entry_point_content=$(cat "${PLUGIN_ROOT}/skills/claude_using-void-grimoire/SKILL.md" 2>&1 || echo "Error reading using-void-grimoire skill")
 
 # Read registry
 REGISTRY=$(cat "$PLUGIN_ROOT/skills/registry.json")
@@ -28,7 +28,7 @@ escape_for_json() {
 
 entry_point_escaped=$(escape_for_json "$entry_point_content")
 registry_escaped=$(escape_for_json "$REGISTRY")
-session_context="<EXTREMELY_IMPORTANT>\nYou have void-grimoire.\n\n**Below is the full content of your 'void-grimoire:entry-point' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${entry_point_escaped}\n\n**Skill Registry:**\n\n${registry_escaped}\n</EXTREMELY_IMPORTANT>"
+session_context="<EXTREMELY_IMPORTANT>\nYou have void-grimoire.\n\n**Below is the full content of your 'claude:using-void-grimoire' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${entry_point_escaped}\n\n**Skill Registry:**\n\n${registry_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context.

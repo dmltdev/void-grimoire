@@ -4,7 +4,7 @@
 
 **Goal:** Add a `codebase:service-map` skill that auto-discovers services and dependencies in JS/TS and Go codebases, caches the topology, and expands task scope to include affected services.
 
-**Architecture:** New `codebase` domain with one skill. Gate 2 in the entry-point fires `docs:lookup` and `codebase:service-map` in parallel. The skill reads/writes `.service-map.json` at the project root. Language-specific detection heuristics live in reference files loaded on demand.
+**Architecture:** New `codebase` domain with one skill. Gate 2 in the using-void-grimoire fires `docs:lookup` and `codebase:service-map` in parallel. The skill reads/writes `.service-map.json` at the project root. Language-specific detection heuristics live in reference files loaded on demand.
 
 **Tech Stack:** Pure markdown skill (no runtime code). Cache is a JSON file.
 
@@ -282,7 +282,7 @@ git commit -m "feat(codebase): register codebase domain in registry"
 ### Task 5: Update Entry-Point Gate 2
 
 **Files:**
-- Modify: `.claude/skills/claude_entry-point/SKILL.md` (lines 30-31)
+- Modify: `.claude/skills/claude_using-void-grimoire/SKILL.md` (lines 30-31)
 
 **Step 1: Update Gate 2 instruction**
 
@@ -302,13 +302,13 @@ Invoke `docs:lookup` and `codebase:service-map` in parallel. Wait for both to co
 
 **Step 2: Verify the change**
 
-Run: `grep -A2 "Gate 2" .claude/skills/claude_entry-point/SKILL.md`
+Run: `grep -A2 "Gate 2" .claude/skills/claude_using-void-grimoire/SKILL.md`
 Expected: Shows "Docs & Codebase Gate" and mentions both `docs:lookup` and `codebase:service-map`.
 
 **Step 3: Commit**
 
 ```bash
-git add .claude/skills/claude_entry-point/SKILL.md
+git add .claude/skills/claude_using-void-grimoire/SKILL.md
 git commit -m "feat(codebase): update Gate 2 to invoke service-map in parallel"
 ```
 
@@ -435,9 +435,9 @@ Expected:
 Run: `cat .claude/skills/registry.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d['domains']), 'domains:', sorted(d['domains'].keys()))"`
 Expected: `8 domains: ['claude', 'codebase', 'design', 'dev', 'docs', 'git', 'npm', 'workflow']`
 
-**Step 3: Verify entry-point mentions service-map**
+**Step 3: Verify using-void-grimoire mentions service-map**
 
-Run: `grep "service-map" .claude/skills/claude_entry-point/SKILL.md`
+Run: `grep "service-map" .claude/skills/claude_using-void-grimoire/SKILL.md`
 Expected: Shows the updated Gate 2 line.
 
 **Step 4: Verify README skill count**

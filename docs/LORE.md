@@ -17,7 +17,7 @@ This plugin works the same way.
 | Starts as **blank pages from the void** — the book is empty until knowledge fills it | `rules/*.md` files start empty, accumulate learned rules over time |
 | The grimoire **summons familiars** to do parallel work | Subagent dispatch via `workflow:subagent-dev` and `workflow:parallel-agents` |
 | Contains **wards and protections** against forbidden acts | `git:safety`, `npm:release-safety` — guardrails against destructive actions |
-| A **ritual of opening** must be performed each time the book is used | SessionStart hook injects the entry point and registry into the session |
+| A **ritual of opening** must be performed each time the book is used | SessionStart hook injects `claude:using-void-grimoire` and the registry into the session |
 
 ## Why "Void"?
 

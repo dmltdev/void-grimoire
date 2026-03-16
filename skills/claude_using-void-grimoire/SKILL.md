@@ -1,5 +1,5 @@
 ---
-name: claude:entry-point
+name: claude:using-void-grimoire
 description: Use when starting any conversation — establishes three-gate flow (rules, docs, routing) and loads the domain registry
 depends-on: []
 chains-to: null

@@ -44,13 +44,13 @@ suggests: ["docs:lookup"]
 
 ### Gate 2 Change
 
-The entry-point's Gate 2 changes from invoking `docs:lookup` alone to invoking `docs:lookup` and `codebase:service-map` in parallel. Claude merges findings before Gate 3 routing.
+The using-void-grimoire skill's Gate 2 changes from invoking `docs:lookup` alone to invoking `docs:lookup` and `codebase:service-map` in parallel. Claude merges findings before Gate 3 routing.
 
 ```
 Gate 1 (Rules) → Gate 2 (docs:lookup ‖ codebase:service-map) → Gate 3 (Route)
 ```
 
-**Updated Gate 2 instruction in `claude_entry-point/SKILL.md`:**
+**Updated Gate 2 instruction in `claude_using-void-grimoire/SKILL.md`:**
 
 > **Gate 2 (Docs & Codebase):** Invoke `docs:lookup` and `codebase:service-map` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3.
 
@@ -196,7 +196,7 @@ If a `package.json`, `go.mod`, or workspace config is malformed or references a 
 
 ### Modified Files
 
-1. **`claude_entry-point/SKILL.md`** — Gate 2 instruction adds parallel `codebase:service-map` invocation.
+1. **`claude_using-void-grimoire/SKILL.md`** — Gate 2 instruction adds parallel `codebase:service-map` invocation.
 2. **`registry.json`** — New `codebase` domain:
    ```json
    "codebase": {
@@ -218,7 +218,7 @@ If a `package.json`, `go.mod`, or workspace config is malformed or references a 
 
 ### Summary
 
-No new hooks, no new dependencies, no plugin runtime changes. One new skill, one new domain, one-line entry-point gate change.
+No new hooks, no new dependencies, no plugin runtime changes. One new skill, one new domain, one-line using-void-grimoire gate change.
 
 ## Acceptance Criteria
 

@@ -17,7 +17,7 @@ void-grimoire/
 │   └── skills/
 │       ├── registry.json
 │       │
-│       ├── claude_entry-point/
+│       ├── claude_using-void-grimoire/
 │       ├── claude_route/
 │       ├── claude_expand-prompt/
 │       ├── claude_learn/
@@ -87,7 +87,7 @@ void-grimoire/
 └── .gitignore
 ```
 
-**41 skills across 8 domains:** claude (4), docs (2), codebase (1), workflow (7), dev (2), git (6), design (18), npm (1). `claude:entry-point` is excluded from the count — it is loaded via hook, not routed.
+**41 skills across 8 domains:** claude (4), docs (2), codebase (1), workflow (7), dev (2), git (6), design (18), npm (1). `claude:using-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
 
 Skill directories use underscore separator: `{domain}_{skill-name}`. Skill names in frontmatter use colon: `{domain}:{skill-name}`.
 
@@ -99,7 +99,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 
 ## 2. Registry
 
-`registry.json` maps domains to trigger keywords, skills, and doc sources. Loaded at session start alongside the entry point. ~600-800 tokens.
+`registry.json` maps domains to trigger keywords, skills, and doc sources. Loaded at session start alongside the entry point (claude:using-void-grimoire). ~600-800 tokens.
 
 ```json
 {
@@ -160,7 +160,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 
 ## 3. Entry Point & Three-Gate Flow
 
-`claude:entry-point` is injected at session start via SessionStart hook. It defines three gates that fire before any code action:
+`claude:using-void-grimoire` is injected at session start via SessionStart hook. It defines three gates that fire before any code action:
 
 ### Gate 1: Rules Gate
 
@@ -184,9 +184,9 @@ User message
   → Proceed with task
 ```
 
-The entry point does NOT contain routing logic, prompt expansion, self-learning, or workflow sequencing. It only defines gates and delegates.
+The entry point (claude:using-void-grimoire) does NOT contain routing logic, prompt expansion, self-learning, or workflow sequencing. It only defines gates and delegates.
 
-~150-200 lines. Total persistent context (entry point + registry): ~2200-2800 tokens.
+~150-200 lines. Total persistent context (entry point (claude:using-void-grimoire) + registry): ~2200-2800 tokens.
 
 ---
 
@@ -241,7 +241,7 @@ The skill invokes the chosen successor directly. This is the one place in the pi
 
 - `chains-to` must be a single string or null (not an array)
 - `depends-on` and `suggests` are always arrays
-- Circular dependencies in `depends-on` are invalid — entry point detects and warns
+- Circular dependencies in `depends-on` are invalid — entry point (claude:using-void-grimoire) detects and warns
 - A skill may omit `chains-to` and invoke a successor internally when branching logic is needed (e.g., `workflow:write-plan`)
 
 ---
@@ -394,12 +394,12 @@ Key constraint: this skill never acts on the expansion. It only produces it and 
 
 The `matcher` field matches against Claude Code session event types (startup, resume, clear, compact). `run-hook.cmd` is a polyglot wrapper (batch + bash hybrid) that dispatches to the named hook script — enables cross-platform support (Windows via Git Bash/MSYS2/Cygwin, Unix/macOS natively).
 
-SessionStart hook reads `claude:entry-point` SKILL.md + `registry.json` and injects both into session context via `hookSpecificOutput`.
+SessionStart hook reads `claude:using-void-grimoire` SKILL.md + `registry.json` and injects both into session context via `hookSpecificOutput`.
 
 ### Design Decisions
 
 - **Self-learning is NOT a hook.** It requires nuanced reasoning that bash can't do. The agent detects corrections; `claude:learn` persists them.
-- **Doc gate and domain gate are NOT hooks.** They're skill invocations orchestrated by the entry point. All reasoning stays in markdown.
+- **Doc gate and domain gate are NOT hooks.** They're skill invocations orchestrated by the entry point (claude:using-void-grimoire). All reasoning stays in markdown.
 - **Batch self-learning triggers on conversation wind-down** (user says "thanks", "that's all", "commit and done"), not a hook event. No `SessionEnd` hook exists in Claude Code yet.
 
 ### Future Hook Candidates (not v1)
@@ -428,7 +428,7 @@ All 14 superpowers skills are absorbed into void-grimoire namespaces:
 | `receiving-code-review` | `git:receive-review` | — |
 | `finishing-a-development-branch` | `git:finish-branch` | — |
 | `writing-skills` | `claude:write-skill` | anthropic-best-practices.md, persuasion-principles.md, testing-skills-with-subagents.md |
-| `using-superpowers` | `claude:entry-point` | Rewritten for void-grimoire (registry-aware, three-gate flow) |
+| `using-superpowers` | `claude:using-void-grimoire` | Rewritten for void-grimoire (registry-aware, three-gate flow) |
 
 Skills are ported with content intact. Frontmatter updated to new format (adding `depends-on`, `chains-to`, `suggests`). Internal references to superpowers skill names updated to void-grimoire names.
 
@@ -440,7 +440,7 @@ Complete frontmatter for all skills with composition relationships:
 
 ```yaml
 # claude domain (not in registry — loaded via hook)
-claude:entry-point       → depends-on: [], chains-to: null, suggests: []
+claude:using-void-grimoire       → depends-on: [], chains-to: null, suggests: []
 
 # claude:init (user-invokable setup skill)
 ---

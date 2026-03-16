@@ -33,7 +33,7 @@ All ported skills must replace these references throughout their content:
 | `superpowers:receiving-code-review` / `receiving-code-review` | `git:receive-review` |
 | `superpowers:finishing-a-development-branch` / `finishing-a-development-branch` | `git:finish-branch` |
 | `superpowers:writing-skills` / `writing-skills` | `claude:write-skill` |
-| `superpowers:using-superpowers` / `using-superpowers` | `claude:entry-point` |
+| `superpowers:using-superpowers` / `using-superpowers` | `claude:using-void-grimoire` |
 | `superpowers:code-reviewer` | `git:request-review` |
 | `docs/superpowers/specs/` | `docs/specs/` |
 | `docs/superpowers/plans/` | `docs/plans/` |
@@ -100,7 +100,7 @@ Copy from `/Users/dmytro.l/dmltdev/skills/superpowers/hooks/run-hook.cmd` verbat
 - [ ] **Step 5: Create `hooks/session-start`**
 
 Copy from `/Users/dmytro.l/dmltdev/skills/superpowers/hooks/session-start`. Then modify:
-- Change the skill path from `skills/using-superpowers/SKILL.md` to `.claude/skills/claude_entry-point/SKILL.md`
+- Change the skill path from `skills/using-superpowers/SKILL.md` to `.claude/skills/claude_using-void-grimoire/SKILL.md`
 - Add registry injection: after reading the SKILL.md content, also read the registry:
   ```bash
   REGISTRY=$(cat "$PLUGIN_ROOT/.claude/skills/registry.json")
@@ -132,10 +132,10 @@ git commit -m "feat: add infrastructure — registry, rules, hooks"
 
 ---
 
-### Task 2: `claude:entry-point` — Session Orchestrator
+### Task 2: `claude:using-void-grimoire` — Session Orchestrator
 
 **Files:**
-- Create: `.claude/skills/claude_entry-point/SKILL.md`
+- Create: `.claude/skills/claude_using-void-grimoire/SKILL.md`
 
 This is written from scratch (not ported). It replaces `using-superpowers`.
 
@@ -143,7 +143,7 @@ This is written from scratch (not ported). It replaces `using-superpowers`.
 
 ```markdown
 ---
-name: claude:entry-point
+name: claude:using-void-grimoire
 description: Use when starting any conversation — establishes three-gate flow (rules, docs, routing) and loads the domain registry
 depends-on: []
 chains-to: null
@@ -229,14 +229,14 @@ When the conversation is winding down ("thanks", "that's all", "commit and done"
 
 - [ ] **Step 2: Verify frontmatter**
 
-Run: `head -6 .claude/skills/claude_entry-point/SKILL.md`
+Run: `head -6 .claude/skills/claude_using-void-grimoire/SKILL.md`
 Expected: Valid YAML frontmatter with name, description, depends-on, chains-to, suggests
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add .claude/skills/claude_entry-point/
-git commit -m "feat: add claude:entry-point skill — session orchestrator with three-gate flow"
+git add .claude/skills/claude_using-void-grimoire/
+git commit -m "feat: add claude:using-void-grimoire skill — session orchestrator with three-gate flow"
 ```
 
 ---
@@ -1135,7 +1135,7 @@ git commit -m "chore: cleanup tmp files, update plugin metadata and README for v
 ## Task Dependency Graph
 
 ```
-Task 1 (infrastructure) ──┬── Task 2 (entry-point)
+Task 1 (infrastructure) ──┬── Task 2 (using-void-grimoire)
                            ├── Task 3 (route)
                            ├── Task 4 (docs:lookup + docs:index)
                            ├── Task 5 (learn)

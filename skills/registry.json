@@ -3,7 +3,7 @@
     "claude": {
       "description": "Meta skills — plugin management, skill authoring, self-learning",
       "triggers": ["skill", "plugin", "claude", "remember", "learn", "rule", "init", "initialize", "setup"],
-      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill", "claude:init"],
+      "skills": ["claude:using-void-grimoire", "claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill", "claude:init"],
       "docs": []
     },
     "docs": {

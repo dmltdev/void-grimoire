@@ -21,7 +21,7 @@ A skill system for Claude Code that enforces structured workflows, learns your c
 
 ## Get Started
 
-The plugin activates automatically. On every message, `claude:entry-point` runs three gates (rules → docs → routing) before any action is taken — you don't need to invoke it manually.
+The plugin activates automatically. On every message, `claude:using-void-grimoire` runs three gates (rules → docs → routing) before any action is taken — you don't need to invoke it manually.
 
 **To build something new**, just describe what you want:
 
@@ -66,7 +66,7 @@ AI coding assistants are powerful but undisciplined. They skip research, forget 
 | **Codebase conventions ignored** — AI defaults to generic patterns instead of yours | Three-tier rule system (global → domain → project). `claude:learn` captures corrections mid-session and persists them for future sessions |
 | **Verification gap** — AI writes code but never proves it works | `workflow:verify-before-completion` enforces an iron law: no completion claims without fresh evidence (test run, build, lint). `dev:tdd` enforces red-green-refactor |
 | **Scope creep & over-engineering** — AI refactors things you didn't ask about | TDD enforces minimal code. Brainstorm decomposes large scopes. Spec compliance reviews catch additions not in the plan |
-| **Prompt drift** — instructions degrade over long sessions | Rules are reloaded from disk on every turn via the entry-point gate. Learned corrections persist across sessions, not just within them |
+| **Prompt drift** — instructions degrade over long sessions | Rules are reloaded from disk on every turn via `claude:using-void-grimoire`. Learned corrections persist across sessions, not just within them |
 | **Stale mental model** — AI forgets decisions made 20 messages ago | Design specs, implementation plans, and session summaries are written to disk. Decisions survive `/compact` and session boundaries |
 | **Handoff friction** — re-establishing context between sessions or tools | `workflow:prepare-compact` generates a session summary with a ready-to-paste continuation prompt. Plans are structured with chunk boundaries for parallel handoff |
 | **Topology awareness** — AI doesn't know how services relate | `codebase:service-map` auto-discovers workspace dependencies (pnpm, lerna, Go workspaces), caches a bidirectional graph, and expands task scope to include affected services |
@@ -148,10 +148,10 @@ Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centr
 | **git** | worktrees, request-review, receive-review, finish-branch, commit-push-pr, safety | Git workflow and code review |
 | **docs** | lookup, index | Documentation search and indexing |
 | **codebase** | service-map | Codebase structure awareness and service topology |
-| **claude** | entry-point, route, expand-prompt, learn, write-skill, init | Plugin meta-skills and self-learning |
+| **claude** | using-void-grimoire, route, expand-prompt, learn, write-skill, init | Plugin meta-skills and self-learning |
 | **npm** | release-safety | Package publishing safety |
 
-**42 skills** total across 8 domains.
+**42 skills** total across 8 domains. (`claude:using-void-grimoire` is loaded via hook, not routed.)
 
 ## Architecture
 
