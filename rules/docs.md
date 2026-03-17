@@ -1,3 +1,3 @@
 # Docs Rules
 
-<!-- Learned rules for docs domain. Managed by claude:learn. -->
+<!-- Learned rules for docs domain. Managed by learn-correction. -->

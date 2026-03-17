@@ -1,3 +1,3 @@
 # Dev Rules
 
-<!-- Learned rules for dev domain. Managed by claude:learn. -->
+<!-- Learned rules for dev domain. Managed by learn-correction. -->

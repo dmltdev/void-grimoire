@@ -1,51 +1,51 @@
 {
   "domains": {
-    "claude": {
+    "void-grimoire": {
       "description": "Meta skills — plugin management, skill authoring, self-learning",
-      "triggers": ["skill", "plugin", "claude", "remember", "learn", "rule", "init", "initialize", "setup"],
-      "skills": ["claude:using-void-grimoire", "claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill", "claude:init"],
+      "triggers": ["skill", "plugin", "void-grimoire", "remember", "learn", "rule", "init", "initialize", "setup"],
+      "skills": ["use-void-grimoire", "route-request", "expand-prompt", "learn-correction", "write-skill", "init-project"],
       "docs": []
     },
     "docs": {
       "description": "Documentation lookup and indexing via qmd",
       "triggers": ["docs", "documentation", "reference", "API docs", "lookup"],
-      "skills": ["docs:lookup", "docs:index"],
+      "skills": ["lookup-docs", "index-docs"],
       "docs": []
     },
     "codebase": {
       "description": "Codebase structure awareness — service topology, dependency graphs",
       "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
-      "skills": ["codebase:service-map"],
+      "skills": ["map-services"],
       "docs": []
     },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
       "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
-      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion", "workflow:prepare-compact"],
+      "skills": ["brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
       "docs": []
     },
     "dev": {
       "description": "Development techniques — TDD, debugging, error handling",
       "triggers": ["test", "TDD", "debug", "bug", "error", "fail", "broken", "crash"],
-      "skills": ["dev:tdd", "dev:debug"],
+      "skills": ["develop-tdd", "debug-systematically"],
       "docs": []
     },
     "git": {
       "description": "Git workflow — commits, branches, PRs, reviews",
       "triggers": ["commit", "push", "PR", "pull request", "branch", "merge", "review", "rebase"],
-      "skills": ["git:safety", "git:commit-push-pr", "git:worktrees", "git:request-review", "git:receive-review", "git:finish-branch"],
+      "skills": ["enforce-git-safety", "commit-push-pr", "use-worktrees", "request-review", "receive-review", "finish-branch"],
       "docs": []
     },
     "design": {
       "description": "UI/UX design — frontend, accessibility, visual quality",
       "triggers": ["UI", "UX", "component", "layout", "CSS", "responsive", "a11y", "animation", "color", "design", "frontend", "page", "screen"],
-      "skills": ["design:frontend-design", "design:audit", "design:critique", "design:adapt", "design:animate", "design:bolder", "design:clarify", "design:colorize", "design:delight", "design:distill", "design:extract", "design:harden", "design:normalize", "design:onboard", "design:optimize", "design:polish", "design:quieter", "design:teach-design"],
+      "skills": ["design-frontend", "audit-design", "critique-design", "adapt-design", "animate-design", "bolden-design", "clarify-design", "colorize-design", "delight-design", "distill-design", "extract-design", "harden-design", "normalize-design", "design-onboarding", "optimize-design", "polish-design", "quieten-design", "teach-design"],
       "docs": []
     },
     "npm": {
       "description": "NPM package management and publishing safety",
       "triggers": ["npm", "publish", "release", "package", "version"],
-      "skills": ["npm:release-safety"],
+      "skills": ["enforce-release-safety"],
       "docs": []
     }
   }

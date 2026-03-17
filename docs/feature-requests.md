@@ -14,7 +14,7 @@ The grimoire should enforce that the model *understands why* before implementing
 
 If the user tries to skip critical steps (brainstorming, planning, risk assessment), the grimoire should either:
 1. **Inform** — tell the user they're skipping important steps and what risks that carries
-2. **Gate** — require explicit acknowledgment to proceed (e.g., a `YOLO` keyword or `workflow:yolo` skill invocation)
+2. **Gate** — require explicit acknowledgment to proceed (e.g., a `YOLO` keyword or `yolo` skill invocation)
 
 ### Problem
 
@@ -41,7 +41,7 @@ Currently, the three-gate flow checks rules, docs, and routing — but it doesn'
 - Per-project config: some projects are experimental (low guardian), some are production (high guardian)
 
 **YOLO escape hatch:**
-- `workflow:yolo` skill or `YOLO` keyword lets the user explicitly bypass guardian checks
+- `yolo` skill or `YOLO` keyword lets the user explicitly bypass guardian checks
 - Should log that guardian was bypassed (for self-learning — "user YOLOs refactors in this project")
 - YOLO scope: per-action (this one change) vs per-session (don't bother me this session)
 
@@ -95,7 +95,7 @@ See `docs/specs/2026-03-15-centralized-config-and-features-design.md`
 
 ### Intent
 
-Unified per-project directory for all plugin state: config, rules, decision history, service map. Replaces scattered locations (root `rules/`, root `.service-map.json`, `docs/specs/`, CLAUDE.md HTML comments). Initialized via `claude:init` skill. Loaded in Gate 1.
+Unified per-project directory for all plugin state: config, rules, decision history, service map. Replaces scattered locations (root `rules/`, root `.service-map.json`, `docs/specs/`, CLAUDE.md HTML comments). Initialized via `init-project` skill. Loaded in Gate 1.
 
 ### Design
 

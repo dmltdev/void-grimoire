@@ -1,10 +1,10 @@
 # Codebase Service Map Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+> **For Claude:** REQUIRED SUB-SKILL: Use execute-plan to implement this plan task-by-task.
 
-**Goal:** Add a `codebase:service-map` skill that auto-discovers services and dependencies in JS/TS and Go codebases, caches the topology, and expands task scope to include affected services.
+**Goal:** Add a `map-services` skill that auto-discovers services and dependencies in JS/TS and Go codebases, caches the topology, and expands task scope to include affected services.
 
-**Architecture:** New `codebase` domain with one skill. Gate 2 in the using-void-grimoire fires `docs:lookup` and `codebase:service-map` in parallel. The skill reads/writes `.service-map.json` at the project root. Language-specific detection heuristics live in reference files loaded on demand.
+**Architecture:** New `codebase` domain with one skill. Gate 2 in the using-void-grimoire fires `lookup-docs` and `map-services` in parallel. The skill reads/writes `.service-map.json` at the project root. Language-specific detection heuristics live in reference files loaded on demand.
 
 **Tech Stack:** Pure markdown skill (no runtime code). Cache is a JSON file.
 
@@ -15,7 +15,7 @@
 ### Task 1: Create JS/TS Reference File
 
 **Files:**
-- Create: `.claude/skills/codebase_service-map/references/js-ts.md`
+- Create: `.claude/skills/map-services/references/js-ts.md`
 
 **Step 1: Create the reference file**
 
@@ -67,13 +67,13 @@ After all services are enumerated, compute `dependedOnBy` by inverting `dependsO
 
 **Step 2: Verify file exists**
 
-Run: `cat .claude/skills/codebase_service-map/references/js-ts.md | head -5`
+Run: `cat .claude/skills/map-services/references/js-ts.md | head -5`
 Expected: Shows the title and first lines of the file.
 
 **Step 3: Commit**
 
 ```bash
-git add .claude/skills/codebase_service-map/references/js-ts.md
+git add .claude/skills/map-services/references/js-ts.md
 git commit -m "feat(codebase): add JS/TS service discovery reference"
 ```
 
@@ -82,7 +82,7 @@ git commit -m "feat(codebase): add JS/TS service discovery reference"
 ### Task 2: Create Go Reference File
 
 **Files:**
-- Create: `.claude/skills/codebase_service-map/references/go.md`
+- Create: `.claude/skills/map-services/references/go.md`
 
 **Step 1: Create the reference file**
 
@@ -132,13 +132,13 @@ After all services are enumerated, compute `dependedOnBy` by inverting `dependsO
 
 **Step 2: Verify file exists**
 
-Run: `cat .claude/skills/codebase_service-map/references/go.md | head -5`
+Run: `cat .claude/skills/map-services/references/go.md | head -5`
 Expected: Shows the title and first lines of the file.
 
 **Step 3: Commit**
 
 ```bash
-git add .claude/skills/codebase_service-map/references/go.md
+git add .claude/skills/map-services/references/go.md
 git commit -m "feat(codebase): add Go service discovery reference"
 ```
 
@@ -147,17 +147,17 @@ git commit -m "feat(codebase): add Go service discovery reference"
 ### Task 3: Create SKILL.md
 
 **Files:**
-- Create: `.claude/skills/codebase_service-map/SKILL.md`
+- Create: `.claude/skills/map-services/SKILL.md`
 
 **Step 1: Create the skill file**
 
 ```markdown
 ---
-name: codebase:service-map
+name: map-services
 description: Use when any task may affect multiple services — auto-discovers services and dependencies from workspace configs and cross-package imports (JS/TS, Go), caches topology to .service-map.json, and expands task scope to include affected services
 depends-on: []
 chains-to: null
-suggests: ["docs:lookup"]
+suggests: ["lookup-docs"]
 ---
 
 ## Service Map Skill
@@ -230,13 +230,13 @@ If user says "re-scan services", "rebuild service map", or similar: delete `.ser
 
 **Step 2: Verify file exists**
 
-Run: `cat .claude/skills/codebase_service-map/SKILL.md | head -10`
-Expected: Shows frontmatter with name `codebase:service-map`.
+Run: `cat .claude/skills/map-services/SKILL.md | head -10`
+Expected: Shows frontmatter with name `map-services`.
 
 **Step 3: Commit**
 
 ```bash
-git add .claude/skills/codebase_service-map/SKILL.md
+git add .claude/skills/map-services/SKILL.md
 git commit -m "feat(codebase): add service-map skill"
 ```
 
@@ -255,7 +255,7 @@ Add a new `"codebase"` key to the `"domains"` object, after the `"docs"` entry:
 "codebase": {
   "description": "Codebase structure awareness — service topology, dependency graphs",
   "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
-  "skills": ["codebase:service-map"],
+  "skills": ["map-services"],
   "docs": []
 },
 ```
@@ -282,7 +282,7 @@ git commit -m "feat(codebase): register codebase domain in registry"
 ### Task 5: Update Entry-Point Gate 2
 
 **Files:**
-- Modify: `.claude/skills/claude_using-void-grimoire/SKILL.md` (lines 30-31)
+- Modify: `.claude/skills/use-void-grimoire/SKILL.md` (lines 30-31)
 
 **Step 1: Update Gate 2 instruction**
 
@@ -290,25 +290,25 @@ Replace the current Gate 2 section:
 
 ```markdown
 ### Gate 2: Doc Gate
-Invoke `docs:lookup` with the task context. This checks for relevant documentation (via qmd or local file fallback). Even "no docs found" is a valid result — the point is you looked.
+Invoke `lookup-docs` with the task context. This checks for relevant documentation (via qmd or local file fallback). Even "no docs found" is a valid result — the point is you looked.
 ```
 
 With:
 
 ```markdown
 ### Gate 2: Docs & Codebase Gate
-Invoke `docs:lookup` and `codebase:service-map` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
+Invoke `lookup-docs` and `map-services` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
 ```
 
 **Step 2: Verify the change**
 
-Run: `grep -A2 "Gate 2" .claude/skills/claude_using-void-grimoire/SKILL.md`
-Expected: Shows "Docs & Codebase Gate" and mentions both `docs:lookup` and `codebase:service-map`.
+Run: `grep -A2 "Gate 2" .claude/skills/use-void-grimoire/SKILL.md`
+Expected: Shows "Docs & Codebase Gate" and mentions both `lookup-docs` and `map-services`.
 
 **Step 3: Commit**
 
 ```bash
-git add .claude/skills/claude_using-void-grimoire/SKILL.md
+git add .claude/skills/use-void-grimoire/SKILL.md
 git commit -m "feat(codebase): update Gate 2 to invoke service-map in parallel"
 ```
 
@@ -364,11 +364,11 @@ git commit -m "docs: add codebase domain to README"
 
 **Step 1: Add to plugin structure tree (Section 1)**
 
-After the `docs_index/` line, add:
+After the `index-docs/` line, add:
 
 ```
 │       │
-│       ├── codebase_service-map/
+│       ├── map-services/
 ```
 
 **Step 2: Update skill count in Section 1**
@@ -377,11 +377,11 @@ Change `**41 skills across 7 domains:**` to `**42 skills across 8 domains:**` an
 
 **Step 3: Add frontmatter to Section 10**
 
-After the `docs:index` line, add:
+After the `index-docs` line, add:
 
 ```yaml
 # codebase domain
-codebase:service-map    → depends-on: [], chains-to: null, suggests: [docs:lookup]
+map-services    → depends-on: [], chains-to: null, suggests: [lookup-docs]
 ```
 
 **Step 4: Verify**
@@ -393,7 +393,7 @@ Expected: At least 3 matches.
 
 ```bash
 git add docs/specs/2026-03-14-void-grimoire-architecture-design.md
-git commit -m "docs: add codebase:service-map to architecture spec"
+git commit -m "docs: add map-services to architecture spec"
 ```
 
 ---
@@ -406,7 +406,7 @@ git commit -m "docs: add codebase:service-map to architecture spec"
 **Step 1: Create empty rules file**
 
 ```markdown
-<!-- Learned rules for the codebase domain. Managed by claude:learn. -->
+<!-- Learned rules for the codebase domain. Managed by learn-correction. -->
 ```
 
 **Step 2: Commit**
@@ -422,12 +422,12 @@ git commit -m "feat(codebase): add empty codebase rules file"
 
 **Step 1: Verify skill directory structure**
 
-Run: `find .claude/skills/codebase_service-map -type f | sort`
+Run: `find .claude/skills/map-services -type f | sort`
 Expected:
 ```
-.claude/skills/codebase_service-map/SKILL.md
-.claude/skills/codebase_service-map/references/go.md
-.claude/skills/codebase_service-map/references/js-ts.md
+.claude/skills/map-services/SKILL.md
+.claude/skills/map-services/references/go.md
+.claude/skills/map-services/references/js-ts.md
 ```
 
 **Step 2: Verify registry has 8 domains**
@@ -437,7 +437,7 @@ Expected: `8 domains: ['claude', 'codebase', 'design', 'dev', 'docs', 'git', 'np
 
 **Step 3: Verify using-void-grimoire mentions service-map**
 
-Run: `grep "service-map" .claude/skills/claude_using-void-grimoire/SKILL.md`
+Run: `grep "service-map" .claude/skills/use-void-grimoire/SKILL.md`
 Expected: Shows the updated Gate 2 line.
 
 **Step 4: Verify README skill count**

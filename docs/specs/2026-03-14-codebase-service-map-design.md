@@ -10,7 +10,7 @@ When Claude Code works in a multi-service codebase (monorepo or multi-repo), it 
 
 ## Solution
 
-A new `codebase:service-map` skill that auto-discovers services and their dependencies, caches the topology to `.service-map.json`, and automatically expands task scope to include affected services.
+A new `map-services` skill that auto-discovers services and their dependencies, caches the topology to `.service-map.json`, and automatically expands task scope to include affected services.
 
 ## Architecture
 
@@ -20,10 +20,10 @@ A new `codebase:service-map` skill that auto-discovers services and their depend
 
 ### New Skill
 
-`codebase:service-map` — lives at `.claude/skills/codebase_service-map/`.
+`map-services` — lives at `skills/map-services/`.
 
 ```
-codebase_service-map/
+map-services/
 ├── SKILL.md              # Decision logic, cache behavior, scope expansion rules
 └── references/
     ├── js-ts.md          # Detection heuristics for JS/TS monorepos
@@ -34,25 +34,26 @@ codebase_service-map/
 
 ```yaml
 ---
-name: codebase:service-map
+name: map-services
+domain: codebase
 description: Use when any task may affect multiple services — auto-discovers services and dependencies from workspace configs and cross-package imports (JS/TS, Go), caches topology to .service-map.json, and expands task scope to include affected services
 depends-on: []
 chains-to: null
-suggests: ["docs:lookup"]
+suggests: ["lookup-docs"]
 ---
 ```
 
 ### Gate 2 Change
 
-The using-void-grimoire skill's Gate 2 changes from invoking `docs:lookup` alone to invoking `docs:lookup` and `codebase:service-map` in parallel. Claude merges findings before Gate 3 routing.
+The using-void-grimoire skill's Gate 2 changes from invoking `lookup-docs` alone to invoking `lookup-docs` and `map-services` in parallel. Claude merges findings before Gate 3 routing.
 
 ```
-Gate 1 (Rules) → Gate 2 (docs:lookup ‖ codebase:service-map) → Gate 3 (Route)
+Gate 1 (Rules) → Gate 2 (lookup-docs ‖ map-services) → Gate 3 (Route)
 ```
 
-**Updated Gate 2 instruction in `claude_using-void-grimoire/SKILL.md`:**
+**Updated Gate 2 instruction in `use-void-grimoire/SKILL.md`:**
 
-> **Gate 2 (Docs & Codebase):** Invoke `docs:lookup` and `codebase:service-map` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3.
+> **Gate 2 (Docs & Codebase):** Invoke `lookup-docs` and `map-services` in parallel. Wait for both to complete. Merge their outputs: documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3.
 
 ## Service Discovery
 
@@ -126,7 +127,7 @@ Details live in reference files loaded on demand. High-level summary below; full
 
 ## Scope Expansion
 
-The core behavior. When `codebase:service-map` loads the map, it determines which service(s) the current task touches and walks the dependency graph to collect all directly related services.
+The core behavior. When `map-services` loads the map, it determines which service(s) the current task touches and walks the dependency graph to collect all directly related services.
 
 ### Task-to-Service Matching
 
@@ -196,14 +197,13 @@ If a `package.json`, `go.mod`, or workspace config is malformed or references a 
 
 ### Modified Files
 
-1. **`claude_using-void-grimoire/SKILL.md`** — Gate 2 instruction adds parallel `codebase:service-map` invocation.
+1. **`use-void-grimoire/SKILL.md`** — Gate 2 instruction adds parallel `map-services` invocation.
 2. **`registry.json`** — New `codebase` domain:
    ```json
    "codebase": {
      "description": "Codebase structure awareness — service topology, dependency graphs",
      "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
-     "skills": ["codebase:service-map"],
-     "docs": []
+     "skills": ["map-services"],     "docs": []
    }
    ```
 3. **README.md** — New domain row, skill count incremented.
@@ -211,7 +211,7 @@ If a `package.json`, `go.mod`, or workspace config is malformed or references a 
 
 ### Unchanged
 
-- `docs:lookup` — untouched, documentation only.
+- `lookup-docs` — untouched, documentation only.
 - SessionStart hook — no additional payload.
 - Three-gate flow structure — still three gates.
 - All other skills — unaware of service-map unless they read `.service-map.json`.

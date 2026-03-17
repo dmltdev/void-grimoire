@@ -74,7 +74,7 @@ Design choices:
 - **`tool` + `usage` for logAccess** — freeform text because every logging backend is different
 - **`command` for qmd** — tells the AI what CLI command to run
 - **Schema file alongside config** — provides editor autocomplete and validation
-- **`version` field** — enables future `claude:init` runs to detect stale configs and offer migrations
+- **`version` field** — enables future `init-project` runs to detect stale configs and offer migrations
 - **Feature shape convention** — every feature object must have `enabled` (boolean) and `description` (string). Additional fields are feature-specific.
 
 ## Gate 1 Changes
@@ -94,9 +94,9 @@ Gate 1 does NOT fail if config is missing or malformed. Plugin works out of the 
 
 **Supersedes:** the architecture spec's Gate 1 description. When `.void-grimoire/` exists, rules are loaded from there instead of the plugin root. The `<!-- void-grimoire:qmd:enabled -->` HTML comment approach in CLAUDE.md is deprecated — `config.json` is the single source of truth for feature toggles.
 
-## `claude:init` Skill
+## `init-project` Skill
 
-New skill at `skills/claude_init/SKILL.md`. Explicit initialization — user runs `/skill claude:init`.
+New skill at `skills/init-project/SKILL.md`. Explicit initialization — user runs `/skill init-project`.
 
 Behavior:
 
@@ -110,7 +110,7 @@ No auto-init. No surprise file creation. User controls when setup happens.
 
 ## Feature: Debug Log Access
 
-`dev:debug` reads `config.features.logAccess`:
+`debug-systematically` reads `config.features.logAccess`:
 
 - **Enabled** — uses `tool` and `usage` fields to query logs as part of debugging flow
 - **Disabled** — relies on user-provided logs (current behavior)
@@ -121,7 +121,7 @@ Supports MCP tools (Sentry, Axiom, etc.) or local CLI tools. The `usage` field i
 
 Makes existing artifacts discoverable across sessions. Not a new system — just a predictable location.
 
-`workflow:brainstorm`, `workflow:write-plan`, `workflow:execute-plan` read `config.features.decisionHistory`:
+`brainstorm`, `write-plan`, `execute-plan` read `config.features.decisionHistory`:
 
 - **Enabled** — write artifacts to `.void-grimoire/history/<initiative>/` (brainstorm.md, plan.md, implementation.md)
 - **Disabled** — write to `docs/specs/` (current behavior)
@@ -134,17 +134,17 @@ Value: context recovery after `/compact` or new sessions, prevents re-litigating
 
 | Skill | Config Key | Behavior When Enabled | Behavior When Disabled |
 |-------|-----------|----------------------|----------------------|
-| `dev:debug` | `logAccess` | Queries logs via configured tool | User provides logs manually |
-| `docs:lookup` | `qmd` | Uses configured command | Falls back to local file search |
-| `docs:index` | `qmd` | Uses configured command | Falls back to local file search |
-| `codebase:service-map` | `serviceMap` | Writes to `.void-grimoire/service-map.json` | Entry point skips invocation in Gate 2 |
-| `workflow:brainstorm` | `decisionHistory` | Writes to `.void-grimoire/history/` | Writes to `docs/specs/` |
-| `workflow:write-plan` | `decisionHistory` | Writes to `.void-grimoire/history/` | Writes to `docs/specs/` |
-| `workflow:execute-plan` | `decisionHistory` | Writes to `.void-grimoire/history/` | Writes to `docs/specs/` |
-| `workflow:prepare-compact` | `decisionHistory` | References `.void-grimoire/history/` in session summary | No change |
-| `claude:learn` | — | Writes learned rules to `.void-grimoire/rules/` | Writes to plugin's `rules/` (fallback) |
-| `claude:init` | — | Scaffolds `.void-grimoire/` | — |
-| `claude:using-void-grimoire` | — | Loads config + rules from `.void-grimoire/` | Loads rules from plugin's `rules/` |
+| `debug-systematically` | `logAccess` | Queries logs via configured tool | User provides logs manually |
+| `lookup-docs` | `qmd` | Uses configured command | Falls back to local file search |
+| `index-docs` | `qmd` | Uses configured command | Falls back to local file search |
+| `map-services` | `serviceMap` | Writes to `.void-grimoire/service-map.json` | Entry point skips invocation in Gate 2 |
+| `brainstorm` | `decisionHistory` | Writes to `.void-grimoire/history/` | Writes to `docs/specs/` |
+| `write-plan` | `decisionHistory` | Writes to `.void-grimoire/history/` | Writes to `docs/specs/` |
+| `execute-plan` | `decisionHistory` | Writes to `.void-grimoire/history/` | Writes to `docs/specs/` |
+| `prepare-compact` | `decisionHistory` | References `.void-grimoire/history/` in session summary | No change |
+| `learn-correction` | — | Writes learned rules to `.void-grimoire/rules/` | Writes to plugin's `rules/` (fallback) |
+| `init-project` | — | Scaffolds `.void-grimoire/` | — |
+| `use-void-grimoire` | — | Loads config + rules from `.void-grimoire/` | Loads rules from plugin's `rules/` |
 
 ## `.gitignore` Guidance
 
@@ -163,7 +163,7 @@ Recommended `.gitignore` entries for consumer projects:
 ## Migration
 
 - Plugin repo `rules/` directory becomes a template and fallback (ships with placeholder files)
-- Existing `.service-map.json` at project root → `.void-grimoire/service-map.json`. `claude:init` warns if a stale `.service-map.json` exists at project root
+- Existing `.service-map.json` at project root → `.void-grimoire/service-map.json`. `init-project` warns if a stale `.service-map.json` exists at project root
 - Existing `docs/specs/` artifacts are NOT migrated automatically — they stay where they are
-- `claude:init` does not move existing files; it scaffolds fresh
+- `init-project` does not move existing files; it scaffolds fresh
 - `<!-- void-grimoire:qmd:enabled -->` HTML comments in CLAUDE.md are deprecated — `config.json` is the source of truth

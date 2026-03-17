@@ -1,3 +1,3 @@
 # NPM Rules
 
-<!-- Learned rules for npm domain. Managed by claude:learn. -->
+<!-- Learned rules for npm domain. Managed by learn-correction. -->

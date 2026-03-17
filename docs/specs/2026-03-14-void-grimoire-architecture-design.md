@@ -1,10 +1,10 @@
 # Void Grimoire Architecture Design
 
-> **For agentic workers:** REQUIRED: Use workflow:write-plan to create an implementation plan from this spec.
+> **For agentic workers:** REQUIRED: Use write-plan to create an implementation plan from this spec.
 
 **Goal:** Build a Claude Code plugin that organizes skills by domain, enforces doc-lookup and skill-routing before code actions, supports prompt expansion, and self-learns from user corrections.
 
-**Predecessor:** Superpowers plugin (absorbed fully — workflow skills ported into `workflow:*` namespace).
+**Predecessor:** Superpowers plugin (absorbed fully — workflow skills ported into void-grimoire).
 
 ---
 
@@ -17,55 +17,57 @@ void-grimoire/
 │   └── skills/
 │       ├── registry.json
 │       │
-│       ├── claude_using-void-grimoire/
-│       ├── claude_route/
-│       ├── claude_expand-prompt/
-│       ├── claude_learn/
-│       ├── claude_write-skill/
-│       ├── claude_symlink-skills/
+│       ├── use-void-grimoire/
+│       ├── route-request/
+│       ├── expand-prompt/
+│       ├── learn-correction/
+│       ├── write-skill/
+│       ├── init-project/
+│       ├── symlink-skills/
 │       │
-│       ├── docs_lookup/
-│       ├── docs_index/
+│       ├── lookup-docs/
+│       ├── index-docs/
 │       │
-│       ├── codebase_service-map/
+│       ├── map-services/
 │       │
-│       ├── workflow_brainstorm/
-│       ├── workflow_write-plan/
-│       ├── workflow_execute-plan/
-│       ├── workflow_subagent-dev/
-│       ├── workflow_parallel-agents/
-│       ├── workflow_verify-before-completion/
+│       ├── brainstorm/
+│       ├── write-plan/
+│       ├── execute-plan/
+│       ├── develop-with-subagents/
+│       ├── dispatch-parallel-agents/
+│       ├── verify-before-completion/
+│       ├── prepare-compact/
 │       │
-│       ├── dev_tdd/
-│       ├── dev_debug/
+│       ├── develop-tdd/
+│       ├── debug-systematically/
 │       │
-│       ├── git_safety/
-│       ├── git_commit-push-pr/
-│       ├── git_worktrees/
-│       ├── git_request-review/
-│       ├── git_receive-review/
-│       ├── git_finish-branch/
+│       ├── enforce-git-safety/
+│       ├── commit-push-pr/
+│       ├── use-worktrees/
+│       ├── request-review/
+│       ├── receive-review/
+│       ├── finish-branch/
 │       │
-│       ├── design_frontend-design/
-│       ├── design_audit/
-│       ├── design_critique/
-│       ├── design_adapt/
-│       ├── design_animate/
-│       ├── design_bolder/
-│       ├── design_clarify/
-│       ├── design_colorize/
-│       ├── design_delight/
-│       ├── design_distill/
-│       ├── design_extract/
-│       ├── design_harden/
-│       ├── design_normalize/
-│       ├── design_onboard/
-│       ├── design_optimize/
-│       ├── design_polish/
-│       ├── design_quieter/
-│       ├── design_teach-design/
+│       ├── design-frontend/
+│       ├── audit-design/
+│       ├── critique-design/
+│       ├── adapt-design/
+│       ├── animate-design/
+│       ├── bolder-design/
+│       ├── clarify-design/
+│       ├── colorize-design/
+│       ├── delight-design/
+│       ├── distill-design/
+│       ├── extract-design/
+│       ├── harden-design/
+│       ├── normalize-design/
+│       ├── onboard-design/
+│       ├── optimize-design/
+│       ├── polish-design/
+│       ├── quieter-design/
+│       ├── teach-design/
 │       │
-│       └── npm_release-safety/
+│       └── enforce-release-safety/
 │
 ├── hooks/
 │   ├── hooks.json
@@ -87,9 +89,9 @@ void-grimoire/
 └── .gitignore
 ```
 
-**41 skills across 8 domains:** claude (4), docs (2), codebase (1), workflow (7), dev (2), git (6), design (18), npm (1). `claude:using-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
+**43 skills across 8 domains:** void-grimoire (6), docs (2), codebase (1), workflow (7), dev (2), git (6), design (18), npm (1). `use-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
 
-Skill directories use underscore separator: `{domain}_{skill-name}`. Skill names in frontmatter use colon: `{domain}:{skill-name}`.
+Skill directories match the skill name (flat kebab-case). Domain is specified in SKILL.md frontmatter via the `domain` field. Skill names in frontmatter are the bare name without domain prefix. Domain is a separate frontmatter field.
 
 Supporting files (prompts, references, anti-pattern docs) live inside their respective skill directory alongside SKILL.md.
 
@@ -99,57 +101,57 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 
 ## 2. Registry
 
-`registry.json` maps domains to trigger keywords, skills, and doc sources. Loaded at session start alongside the entry point (claude:using-void-grimoire). ~600-800 tokens.
+`registry.json` maps domains to trigger keywords, skills, and doc sources. Loaded at session start alongside the entry point (use-void-grimoire). ~600-800 tokens.
 
 ```json
 {
   "domains": {
-    "claude": {
+    "void-grimoire": {
       "description": "Meta skills — plugin management, skill authoring, self-learning",
-      "triggers": ["skill", "plugin", "claude", "remember", "learn", "rule"],
-      "skills": ["claude:route", "claude:expand-prompt", "claude:learn", "claude:write-skill"],
+      "triggers": ["skill", "plugin", "void-grimoire", "remember", "learn", "rule"],
+      "skills": ["route-request", "expand-prompt", "learn-correction", "write-skill", "init-project", "symlink-skills"],
       "docs": []
     },
     "docs": {
       "description": "Documentation lookup and indexing via qmd",
       "triggers": ["docs", "documentation", "reference", "API docs", "lookup"],
-      "skills": ["docs:lookup", "docs:index"],
+      "skills": ["lookup-docs", "index-docs"],
       "docs": []
     },
     "codebase": {
       "description": "Codebase structure awareness — service topology, dependency graphs",
       "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
-      "skills": ["codebase:service-map"],
+      "skills": ["map-services"],
       "docs": []
     },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
       "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
-      "skills": ["workflow:brainstorm", "workflow:write-plan", "workflow:execute-plan", "workflow:subagent-dev", "workflow:parallel-agents", "workflow:verify-before-completion", "workflow:prepare-compact"],
+      "skills": ["brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
       "docs": []
     },
     "dev": {
       "description": "Development techniques — TDD, debugging, error handling",
       "triggers": ["test", "TDD", "debug", "bug", "error", "fail", "broken", "crash"],
-      "skills": ["dev:tdd", "dev:debug"],
+      "skills": ["develop-tdd", "debug-systematically"],
       "docs": []
     },
     "git": {
       "description": "Git workflow — commits, branches, PRs, reviews",
       "triggers": ["commit", "push", "PR", "pull request", "branch", "merge", "review", "rebase"],
-      "skills": ["git:safety", "git:commit-push-pr", "git:worktrees", "git:request-review", "git:receive-review", "git:finish-branch"],
+      "skills": ["enforce-git-safety", "commit-push-pr", "use-worktrees", "request-review", "receive-review", "finish-branch"],
       "docs": []
     },
     "design": {
       "description": "UI/UX design — frontend, accessibility, visual quality",
       "triggers": ["UI", "UX", "component", "layout", "CSS", "responsive", "a11y", "animation", "color", "design", "frontend", "page", "screen"],
-      "skills": ["design:frontend-design", "design:audit", "design:critique", "design:adapt", "design:animate", "design:bolder", "design:clarify", "design:colorize", "design:delight", "design:distill", "design:extract", "design:harden", "design:normalize", "design:onboard", "design:optimize", "design:polish", "design:quieter", "design:teach-design"],
+      "skills": ["design-frontend", "audit-design", "critique-design", "adapt-design", "animate-design", "bolder-design", "clarify-design", "colorize-design", "delight-design", "distill-design", "extract-design", "harden-design", "normalize-design", "onboard-design", "optimize-design", "polish-design", "quieter-design", "teach-design"],
       "docs": []
     },
     "npm": {
       "description": "NPM package management and publishing safety",
       "triggers": ["npm", "publish", "release", "package", "version"],
-      "skills": ["npm:release-safety"],
+      "skills": ["enforce-release-safety"],
       "docs": []
     }
   }
@@ -160,7 +162,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 
 ## 3. Entry Point & Three-Gate Flow
 
-`claude:using-void-grimoire` is injected at session start via SessionStart hook. It defines three gates that fire before any code action:
+`use-void-grimoire` is injected at session start via SessionStart hook. It defines three gates that fire before any code action:
 
 ### Gate 1: Rules Gate
 
@@ -169,24 +171,24 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
 Always reads `rules/global.md`. Additionally reads `rules/{domain}.md` for each domain matched by the task. Injects learned corrections into context. Always runs (just file reads, no skill invocation).
 
 ### Gate 2: Docs & Codebase Gate
-Invoke `docs:lookup` and `codebase:service-map` in parallel. `docs:lookup` searches indexed docs via qmd (or falls back to local Grep/Read). `codebase:service-map` checks for `.service-map.json` cache (or runs discovery) and expands task scope to include affected services. Merge both outputs before Gate 3.
+Invoke `lookup-docs` and `map-services` in parallel. `lookup-docs` searches indexed docs via qmd (or falls back to local Grep/Read). `map-services` checks for `.service-map.json` cache (or runs discovery) and expands task scope to include affected services. Merge both outputs before Gate 3.
 
 ### Gate 3: Domain Gate
-Invoke `claude:route`. Match user request against registry triggers. Return list of applicable skills. Agent invokes those skills before acting.
+Invoke `route-request`. Match user request against registry triggers. Return list of applicable skills. Agent invokes those skills before acting.
 
 ### Flow
 
 ```
 User message
   → Gate 1: Read rules/{matched domains}.md
-  → Gate 2: docs:lookup ‖ codebase:service-map
-  → Gate 3: claude:route → invoke matched skills
+  → Gate 2: lookup-docs ‖ map-services
+  → Gate 3: route-request → invoke matched skills
   → Proceed with task
 ```
 
-The entry point (claude:using-void-grimoire) does NOT contain routing logic, prompt expansion, self-learning, or workflow sequencing. It only defines gates and delegates.
+The entry point (use-void-grimoire) does NOT contain routing logic, prompt expansion, self-learning, or workflow sequencing. It only defines gates and delegates.
 
-~150-200 lines. Total persistent context (entry point (claude:using-void-grimoire) + registry): ~2200-2800 tokens.
+~150-200 lines. Total persistent context (entry point (use-void-grimoire) + registry): ~2200-2800 tokens.
 
 ---
 
@@ -196,7 +198,8 @@ The entry point (claude:using-void-grimoire) does NOT contain routing logic, pro
 
 ```yaml
 ---
-name: domain:skill-name
+name: skill-name
+domain: domain-name
 description: Use when [triggering conditions — optimized for Claude search]
 depends-on: []
 chains-to: []
@@ -217,22 +220,22 @@ All fields use consistent types: `depends-on` and `suggests` are always arrays (
 ### Workflow Pipeline (via `chains-to`)
 
 ```
-workflow:brainstorm
-  → workflow:write-plan
-    → (skill decides at runtime) workflow:execute-plan OR workflow:subagent-dev
-      → workflow:verify-before-completion
-        → git:finish-branch
+brainstorm
+  → write-plan
+    → (skill decides at runtime) execute-plan OR develop-with-subagents
+      → verify-before-completion
+        → finish-branch
 ```
 
-**Branching at `workflow:write-plan`:** This skill does NOT use `chains-to` because the successor depends on the plan's characteristics. Instead, `write-plan` has internal logic that chooses:
-- `workflow:subagent-dev` — when the plan has 3+ independent tasks suitable for parallel subagent execution
-- `workflow:execute-plan` — for sequential plans or plans with fewer than 3 tasks
+**Branching at `write-plan`:** This skill does NOT use `chains-to` because the successor depends on the plan's characteristics. Instead, `write-plan` has internal logic that chooses:
+- `develop-with-subagents` — when the plan has 3+ independent tasks suitable for parallel subagent execution
+- `execute-plan` — for sequential plans or plans with fewer than 3 tasks
 
 The skill invokes the chosen successor directly. This is the one place in the pipeline where routing is internal to the skill rather than declared in frontmatter.
 
 ### `suggests` Runtime Behavior
 
-1. Skill declares `suggests: [design:critique, dev:tdd]`
+1. Skill declares `suggests: [critique-design, develop-tdd]`
 2. Agent checks: does the current task match any suggested skill's domain triggers?
 3. If yes → invoke that skill
 4. If no → skip silently
@@ -241,8 +244,8 @@ The skill invokes the chosen successor directly. This is the one place in the pi
 
 - `chains-to` must be a single string or null (not an array)
 - `depends-on` and `suggests` are always arrays
-- Circular dependencies in `depends-on` are invalid — entry point (claude:using-void-grimoire) detects and warns
-- A skill may omit `chains-to` and invoke a successor internally when branching logic is needed (e.g., `workflow:write-plan`)
+- Circular dependencies in `depends-on` are invalid — entry point (use-void-grimoire) detects and warns
+- A skill may omit `chains-to` and invoke a successor internally when branching logic is needed (e.g., `write-plan`)
 
 ---
 
@@ -279,7 +282,7 @@ Correction detected
 - **Scope:** domain name
 ```
 
-Append-only. Manual pruning by user or future `claude:prune-rules` skill.
+Append-only. Manual pruning by user or future `prune-rules` skill.
 
 ### Batch Prompt
 
@@ -301,7 +304,7 @@ Gate 1 (rules gate) reads `rules/` files matching the task's domain(s) at sessio
 
 ## 6. Doc Gate & QMD Integration
 
-### `docs:lookup` (automatic, via gate 2)
+### `lookup-docs` (automatic, via gate 2)
 
 > **Superseded by:** `2026-03-15-centralized-config-and-features-design.md` — Gate 1 now loads config from `.void-grimoire/config.json`, rules from `.void-grimoire/rules/` (with plugin fallback). HTML comment qmd detection is deprecated.
 
@@ -313,9 +316,9 @@ Gate 1 (rules gate) reads `rules/` files matching the task's domain(s) at sessio
 6. If qmd disabled → Grep/Read on README.md, docs/, CONTRIBUTING.md, inline comments
 7. Return findings (even "no docs found" is valid — the gate passed)
 
-### `docs:index` (explicit, user-invoked)
+### `index-docs` (explicit, user-invoked)
 
-User runs `/docs:index <url>` or `/docs:index <local-path>`.
+User runs `/index-docs <url>` or `/index-docs <local-path>`.
 
 - Runs `qmd fetch <url>` + indexes content
 - Registers in `registry.json` under the relevant domain's `docs` field
@@ -337,30 +340,31 @@ HTML comment format — invisible in rendered markdown, parseable by skills.
 
 ## 7. Prompt Expansion
 
-`claude:expand-prompt` is explicitly invoked (not part of automatic gates). User calls it for terse or ambiguous requests.
+`expand-prompt` is explicitly invoked (not part of automatic gates). User calls it for terse or ambiguous requests.
 
 ### Process
 
 1. Take user's terse prompt
 2. Read registry → identify relevant domains
 3. Check `rules/` for applicable learned rules
-4. Run `docs:lookup` for relevant context
+4. Run `lookup-docs` for relevant context
 5. Expand into structured intent:
    - Matched domains and skills
    - Relevant docs and learned rules
    - Decomposed sub-tasks
    - Suggested workflow
 6. Present expansion to user for confirmation
-7. On approval → proceed into `workflow:brainstorm` with expanded context
+7. On approval → proceed into `brainstorm` with expanded context
 
 ### Frontmatter
 
 ```yaml
 ---
-name: claude:expand-prompt
+name: expand-prompt
+domain: void-grimoire
 description: Use when a user request is terse or ambiguous — expands it with domain context, docs, and learned rules before proceeding
-depends-on: [claude:route, docs:lookup]
-chains-to: "workflow:brainstorm"
+depends-on: [route-request, lookup-docs]
+chains-to: "brainstorm"
 suggests: []
 ---
 ```
@@ -394,12 +398,12 @@ Key constraint: this skill never acts on the expansion. It only produces it and 
 
 The `matcher` field matches against Claude Code session event types (startup, resume, clear, compact). `run-hook.cmd` is a polyglot wrapper (batch + bash hybrid) that dispatches to the named hook script — enables cross-platform support (Windows via Git Bash/MSYS2/Cygwin, Unix/macOS natively).
 
-SessionStart hook reads `claude:using-void-grimoire` SKILL.md + `registry.json` and injects both into session context via `hookSpecificOutput`.
+SessionStart hook reads `use-void-grimoire` SKILL.md + `registry.json` and injects both into session context via `hookSpecificOutput`.
 
 ### Design Decisions
 
-- **Self-learning is NOT a hook.** It requires nuanced reasoning that bash can't do. The agent detects corrections; `claude:learn` persists them.
-- **Doc gate and domain gate are NOT hooks.** They're skill invocations orchestrated by the entry point (claude:using-void-grimoire). All reasoning stays in markdown.
+- **Self-learning is NOT a hook.** It requires nuanced reasoning that bash can't do. The agent detects corrections; `learn-correction` persists them.
+- **Doc gate and domain gate are NOT hooks.** They're skill invocations orchestrated by the entry point (use-void-grimoire). All reasoning stays in markdown.
 - **Batch self-learning triggers on conversation wind-down** (user says "thanks", "that's all", "commit and done"), not a hook event. No `SessionEnd` hook exists in Claude Code yet.
 
 ### Future Hook Candidates (not v1)
@@ -415,20 +419,20 @@ All 14 superpowers skills are absorbed into void-grimoire namespaces:
 
 | Superpowers | Void Grimoire | Supporting files |
 |---|---|---|
-| `brainstorming` | `workflow:brainstorm` | spec-document-reviewer-prompt.md, visual-companion.md |
-| `writing-plans` | `workflow:write-plan` | plan-document-reviewer-prompt.md |
-| `executing-plans` | `workflow:execute-plan` | — |
-| `subagent-driven-development` | `workflow:subagent-dev` | implementer-prompt.md, spec-reviewer-prompt.md, code-quality-reviewer-prompt.md |
-| `dispatching-parallel-agents` | `workflow:parallel-agents` | — |
-| `verification-before-completion` | `workflow:verify-before-completion` | — |
-| `test-driven-development` | `dev:tdd` | testing-anti-patterns.md |
-| `systematic-debugging` | `dev:debug` | root-cause-tracing.md, defense-in-depth.md, condition-based-waiting.md |
-| `using-git-worktrees` | `git:worktrees` | — |
-| `requesting-code-review` | `git:request-review` | code-reviewer.md |
-| `receiving-code-review` | `git:receive-review` | — |
-| `finishing-a-development-branch` | `git:finish-branch` | — |
-| `writing-skills` | `claude:write-skill` | anthropic-best-practices.md, persuasion-principles.md, testing-skills-with-subagents.md |
-| `using-superpowers` | `claude:using-void-grimoire` | Rewritten for void-grimoire (registry-aware, three-gate flow) |
+| `brainstorming` | `brainstorm` | spec-document-reviewer-prompt.md, visual-companion.md |
+| `writing-plans` | `write-plan` | plan-document-reviewer-prompt.md |
+| `executing-plans` | `execute-plan` | — |
+| `subagent-driven-development` | `develop-with-subagents` | implementer-prompt.md, spec-reviewer-prompt.md, code-quality-reviewer-prompt.md |
+| `dispatching-parallel-agents` | `dispatch-parallel-agents` | — |
+| `verification-before-completion` | `verify-before-completion` | — |
+| `test-driven-development` | `develop-tdd` | testing-anti-patterns.md |
+| `systematic-debugging` | `debug-systematically` | root-cause-tracing.md, defense-in-depth.md, condition-based-waiting.md |
+| `using-git-worktrees` | `use-worktrees` | — |
+| `requesting-code-review` | `request-review` | code-reviewer.md |
+| `receiving-code-review` | `receive-review` | — |
+| `finishing-a-development-branch` | `finish-branch` | — |
+| `writing-skills` | `write-skill` | anthropic-best-practices.md, persuasion-principles.md, testing-skills-with-subagents.md |
+| `using-superpowers` | `use-void-grimoire` | Rewritten for void-grimoire (registry-aware, three-gate flow) |
 
 Skills are ported with content intact. Frontmatter updated to new format (adding `depends-on`, `chains-to`, `suggests`). Internal references to superpowers skill names updated to void-grimoire names.
 
@@ -439,12 +443,13 @@ Skills are ported with content intact. Frontmatter updated to new format (adding
 Complete frontmatter for all skills with composition relationships:
 
 ```yaml
-# claude domain (not in registry — loaded via hook)
-claude:using-void-grimoire       → depends-on: [], chains-to: null, suggests: []
+# void-grimoire domain (not in registry — loaded via hook)
+use-void-grimoire            → depends-on: [], chains-to: null, suggests: []
 
-# claude:init (user-invokable setup skill)
+# init-project (user-invokable setup skill)
 ---
-name: claude:init
+name: init-project
+domain: void-grimoire
 description: Use when setting up void-grimoire in a new project — scaffolds .void-grimoire/ directory with config, schema, and rule templates
 depends-on: []
 chains-to: null
@@ -452,47 +457,48 @@ suggests: []
 user-invokable: true
 ---
 
-# claude domain (in registry)
-claude:route             → depends-on: [], chains-to: null, suggests: []
-claude:expand-prompt     → depends-on: [claude:route, docs:lookup], chains-to: "workflow:brainstorm", suggests: []
-claude:learn             → depends-on: [], chains-to: null, suggests: []
-claude:write-skill       → depends-on: [], chains-to: null, suggests: []
-claude:symlink-skills    → depends-on: [], chains-to: null, suggests: []
+# void-grimoire domain (in registry)
+# Note: each skill's SKILL.md frontmatter includes a `domain` field (e.g., `domain: void-grimoire`)
+route-request            → depends-on: [], chains-to: null, suggests: []
+expand-prompt            → depends-on: [route-request, lookup-docs], chains-to: "brainstorm", suggests: []
+learn-correction         → depends-on: [], chains-to: null, suggests: []
+write-skill              → depends-on: [], chains-to: null, suggests: []
+symlink-skills           → depends-on: [], chains-to: null, suggests: []
 
 # docs domain
-docs:lookup              → depends-on: [], chains-to: null, suggests: []
-docs:index               → depends-on: [], chains-to: null, suggests: []
+lookup-docs              → depends-on: [], chains-to: null, suggests: []
+index-docs               → depends-on: [], chains-to: null, suggests: []
 
 # codebase domain
-codebase:service-map    → depends-on: [], chains-to: null, suggests: [docs:lookup]
+map-services             → depends-on: [], chains-to: null, suggests: [lookup-docs]
 
 # workflow domain
-workflow:brainstorm          → depends-on: [], chains-to: "workflow:write-plan", suggests: [design:critique, design:frontend-design]
-workflow:write-plan          → depends-on: [workflow:brainstorm], chains-to: null, suggests: [dev:tdd]
-  # chains-to is null: skill decides at runtime between workflow:execute-plan and workflow:subagent-dev
-  # (see Section 4 "Branching at workflow:write-plan")
-workflow:execute-plan        → depends-on: [workflow:write-plan], chains-to: "workflow:verify-before-completion", suggests: []
-workflow:subagent-dev        → depends-on: [workflow:write-plan], chains-to: "workflow:verify-before-completion", suggests: []
-workflow:parallel-agents     → depends-on: [], chains-to: null, suggests: []
-workflow:verify-before-completion → depends-on: [], chains-to: "git:finish-branch", suggests: []
+brainstorm               → depends-on: [], chains-to: "write-plan", suggests: [critique-design, design-frontend]
+write-plan               → depends-on: [brainstorm], chains-to: null, suggests: [develop-tdd]
+  # chains-to is null: skill decides at runtime between execute-plan and develop-with-subagents
+  # (see Section 4 "Branching at write-plan")
+execute-plan             → depends-on: [write-plan], chains-to: "verify-before-completion", suggests: []
+develop-with-subagents   → depends-on: [write-plan], chains-to: "verify-before-completion", suggests: []
+dispatch-parallel-agents → depends-on: [], chains-to: null, suggests: []
+verify-before-completion → depends-on: [], chains-to: "finish-branch", suggests: []
 
 # dev domain
-dev:tdd                  → depends-on: [], chains-to: null, suggests: []
-dev:debug                → depends-on: [], chains-to: null, suggests: [dev:tdd]
+develop-tdd              → depends-on: [], chains-to: null, suggests: []
+debug-systematically     → depends-on: [], chains-to: null, suggests: [develop-tdd]
 
 # git domain
-git:safety               → depends-on: [], chains-to: null, suggests: []
-git:commit-push-pr       → depends-on: [], chains-to: null, suggests: [git:safety]
-git:worktrees            → depends-on: [], chains-to: null, suggests: []
-git:request-review       → depends-on: [], chains-to: null, suggests: [git:safety]
-git:receive-review       → depends-on: [], chains-to: null, suggests: []
-git:finish-branch        → depends-on: [], chains-to: null, suggests: [git:safety]
+enforce-git-safety       → depends-on: [], chains-to: null, suggests: []
+commit-push-pr           → depends-on: [], chains-to: null, suggests: [enforce-git-safety]
+use-worktrees            → depends-on: [], chains-to: null, suggests: []
+request-review           → depends-on: [], chains-to: null, suggests: [enforce-git-safety]
+receive-review           → depends-on: [], chains-to: null, suggests: []
+finish-branch            → depends-on: [], chains-to: null, suggests: [enforce-git-safety]
 
 # design domain — all chains-to: null, suggests: []
-# (design skills are invoked via workflow:brainstorm/write-plan suggests or direct user request)
+# (design skills are invoked via brainstorm/write-plan suggests or direct user request)
 
 # npm domain
-npm:release-safety       → depends-on: [], chains-to: null, suggests: []
+enforce-release-safety   → depends-on: [], chains-to: null, suggests: []
 ```
 
 ---

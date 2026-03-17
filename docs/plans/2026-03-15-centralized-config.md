@@ -1,10 +1,10 @@
 # Centralized Config, Debug Log Access & Decision History — Implementation Plan
 
-> **For agentic workers:** REQUIRED: Use workflow:subagent-dev (if subagents available) or workflow:execute-plan to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED: Use develop-with-subagents (if subagents available) or execute-plan to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add `.void-grimoire/` per-project config directory with centralized config, debug log access, and decision history features.
 
-**Architecture:** Gate 1 loads `config.json` from `.void-grimoire/` in the consumer project (falls back to plugin's `rules/` if absent). Skills read feature flags from config. `claude:init` scaffolds the directory. All plugin state (rules, service-map, decision history) moves under `.void-grimoire/`.
+**Architecture:** Gate 1 loads `config.json` from `.void-grimoire/` in the consumer project (falls back to plugin's `rules/` if absent). Skills read feature flags from config. `init-project` scaffolds the directory. All plugin state (rules, service-map, decision history) moves under `.void-grimoire/`.
 
 **Tech Stack:** Markdown skill files, JSON config/schema. No runtime code — this is a Claude Code plugin of instruction files.
 
@@ -16,7 +16,7 @@
 
 ### Task 1: Create config.schema.json
 
-This is a template file that `claude:init` will copy into consumer projects. It lives in the plugin repo so there's a single source of truth.
+This is a template file that `init-project` will copy into consumer projects. It lives in the plugin repo so there's a single source of truth.
 
 **Files:**
 - Create: `templates/config.schema.json`
@@ -138,19 +138,19 @@ git add templates/config.json
 git commit -m "feat: add default config.json template"
 ```
 
-### Task 3: Create claude:init skill
+### Task 3: Create init-project skill
 
 **Files:**
-- Create: `skills/claude_init/SKILL.md`
-- Modify: `skills/registry.json` — add `claude:init` to claude domain skills array
+- Create: `skills/init-project/SKILL.md`
+- Modify: `skills/registry.json` — add `init-project` to claude domain skills array
 
 - [ ] **Step 1: Write the skill file**
 
-`skills/claude_init/SKILL.md`:
+`skills/init-project/SKILL.md`:
 
 ```markdown
 ---
-name: claude:init
+name: init-project
 description: Use when setting up void-grimoire in a new project — scaffolds .void-grimoire/ directory with config, schema, and rule templates
 depends-on: []
 chains-to: null
@@ -181,7 +181,7 @@ Create the following structure at project root:
   config.schema.json
   rules/
     global.md
-    claude.md
+    void-grimoire.md
     codebase.md
     design.md
     dev.md
@@ -193,8 +193,8 @@ Create the following structure at project root:
 ```
 
 - Copy `config.json` and `config.schema.json` from the plugin's `templates/` directory
-- Create each rule file with placeholder content: `<!-- Learned rules for {domain} domain. Managed by claude:learn. -->`
-- `global.md` uses: `<!-- Learned rules that apply across all domains. Managed by claude:learn. -->`
+- Create each rule file with placeholder content: `<!-- Learned rules for {domain} domain. Managed by learn-correction. -->`
+- `global.md` uses: `<!-- Learned rules that apply across all domains. Managed by learn-correction. -->`
 - Create `history/` as empty directory (add `.gitkeep` inside it)
 
 ### Step 3: Check for stale files
@@ -223,25 +223,25 @@ Create the following structure at project root:
 
 - [ ] **Step 2: Register in registry.json**
 
-In `skills/registry.json`, add `"claude:init"` to the `claude.skills` array (after `"claude:write-skill"`).
+In `skills/registry.json`, add `"init-project"` to the `void-grimoire.skills` array (after `"write-skill"`).
 
-Add `"init"` and `"initialize"` and `"setup"` to the `claude.triggers` array.
+Add `"init"` and `"initialize"` and `"setup"` to the `void-grimoire.triggers` array.
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/claude_init/SKILL.md skills/registry.json
-git commit -m "feat: add claude:init skill for scaffolding .void-grimoire/ in consumer projects"
+git add skills/init-project/SKILL.md skills/registry.json
+git commit -m "feat: add init-project skill for scaffolding .void-grimoire/ in consumer projects"
 ```
 
 ---
 
 ## Chunk 2: Gate 1 & Entry Point Changes
 
-### Task 4: Update claude:using-void-grimoire for config loading
+### Task 4: Update use-void-grimoire for config loading
 
 **Files:**
-- Modify: `skills/claude_using-void-grimoire/SKILL.md`
+- Modify: `skills/use-void-grimoire/SKILL.md`
 
 - [ ] **Step 1: Update Gate 1 in the entry point**
 
@@ -269,23 +269,23 @@ Replace the section starting with `### Gate 2: Docs & Codebase Gate` through its
 ```markdown
 ### Gate 2: Docs & Codebase Gate
 Invoke the following in parallel, then merge outputs:
-- `docs:lookup` — always runs
-- `codebase:service-map` — runs unless config has `features.serviceMap.enabled: false`
+- `lookup-docs` — always runs
+- `map-services` — runs unless config has `features.serviceMap.enabled: false`
 
-Wait for both (or just docs:lookup if service-map is skipped). Documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
+Wait for both (or just lookup-docs if service-map is skipped). Documentation findings inform the task context; service-map scope expansion adds mandatory checklist items for affected services. Pass the combined context to Gate 3. Even "no docs found" or "no services detected" are valid results — the point is you looked.
 ```
 
 - [ ] **Step 3: Commit**
 
 ```bash
-git add skills/claude_using-void-grimoire/SKILL.md
+git add skills/use-void-grimoire/SKILL.md
 git commit -m "feat: update using-void-grimoire Gate 1 to load config from .void-grimoire/, Gate 2 to respect serviceMap flag"
 ```
 
-### Task 5: Update claude:learn to write rules to .void-grimoire/
+### Task 5: Update learn-correction to write rules to .void-grimoire/
 
 **Files:**
-- Modify: `skills/claude_learn/SKILL.md`
+- Modify: `skills/learn-correction/SKILL.md`
 
 - [ ] **Step 1: Update the Storage Tier Classification section**
 
@@ -310,24 +310,24 @@ Correction detected
 - About a technology, pattern, or domain practice → rules/{domain}.md
 - About communication style, output format, general approach → rules/global.md
 
-**Path resolution:** Always check for `.void-grimoire/rules/` first. If it exists, write there. If not, fall back to the plugin's `rules/` directory. This ensures projects that have run `claude:init` get project-scoped rules, while uninitialised projects still work.
+**Path resolution:** Always check for `.void-grimoire/rules/` first. If it exists, write there. If not, fall back to the plugin's `rules/` directory. This ensures projects that have run `init-project` get project-scoped rules, while uninitialised projects still work.
 ```
 
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/claude_learn/SKILL.md
-git commit -m "feat: update claude:learn to write rules to .void-grimoire/rules/ when available"
+git add skills/learn-correction/SKILL.md
+git commit -m "feat: update learn-correction to write rules to .void-grimoire/rules/ when available"
 ```
 
 ---
 
 ## Chunk 3: Feature-Aware Skill Updates
 
-### Task 6: Update docs:lookup to use config instead of HTML comments
+### Task 6: Update lookup-docs to use config instead of HTML comments
 
 **Files:**
-- Modify: `skills/docs_lookup/SKILL.md`
+- Modify: `skills/lookup-docs/SKILL.md`
 
 - [ ] **Step 1: Rewrite the Process section**
 
@@ -343,14 +343,14 @@ If `.void-grimoire/config.json` was loaded in Gate 1, read `features.qmd`:
 
 **Deprecated:** The `<!-- void-grimoire:qmd:enabled -->` HTML comment approach in CLAUDE.md is no longer used. If encountered, ignore it and follow config.json.
 
-**Intentional behavior change:** The old interactive "install qmd?" prompt is removed. qmd is now configured explicitly via `claude:init` + config.json. This avoids prompting users who don't want qmd on every first run.
+**Intentional behavior change:** The old interactive "install qmd?" prompt is removed. qmd is now configured explicitly via `init-project` + config.json. This avoids prompting users who don't want qmd on every first run.
 
 ### 2. If no config exists and qmd status is unknown
 Check if qmd is installed: `which qmd`
 
 If qmd is NOT installed, skip it silently. If installed but no config, use `qmd search` as default command.
 
-**Note:** To configure qmd, run `/skill claude:init` and set `features.qmd.enabled: true` in `.void-grimoire/config.json`.
+**Note:** To configure qmd, run `/skill init-project` and set `features.qmd.enabled: true` in `.void-grimoire/config.json`.
 
 ### 3. Search for docs
 
@@ -374,14 +374,14 @@ Report what was found. "No docs found" is a valid result — the gate passed bec
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/docs_lookup/SKILL.md
-git commit -m "feat: update docs:lookup to read qmd config from .void-grimoire/config.json"
+git add skills/lookup-docs/SKILL.md
+git commit -m "feat: update lookup-docs to read qmd config from .void-grimoire/config.json"
 ```
 
-### Task 7: Update docs:index to reference config
+### Task 7: Update index-docs to reference config
 
 **Files:**
-- Modify: `skills/docs_index/SKILL.md`
+- Modify: `skills/index-docs/SKILL.md`
 
 - [ ] **Step 1: Add config note to Prerequisites section**
 
@@ -389,20 +389,20 @@ After the existing Prerequisites section, add:
 
 ```markdown
 **Config:** If `.void-grimoire/config.json` exists and `features.qmd.enabled` is `false`, warn the user:
-> "qmd is disabled in your config. Enable it in `.void-grimoire/config.json` under `features.qmd` to use indexed documentation with `docs:lookup`."
+> "qmd is disabled in your config. Enable it in `.void-grimoire/config.json` under `features.qmd` to use indexed documentation with `lookup-docs`."
 ```
 
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/docs_index/SKILL.md
-git commit -m "feat: update docs:index to check qmd config status"
+git add skills/index-docs/SKILL.md
+git commit -m "feat: update index-docs to check qmd config status"
 ```
 
-### Task 8: Update dev:debug for log access
+### Task 8: Update debug-systematically for log access
 
 **Files:**
-- Modify: `skills/dev_debug/SKILL.md`
+- Modify: `skills/debug-systematically/SKILL.md`
 
 - [ ] **Step 1: Add Log Access section after Phase 1, Step 1 (Read Error Messages Carefully)**
 
@@ -421,14 +421,14 @@ Insert a new subsection in Phase 1, between step 1 ("Read Error Messages Careful
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/dev_debug/SKILL.md
-git commit -m "feat: add log access config support to dev:debug Phase 1"
+git add skills/debug-systematically/SKILL.md
+git commit -m "feat: add log access config support to debug-systematically Phase 1"
 ```
 
-### Task 9: Update codebase:service-map for .void-grimoire/ paths
+### Task 9: Update map-services for .void-grimoire/ paths
 
 **Files:**
-- Modify: `skills/codebase_service-map/SKILL.md`
+- Modify: `skills/map-services/SKILL.md`
 
 - [ ] **Step 1: Update cache path references**
 
@@ -453,7 +453,7 @@ In the "Forced Re-scan" section, update: delete the appropriate file based on wh
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/codebase_service-map/SKILL.md
+git add skills/map-services/SKILL.md
 git commit -m "feat: update service-map to use .void-grimoire/service-map.json when available"
 ```
 
@@ -461,10 +461,10 @@ git commit -m "feat: update service-map to use .void-grimoire/service-map.json w
 
 ## Chunk 4: Decision History in Workflow Skills
 
-### Task 10: Update workflow:brainstorm for decision history
+### Task 10: Update brainstorm for decision history
 
 **Files:**
-- Modify: `skills/workflow_brainstorm/SKILL.md`
+- Modify: `skills/brainstorm/SKILL.md`
 
 - [ ] **Step 1: Update the "After the Design" documentation section**
 
@@ -491,14 +491,14 @@ Also update step 6 in the Checklist to match:
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/workflow_brainstorm/SKILL.md
-git commit -m "feat: update workflow:brainstorm to write to .void-grimoire/history/ when decision history enabled"
+git add skills/brainstorm/SKILL.md
+git commit -m "feat: update brainstorm to write to .void-grimoire/history/ when decision history enabled"
 ```
 
-### Task 11: Update workflow:write-plan for decision history
+### Task 11: Update write-plan for decision history
 
 **Files:**
-- Modify: `skills/workflow_write-plan/SKILL.md`
+- Modify: `skills/write-plan/SKILL.md`
 
 - [ ] **Step 1: Update the "Save plans to" line**
 
@@ -510,7 +510,7 @@ Replace:
 with:
 ```
 **Save plans to:**
-- **If decision history enabled** (`.void-grimoire/config.json` → `features.decisionHistory.enabled: true`): `.void-grimoire/history/<initiative>/plan.md` — use the same initiative directory created by workflow:brainstorm
+- **If decision history enabled** (`.void-grimoire/config.json` → `features.decisionHistory.enabled: true`): `.void-grimoire/history/<initiative>/plan.md` — use the same initiative directory created by brainstorm
 - **Otherwise:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override both defaults)
 ```
@@ -518,14 +518,14 @@ with:
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/workflow_write-plan/SKILL.md
-git commit -m "feat: update workflow:write-plan to write to .void-grimoire/history/ when decision history enabled"
+git add skills/write-plan/SKILL.md
+git commit -m "feat: update write-plan to write to .void-grimoire/history/ when decision history enabled"
 ```
 
-### Task 12: Update workflow:execute-plan for decision history
+### Task 12: Update execute-plan for decision history
 
 **Files:**
-- Modify: `skills/workflow_execute-plan/SKILL.md`
+- Modify: `skills/execute-plan/SKILL.md`
 
 - [ ] **Step 1: Add implementation record step**
 
@@ -561,14 +561,14 @@ This record completes the decision chain: brainstorm → plan → implementation
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/workflow_execute-plan/SKILL.md
-git commit -m "feat: update workflow:execute-plan to write implementation record to decision history"
+git add skills/execute-plan/SKILL.md
+git commit -m "feat: update execute-plan to write implementation record to decision history"
 ```
 
-### Task 13: Update workflow:prepare-compact for decision history
+### Task 13: Update prepare-compact for decision history
 
 **Files:**
-- Modify: `skills/workflow_prepare-compact/SKILL.md`
+- Modify: `skills/prepare-compact/SKILL.md`
 
 - [ ] **Step 1: Add history reference to Step 1**
 
@@ -581,8 +581,8 @@ In Step 1 ("Gather Session Context"), add item 6:
 - [ ] **Step 2: Commit**
 
 ```bash
-git add skills/workflow_prepare-compact/SKILL.md
-git commit -m "feat: update workflow:prepare-compact to reference decision history"
+git add skills/prepare-compact/SKILL.md
+git commit -m "feat: update prepare-compact to reference decision history"
 ```
 
 ---
@@ -642,7 +642,7 @@ See `docs/specs/2026-03-15-centralized-config-and-features-design.md`
 
 ### Intent
 
-Unified per-project directory for all plugin state: config, rules, decision history, service map. Replaces scattered locations (root `rules/`, root `.service-map.json`, `docs/superpowers/specs/`, CLAUDE.md HTML comments). Initialized via `claude:init` skill. Loaded in Gate 1.
+Unified per-project directory for all plugin state: config, rules, decision history, service map. Replaces scattered locations (root `rules/`, root `.service-map.json`, `docs/superpowers/specs/`, CLAUDE.md HTML comments). Initialized via `init-project` skill. Loaded in Gate 1.
 
 ### Design
 
@@ -665,11 +665,11 @@ git commit -m "docs: add FR-002 (debug log access), FR-003 (decision history), F
 
 Add a new section after "Get Started" (or after "Service Topology") covering:
 
-- What `.void-grimoire/` is and how to initialize it (`/skill claude:init`)
+- What `.void-grimoire/` is and how to initialize it (`/skill init-project`)
 - Brief description of each configurable feature (qmd, logAccess, decisionHistory, serviceMap)
 - Link to the spec for details
 
-- [ ] **Step 2: Add claude:init to the skill count and claude domain row**
+- [ ] **Step 2: Add init-project to the skill count and claude domain row**
 
 Update the total skill count (increment by 1) and add `init` to the claude domain listing.
 
@@ -693,11 +693,11 @@ At the top of the relevant sections (Gate 1, Storage Tiers, qmd detection), add:
 > **Superseded by:** `2026-03-15-centralized-config-and-features-design.md` — Gate 1 now loads config from `.void-grimoire/config.json`, rules from `.void-grimoire/rules/` (with plugin fallback). HTML comment qmd detection is deprecated.
 ```
 
-- [ ] **Step 2: Add claude:init to Section 10 (Skill Frontmatter Reference)**
+- [ ] **Step 2: Add init-project to Section 10 (Skill Frontmatter Reference)**
 
 ```yaml
 ---
-name: claude:init
+name: init-project
 description: Use when setting up void-grimoire in a new project — scaffolds .void-grimoire/ directory with config, schema, and rule templates
 depends-on: []
 chains-to: null

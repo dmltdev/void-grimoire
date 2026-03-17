@@ -1,3 +1,3 @@
 # Global Rules
 
-<!-- Learned rules that apply across all domains. Managed by claude:learn. -->
+<!-- Learned rules that apply across all domains. Managed by learn-correction. -->
