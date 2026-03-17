@@ -30,6 +30,7 @@ void-grimoire/
 │       │
 │       ├── map-services/
 │       │
+│       ├── verify-requirements/
 │       ├── brainstorm/
 │       ├── write-plan/
 │       ├── execute-plan/
@@ -89,7 +90,7 @@ void-grimoire/
 └── .gitignore
 ```
 
-**43 skills across 8 domains:** void-grimoire (6), docs (2), codebase (1), workflow (7), dev (2), git (6), design (18), npm (1). `use-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
+**44 skills across 8 domains:** void-grimoire (6), docs (2), codebase (1), workflow (8), dev (2), git (6), design (18), npm (1). `use-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
 
 Skill directories match the skill name (flat kebab-case). Domain is specified in SKILL.md frontmatter via the `domain` field. Skill names in frontmatter are the bare name without domain prefix. Domain is a separate frontmatter field.
 
@@ -126,8 +127,8 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
     },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
-      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
-      "skills": ["brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
+      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary", "requirements", "spec", "PRD", "ticket", "feasibility", "validate"],
+      "skills": ["verify-requirements", "brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
       "docs": []
     },
     "dev": {
@@ -473,6 +474,7 @@ index-docs               → depends-on: [], chains-to: null, suggests: []
 map-services             → depends-on: [], chains-to: null, suggests: [lookup-docs]
 
 # workflow domain
+verify-requirements      → depends-on: [], chains-to: null, suggests: [brainstorm, map-services]
 brainstorm               → depends-on: [], chains-to: "write-plan", suggests: [critique-design, design-frontend]
 write-plan               → depends-on: [brainstorm], chains-to: null, suggests: [develop-tdd]
   # chains-to is null: skill decides at runtime between execute-plan and develop-with-subagents

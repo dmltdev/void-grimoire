@@ -20,8 +20,8 @@
     },
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
-      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary"],
-      "skills": ["brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
+      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary", "requirements", "spec", "PRD", "ticket", "feasibility", "validate"],
+      "skills": ["verify-requirements", "brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
       "docs": []
     },
     "dev": {
