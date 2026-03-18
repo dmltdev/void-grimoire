@@ -7,6 +7,16 @@ chains-to: null
 suggests: [develop-tdd]
 ---
 
+## Quality Level
+
+Read `quality-level` from the spec or plan. If not present, assume `production`.
+Refer to the brainstorm skill's **Quality Level** section for the full tier table
+and definitions. Apply the row for this skill's concern area (e.g., Verification
+for verify-before-completion, Branch/PR for finish-branch).
+
+Write `quality-level: {tier}` in any artifact this skill produces (plans, etc.)
+so downstream skills can read it.
+
 # Writing Plans
 
 ## Overview
