@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoresearch — {{SKILL_NAME}}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; color: #333; padding: 24px; }
+  h1 { font-size: 1.4rem; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { color: #888; font-size: 0.85rem; margin-bottom: 24px; }
+  .status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+  .status-running { background: #E3F2FD; color: #1565C0; }
+  .status-complete { background: #E8F5E9; color: #2E7D32; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .card { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: #999; margin-bottom: 4px; }
+  .card-value { font-size: 1.6rem; font-weight: 700; }
+  .chart-container { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 24px; }
+  th { background: #f5f5f5; text-align: left; padding: 10px 14px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: #777; }
+  td { padding: 10px 14px; border-top: 1px solid #f0f0f0; font-size: 0.85rem; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; }
+  .tag-baseline { background: #E3F2FD; color: #1565C0; }
+  .tag-keep { background: #E8F5E9; color: #2E7D32; }
+  .tag-discard { background: #FFEBEE; color: #C62828; }
+  .eval-bar-bg { background: #f0f0f0; border-radius: 4px; height: 8px; width: 100%; }
+  .eval-bar { border-radius: 4px; height: 8px; background: #81C784; }
+  .section-title { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Autoresearch — {{SKILL_NAME}}</h1>
+<p class="subtitle">Optimizing skill via autonomous experiment loop</p>
+<span id="statusBadge" class="status-badge status-running">Running</span>
+
+<div class="cards" style="margin-top: 16px;">
+  <div class="card"><div class="card-label">Current Experiment</div><div class="card-value" id="currentExp">—</div></div>
+  <div class="card"><div class="card-label">Baseline</div><div class="card-value" id="baselineScore">—</div></div>
+  <div class="card"><div class="card-label">Best Score</div><div class="card-value" id="bestScore">—</div></div>
+  <div class="card"><div class="card-label">Improvement</div><div class="card-value" id="improvement">—</div></div>
+</div>
+
+<div class="chart-container">
+  <div class="section-title">Score Progression</div>
+  <canvas id="scoreChart" height="80"></canvas>
+</div>
+
+<div class="section-title">Experiments</div>
+<table>
+  <thead><tr><th>#</th><th>Score</th><th>Pass Rate</th><th>Status</th><th>Description</th></tr></thead>
+  <tbody id="expTable"></tbody>
+</table>
+
+<div class="section-title">Eval Breakdown</div>
+<table>
+  <thead><tr><th>Eval</th><th>Pass Rate</th><th></th></tr></thead>
+  <tbody id="evalTable"></tbody>
+</table>
+
+<script>
+let chart = null;
+
+// Embedded data — replaced by autoresearch after each experiment
+const embeddedData = {{RESULTS_JSON}};
+
+async function refresh() {
+  try {
+    let data;
+    try {
+      const resp = await fetch('results.json?' + Date.now());
+      data = await resp.json();
+    } catch(e) {
+      data = embeddedData;
+    }
+
+    // Status badge
+    const badge = document.getElementById('statusBadge');
+    badge.textContent = data.status === 'complete' ? 'Complete' : 'Running Experiment ' + data.current_experiment;
+    badge.className = 'status-badge ' + (data.status === 'complete' ? 'status-complete' : 'status-running');
+
+    // Cards
+    document.getElementById('currentExp').textContent = data.current_experiment;
+    document.getElementById('baselineScore').textContent = data.baseline_score.toFixed(1) + '%';
+    document.getElementById('bestScore').textContent = data.best_score.toFixed(1) + '%';
+    const imp = data.best_score - data.baseline_score;
+    document.getElementById('improvement').textContent = (imp >= 0 ? '+' : '') + imp.toFixed(1) + '%';
+
+    // Chart
+    const labels = data.experiments.map(e => 'Exp ' + e.id);
+    const scores = data.experiments.map(e => e.pass_rate);
+    const colors = data.experiments.map(e => e.status === 'baseline' ? '#64B5F6' : e.status === 'keep' ? '#81C784' : '#E57373');
+
+    if (chart) chart.destroy();
+    const ctx = document.getElementById('scoreChart').getContext('2d');
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Pass Rate %',
+          data: scores,
+          borderColor: '#64B5F6',
+          backgroundColor: 'rgba(100,181,246,0.1)',
+          fill: true,
+          tension: 0.3,
+          pointBackgroundColor: colors,
+          pointRadius: 6,
+          pointHoverRadius: 8
+        }]
+      },
+      options: {
+        scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Experiments table
+    const expTbody = document.getElementById('expTable');
+    expTbody.innerHTML = data.experiments.map(e =>
+      `<tr><td>${e.id}</td><td>${e.score}/${e.max_score}</td><td>${e.pass_rate.toFixed(1)}%</td><td><span class="tag tag-${e.status}">${e.status}</span></td><td>${e.description}</td></tr>`
+    ).join('');
+
+    // Eval breakdown
+    const evalTbody = document.getElementById('evalTable');
+    evalTbody.innerHTML = data.eval_breakdown.map(ev => {
+      const pct = ev.total > 0 ? (ev.pass_count / ev.total * 100).toFixed(0) : 0;
+      return `<tr><td>${ev.name}</td><td>${ev.pass_count}/${ev.total} (${pct}%)</td><td><div class="eval-bar-bg"><div class="eval-bar" style="width:${pct}%"></div></div></td></tr>`;
+    }).join('');
+
+  } catch(e) { /* silent retry */ }
+}
+
+refresh();
+setInterval(refresh, 10000);
+</script>
+</body>
+</html>

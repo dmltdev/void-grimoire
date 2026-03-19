@@ -47,7 +47,10 @@ Take a terse user request and flesh it out with domain context, documentation, a
    - Suggested workflow: brainstorm → write-plan → ...
    ```
 
-4. **Present to user** for confirmation. They can approve, modify, or reject.
+4. **Present to user** for confirmation. ALWAYS end the expansion with an explicit handoff:
+   > "Approve, modify, or reject?"
+
+   Do NOT omit this. Do NOT proceed without it. The user must explicitly approve before anything happens.
 
 5. **On approval** → proceed into `brainstorm` (chains-to) with the expanded context.
 
