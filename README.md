@@ -15,8 +15,8 @@ A skill system for Claude Code that enforces structured workflows, learns your c
 ### Claude Code (Manual)
 
 ```bash
-/plugin marketplace add dmltdev/void-grimoire-marketplace
-/plugin install dmltdev@void-grimoire-marketplace
+/plugin marketplace add dmltdev/void-grimoire
+/plugin install void-grimoire@dmltdev
 ```
 
 ## Get Started
