@@ -37,6 +37,7 @@ void-grimoire/
 │       ├── develop-with-subagents/
 │       ├── dispatch-parallel-agents/
 │       ├── verify-before-completion/
+│       ├── session-summary/
 │       ├── prepare-compact/
 │       │
 │       ├── develop-tdd/
@@ -90,7 +91,7 @@ void-grimoire/
 └── .gitignore
 ```
 
-**44 skills across 8 domains:** void-grimoire (6), docs (2), codebase (1), workflow (8), dev (2), git (6), design (18), npm (1). `use-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
+**45 skills across 8 domains:** void-grimoire (6), docs (2), codebase (1), workflow (9), dev (2), git (6), design (18), npm (1). `use-void-grimoire` is excluded from the count — it is loaded via hook, not routed.
 
 Skill directories match the skill name (flat kebab-case). Domain is specified in SKILL.md frontmatter via the `domain` field. Skill names in frontmatter are the bare name without domain prefix. Domain is a separate frontmatter field.
 
@@ -128,7 +129,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
     "workflow": {
       "description": "Development pipeline — brainstorm, plan, execute, verify",
       "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary", "requirements", "spec", "PRD", "ticket", "feasibility", "validate"],
-      "skills": ["verify-requirements", "brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "prepare-compact"],
+      "skills": ["verify-requirements", "brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "session-summary", "prepare-compact"],
       "docs": []
     },
     "dev": {
@@ -483,6 +484,9 @@ execute-plan             → depends-on: [write-plan], chains-to: "verify-before
 develop-with-subagents   → depends-on: [write-plan], chains-to: "verify-before-completion", suggests: []
 dispatch-parallel-agents → depends-on: [], chains-to: null, suggests: []
 verify-before-completion → depends-on: [], chains-to: "finish-branch", suggests: []
+session-summary          → depends-on: [], chains-to: null, suggests: []
+prepare-compact          → depends-on: [], chains-to: null, suggests: []
+  # deprecated alias of session-summary; kept so legacy /prepare-compact triggers still resolve
 
 # dev domain
 develop-tdd              → depends-on: [], chains-to: null, suggests: []

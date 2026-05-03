@@ -68,7 +68,7 @@ AI coding assistants are powerful but undisciplined. They skip research, forget 
 | **Scope creep & over-engineering** — AI refactors things you didn't ask about | TDD enforces minimal code. Brainstorm decomposes large scopes. Spec compliance reviews catch additions not in the plan |
 | **Prompt drift** — instructions degrade over long sessions | Rules are reloaded from disk on every turn via `use-void-grimoire`. Learned corrections persist across sessions, not just within them |
 | **Stale mental model** — AI forgets decisions made 20 messages ago | Design specs, implementation plans, and session summaries are written to disk. Decisions survive `/compact` and session boundaries |
-| **Handoff friction** — re-establishing context between sessions or tools | `prepare-compact` generates a session summary with a ready-to-paste continuation prompt. Plans are structured with chunk boundaries for parallel handoff |
+| **Handoff friction** — re-establishing context between sessions or tools | `session-summary` generates a session journal (TL;DR, decisions with trade-offs, next steps) with a ready-to-paste continuation prompt. Plans are structured with chunk boundaries for parallel handoff |
 | **Topology awareness** — AI doesn't know how services relate | `map-services` auto-discovers workspace dependencies (pnpm, lerna, Go workspaces), caches a bidirectional graph, and expands task scope to include affected services |
 
 ### Known Limitations
@@ -110,7 +110,7 @@ On first run in a workspace, `map-services` scans for workspace configs and buil
 
 ### Session Continuity
 
-Before running `/compact` or ending a session, invoke `prepare-compact`. It saves a session summary to `docs/sessions/` with a continuation prompt you can paste into the next session.
+Before running `/compact` or ending a session, invoke `session-summary`. It saves a journal of the session to `docs/sessions/` — TL;DR, decisions with trade-offs, discussion, accomplishments, next steps, files touched — plus a continuation prompt you can paste into the next session.
 
 ## Project Configuration
 
@@ -142,7 +142,7 @@ Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centr
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **workflow** | verify-requirements, brainstorm, write-plan, execute-plan, develop-with-subagents, dispatch-parallel-agents, verify-before-completion, prepare-compact | End-to-end development lifecycle |
+| **workflow** | verify-requirements, brainstorm, write-plan, execute-plan, develop-with-subagents, dispatch-parallel-agents, verify-before-completion, session-summary, prepare-compact | End-to-end development lifecycle |
 | **design** | 18 skills (design-frontend, audit, critique, polish, animate, etc.) | UI/UX design and implementation |
 | **dev** | develop-tdd, debug-systematically | Test-driven development and systematic debugging |
 | **git** | use-worktrees, request-review, receive-review, finish-branch, commit-push-pr, enforce-git-safety | Git workflow and code review |
@@ -151,7 +151,7 @@ Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centr
 | **void-grimoire** | use-void-grimoire, route-request, expand-prompt, learn-correction, write-skill, init-project | Plugin meta-skills and self-learning |
 | **npm** | enforce-release-safety | Package publishing safety |
 
-**43 skills** total across 8 domains. (`use-void-grimoire` is loaded via hook, not routed.)
+**44 skills** total across 8 domains. (`use-void-grimoire` is loaded via hook, not routed.)
 
 ## Architecture
 
