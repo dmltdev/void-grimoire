@@ -142,7 +142,7 @@ Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centr
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **workflow** | verify-requirements, brainstorm, write-plan, execute-plan, develop-with-subagents, dispatch-parallel-agents, verify-before-completion, session-summary, prepare-compact | End-to-end development lifecycle |
+| **workflow** | verify-requirements, brainstorm, write-plan, execute-plan, develop-with-subagents, dispatch-parallel-agents, verify-before-completion, session-summary, prepare-compact, session-usage-summary | End-to-end development lifecycle |
 | **design** | 18 skills (design-frontend, audit, critique, polish, animate, etc.) | UI/UX design and implementation |
 | **dev** | develop-tdd, debug-systematically | Test-driven development and systematic debugging |
 | **git** | use-worktrees, request-review, receive-review, finish-branch, commit-push-pr, enforce-git-safety | Git workflow and code review |
@@ -151,7 +151,7 @@ Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centr
 | **void-grimoire** | use-void-grimoire, route-request, expand-prompt, learn-correction, write-skill, init-project | Plugin meta-skills and self-learning |
 | **npm** | enforce-release-safety | Package publishing safety |
 
-**44 skills** total across 8 domains. (`use-void-grimoire` is loaded via hook, not routed.)
+**45 skills** total across 8 domains. (`use-void-grimoire` is loaded via hook, not routed.)
 
 ## Architecture
 

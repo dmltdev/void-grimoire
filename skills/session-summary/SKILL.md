@@ -4,7 +4,7 @@ domain: workflow
 description: Use when the user wants to journal a session, capture context before compacting, or save a retrospective record of decisions, trade-offs, and progress
 depends-on: []
 chains-to: null
-suggests: []
+suggests: ["session-usage-summary"]
 ---
 
 # Session Summary
