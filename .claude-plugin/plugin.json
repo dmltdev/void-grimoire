@@ -1,7 +1,7 @@
 {
   "name": "void-grimoire",
-  "description": "Additive Claude Code skills: session journaling, learned-correction persistence, prompt expansion, registry routing, and lookup/safety helpers",
-  "version": "2.0.0",
+  "description": "Additive Claude Code skills: session journaling, learned-correction persistence, prompt expansion, and lookup/safety helpers",
+  "version": "2.0.1",
   "author": {
     "name": "Dmytro L.",
     "email": "dmltdev@proton.me"
