@@ -1,9 +1,9 @@
 {
   "domains": {
     "void-grimoire": {
-      "description": "Meta skills — plugin management, skill authoring, self-learning",
-      "triggers": ["skill", "plugin", "void-grimoire", "remember", "learn", "rule", "init", "initialize", "setup"],
-      "skills": ["use-void-grimoire", "route-request", "expand-prompt", "learn-correction", "write-skill", "init-project"],
+      "description": "Meta skills — registry routing, prompt expansion, self-learning, skill optimization",
+      "triggers": ["skill", "plugin", "void-grimoire", "remember", "learn", "rule", "correction", "optimize skill", "improve skill"],
+      "skills": ["route-request", "expand-prompt", "learn-correction", "autoresearch"],
       "docs": []
     },
     "docs": {
@@ -19,27 +19,15 @@
       "docs": []
     },
     "workflow": {
-      "description": "Development pipeline — brainstorm, plan, execute, verify",
-      "triggers": ["brainstorm", "plan", "implement", "execute", "verify", "ship", "compact", "session", "summary", "requirements", "spec", "PRD", "ticket", "feasibility", "validate"],
-      "skills": ["verify-requirements", "brainstorm", "write-plan", "execute-plan", "develop-with-subagents", "dispatch-parallel-agents", "verify-before-completion", "session-summary", "prepare-compact", "session-usage-summary"],
-      "docs": []
-    },
-    "dev": {
-      "description": "Development techniques — TDD, debugging, error handling",
-      "triggers": ["test", "TDD", "debug", "bug", "error", "fail", "broken", "crash"],
-      "skills": ["develop-tdd", "debug-systematically"],
+      "description": "Lightweight workflow helpers — requirements validation, session journaling, usage feedback",
+      "triggers": ["session", "summary", "compact", "requirements", "spec", "PRD", "ticket", "feasibility", "validate", "journal"],
+      "skills": ["verify-requirements", "session-summary", "session-usage-summary"],
       "docs": []
     },
     "git": {
-      "description": "Git workflow — commits, branches, PRs, reviews",
-      "triggers": ["commit", "push", "PR", "pull request", "branch", "merge", "review", "rebase"],
-      "skills": ["enforce-git-safety", "commit-push-pr", "use-worktrees", "request-review", "receive-review", "finish-branch"],
-      "docs": []
-    },
-    "design": {
-      "description": "UI/UX design — frontend, accessibility, visual quality",
-      "triggers": ["UI", "UX", "component", "layout", "CSS", "responsive", "a11y", "animation", "color", "design", "frontend", "page", "screen"],
-      "skills": ["design-frontend", "audit-design", "critique-design", "adapt-design", "animate-design", "bolden-design", "clarify-design", "colorize-design", "delight-design", "distill-design", "extract-design", "harden-design", "normalize-design", "design-onboarding", "optimize-design", "polish-design", "quieten-design", "teach-design"],
+      "description": "Git safety and commit/push/PR workflow",
+      "triggers": ["commit", "push", "PR", "pull request", "branch", "force push", "reset", "destructive git"],
+      "skills": ["enforce-git-safety", "commit-push-pr"],
       "docs": []
     },
     "npm": {

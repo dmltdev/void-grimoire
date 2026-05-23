@@ -27,21 +27,17 @@ Persist user corrections as rules so the same mistake is not repeated in future 
 
 ```
 Correction detected
-  ├─ Specific to THIS project/codebase? → Append to project's CLAUDE.md
-  ├─ Specific to a domain (design, git, dev, etc.)?
-  │     ├─ .void-grimoire/rules/ exists? → Append to .void-grimoire/rules/{domain}.md
-  │     └─ No .void-grimoire/? → Append to plugin's rules/{domain}.md
-  └─ General behavior?
-        ├─ .void-grimoire/rules/ exists? → Append to .void-grimoire/rules/global.md
-        └─ No .void-grimoire/? → Append to plugin's rules/global.md
+  ├─ Specific to THIS project/codebase? → Append to project AGENTS.md / CLAUDE.md
+  ├─ Specific to a domain or technology used in this project? → Append to project AGENTS.md / CLAUDE.md under the relevant heading
+  └─ General cross-project behavior? → Append to user's global ~/.claude/CLAUDE.md (with permission)
 ```
 
 **Decision heuristics:**
-- Mentions specific files, paths, or project names → project CLAUDE.md
-- About a technology, pattern, or domain practice → rules/{domain}.md
-- About communication style, output format, general approach → rules/global.md
+- Mentions specific files, paths, or project names → project AGENTS.md / CLAUDE.md
+- About a technology, pattern, or domain practice → project AGENTS.md / CLAUDE.md (grouped under a domain heading)
+- About communication style, output format, general approach → user's global ~/.claude/CLAUDE.md (with permission)
 
-**Path resolution:** Always check for `.void-grimoire/rules/` first. If it exists, write there. If not, fall back to the plugin's `rules/` directory. This ensures projects that have run `init-project` get project-scoped rules, while uninitialised projects still work.
+**Path resolution:** Default to the project's AGENTS.md or CLAUDE.md at repo root. Only write to the global ~/.claude/CLAUDE.md when the rule is clearly cross-project AND the user confirms.
 
 ## Rule Format
 

@@ -3,7 +3,7 @@ name: expand-prompt
 domain: void-grimoire
 description: Use when a user request is terse or ambiguous — expands it with domain context, docs, and learned rules before proceeding
 depends-on: [route-request, lookup-docs]
-chains-to: "brainstorm"
+chains-to: null
 suggests: []
 user-invokable: true
 args:
@@ -14,20 +14,20 @@ args:
 
 # Prompt Expansion
 
-Take a terse user request and flesh it out with domain context, documentation, and learned rules before handing off to brainstorming.
+Take a terse user request and flesh it out with domain context, documentation, and any learned rules before acting on it.
 
 ## When to Use
 
 - User gives a short, ambiguous request ("add dark mode", "fix the auth bug")
 - User explicitly invokes `/expand-prompt`
-- Agent is unsure what the user wants and needs to expand before brainstorming
+- Agent is unsure what the user wants and needs to disambiguate before acting
 
 ## Process
 
 1. **Identify domains** — Run `route-request` (dependency) to match the request against registry triggers.
 
 2. **Gather context:**
-   - Read `rules/global.md` + `rules/{matched domains}.md` for learned rules
+   - Read project AGENTS.md / CLAUDE.md for learned rules and conventions
    - Run `lookup-docs` (dependency) for relevant documentation
    - Check recent git history for related changes
 
@@ -43,8 +43,6 @@ Take a terse user request and flesh it out with domain context, documentation, a
    - Decomposed sub-tasks:
      1. [sub-task]
      2. [sub-task]
-     ...
-   - Suggested workflow: brainstorm → write-plan → ...
    ```
 
 4. **Present to user** for confirmation. ALWAYS end the expansion with an explicit handoff:
@@ -52,7 +50,7 @@ Take a terse user request and flesh it out with domain context, documentation, a
 
    Do NOT omit this. Do NOT proceed without it. The user must explicitly approve before anything happens.
 
-5. **On approval** → proceed into `brainstorm` (chains-to) with the expanded context.
+5. **On approval** → proceed with the expanded intent.
 
 ## Key Constraint
 

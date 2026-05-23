@@ -9,25 +9,12 @@ suggests: []
 
 # Documentation Lookup
 
-Check for relevant documentation before writing code. This is Gate 2 of the three-gate flow.
+Check for relevant documentation before writing code.
 
 ## Process
 
-### 1. Check qmd config
-If `.void-grimoire/config.json` was loaded in Gate 1, read `features.qmd`:
-- `enabled: true` → use qmd with the configured `command`
-- `enabled: false` or config absent → skip qmd, use local search only
-
-**Deprecated:** The `<!-- void-grimoire:qmd:enabled -->` HTML comment approach in CLAUDE.md is no longer used. If encountered, ignore it and follow config.json.
-
-**Intentional behavior change:** The old interactive "install qmd?" prompt is removed. qmd is now configured explicitly via `init-project` + config.json. This avoids prompting users who don't want qmd on every first run.
-
-### 2. If no config exists and qmd status is unknown
-Check if qmd is installed: `which qmd`
-
-If qmd is NOT installed, skip it silently. If installed but no config, use `qmd search` as default command.
-
-**Note:** To configure qmd, run `/skill init-project` and set `features.qmd.enabled: true` in `.void-grimoire/config.json`.
+### 1. Detect qmd
+Run `which qmd`. If installed, use `qmd search` as the default command. If not, skip silently and fall through to local search.
 
 ### 3. Search for docs
 

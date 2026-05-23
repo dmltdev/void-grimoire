@@ -24,9 +24,6 @@ go install github.com/tobi/qmd@latest
 ```
 See https://github.com/tobi/qmd for alternative installation methods.
 
-**Config:** If `.void-grimoire/config.json` exists and `features.qmd.enabled` is `false`, warn the user:
-> "qmd is disabled in your config. Enable it in `.void-grimoire/config.json` under `features.qmd` to use indexed documentation with `lookup-docs`."
-
 ## Process
 
 1. **Fetch the documentation:**
@@ -40,7 +37,7 @@ qmd search "test query related to the docs"
 ```
 
 3. **Register in registry** (optional but recommended):
-Identify which domain this documentation belongs to (design, dev, git, etc.) and note it for the user. The registry's `docs` field per domain can be updated to track indexed sources.
+Identify which domain this documentation belongs to and note it for the user. The registry's `docs` field per domain can be updated to track indexed sources.
 
 ## Examples
 

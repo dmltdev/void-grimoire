@@ -4,7 +4,7 @@ domain: workflow
 description: Use when receiving external requirements, specs, PRDs, or tickets that need validation before design — checks feasibility against codebase, surfaces ambiguity, hidden scope, and contradictions
 depends-on: []
 chains-to: null
-suggests: [brainstorm, map-services]
+suggests: [map-services]
 ---
 
 # Verify Requirements
@@ -12,7 +12,7 @@ suggests: [brainstorm, map-services]
 Adversarial review of external requirements. Every requirement is ambiguous until disambiguated, simple until the dependency chain proves it, and feasible until the codebase says otherwise.
 
 <HARD-GATE>
-Do NOT proceed to design or implementation. This skill produces a review report only. If the user wants to design after, suggest invoking brainstorm.
+Do NOT proceed to design or implementation. This skill produces a review report only.
 </HARD-GATE>
 
 ## Process
@@ -30,7 +30,7 @@ If you can't cleanly split a requirement, that's already an ambiguity finding �
 
 ### 2. Load Context
 
-Read service map (`.void-grimoire/service-map.json`) if available. The skill works without it — scope and feasibility analysis degrade gracefully to codebase-only exploration. Identify relevant codebase areas for the requirements.
+Read service map (`.service-map.json`) if available. The skill works without it — scope and feasibility analysis degrade gracefully to codebase-only exploration. Identify relevant codebase areas for the requirements.
 
 ### 3. Lens Dispatch (Sequential Subagents)
 
@@ -64,13 +64,10 @@ Compile all lens results into two deliverables:
 
 ### 5. Write Output
 
-Save to `.void-grimoire/history/<initiative>/requirements-review.md`. Derive `<initiative>` from source (Jira ticket key, doc title) or ask user if no clear name.
+Save to `docs/requirements/<initiative>-review.md`. Derive `<initiative>` from source (Jira ticket key, doc title) or ask user if no clear name.
 
 Present the summary table and blocker list in conversation.
 
 ### 6. Offer Next Step
 
-> "Want to take this to stakeholders first, or proceed to brainstorm?"
-
-- Stakeholders first → skill ends
-- Brainstorm → suggest invoking brainstorm with verified requirements
+> "Want to take this to stakeholders first, or proceed to design/implementation?"

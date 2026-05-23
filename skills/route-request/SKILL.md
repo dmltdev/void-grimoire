@@ -25,14 +25,14 @@ Match a user request against the domain registry to identify applicable skills.
 
 ## Matching Rules
 
-- Match on semantic relevance, not just exact keyword match. "add a login page" should match `design` (it's a page) and `dev` (it's a feature) even though "login" isn't a trigger.
+- Match on semantic relevance, not just exact keyword match. "look up the React docs" should match `docs` even if no exact keyword fires.
 - When uncertain, include the domain. False positives (checking an irrelevant skill) are cheap. False negatives (missing a relevant skill) cause real problems.
-- The `workflow` domain matches when the task is a new feature, project, or multi-step change. It does NOT match for quick fixes, questions, or single-file edits.
-- The `void-grimoire` domain only matches for meta-tasks (creating skills, managing the plugin, remembering rules).
+- The `workflow` domain matches when the task is requirements validation, session journaling, or compact prep.
+- The `void-grimoire` domain only matches for meta-tasks (routing, prompt expansion, learning corrections, optimizing skills).
 
 ## Output Format
 
 After routing, announce which domains and skills matched:
-> "Matched domains: design, dev. Applicable skills: design-frontend, develop-tdd."
+> "Matched domains: workflow, git. Applicable skills: session-summary, commit-push-pr."
 
 Then invoke each applicable skill.
