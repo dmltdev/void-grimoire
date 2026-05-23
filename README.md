@@ -2,7 +2,9 @@
 
 ![Void Grimoire](void-grimoire.webp)
 
-A skill system for Claude Code that enforces structured workflows, learns your conventions, and prevents the most common failure modes of AI-assisted development.
+A small, additive skill library for Claude Code. Covers what generic workflows don't: session journaling, learned-correction persistence, prompt expansion, registry routing, and a handful of safety and lookup helpers.
+
+This is **not** a workflow framework. It does not enforce phases, gate your work, or auto-inject context. Skills load on demand via the `Skill` tool. Use what you need, ignore the rest.
 
 ## Installation
 
@@ -19,143 +21,49 @@ A skill system for Claude Code that enforces structured workflows, learns your c
 /plugin install void-grimoire@dmltdev
 ```
 
-## Get Started
+## What You Get
 
-The plugin activates automatically. On every message, `use-void-grimoire` runs three gates (rules → docs → routing) before any action is taken — you don't need to invoke it manually.
-
-**To build something new**, just describe what you want:
-
-```
-I want to add a dark mode toggle to the settings page
-```
-
-The plugin will route you through `brainstorm` — exploring your intent, asking clarifying questions, and producing a design spec before any code is written. From there, the pipeline chains automatically:
-
-```
-brainstorm → write-plan → execute-plan → verify → finish-branch
-```
-
-**To fix a bug**, describe the symptom:
-
-```
-The sidebar collapses on page refresh
-```
-
-The plugin routes to `debug-systematically` for systematic root-cause analysis before proposing fixes.
-
-**To invoke a skill directly**, use its full name:
-
-```
-/skill brainstorm
-/skill develop-tdd
-/skill design-frontend
-```
-
-**Self-learning** happens automatically. When you correct the AI mid-session ("don't use mocks here", "always use camelCase"), `learn-correction` persists the correction. Next session, it loads automatically.
-
-## Why
-
-AI coding assistants are powerful but undisciplined. They skip research, forget context, ignore your team's patterns, and claim things work without checking. Void Grimoire adds guardrails.
-
-### What It Solves
-
-| Problem | How Void Grimoire Addresses It |
-|---------|-------------------------------|
-| **AI doesn't understand intent** — jumps to code without grasping the business goal | `brainstorm` gates all work behind intent exploration, clarifying questions, and design approval before any code is written |
-| **Workflow sequencing** — AI codes when it should be researching or planning | Hard-chained pipeline: brainstorm → plan → implement → verify → finish. Skills enforce phase order via `chains-to`; no skipping allowed |
-| **Codebase conventions ignored** — AI defaults to generic patterns instead of yours | Three-tier rule system (global → domain → project). `learn-correction` captures corrections mid-session and persists them for future sessions |
-| **Verification gap** — AI writes code but never proves it works | `verify-before-completion` enforces an iron law: no completion claims without fresh evidence (test run, build, lint). `develop-tdd` enforces red-green-refactor |
-| **Scope creep & over-engineering** — AI refactors things you didn't ask about | TDD enforces minimal code. Brainstorm decomposes large scopes. Spec compliance reviews catch additions not in the plan |
-| **Prompt drift** — instructions degrade over long sessions | Rules are reloaded from disk on every turn via `use-void-grimoire`. Learned corrections persist across sessions, not just within them |
-| **Stale mental model** — AI forgets decisions made 20 messages ago | Design specs, implementation plans, and session summaries are written to disk. Decisions survive `/compact` and session boundaries |
-| **Handoff friction** — re-establishing context between sessions or tools | `session-summary` generates a session journal (TL;DR, decisions with trade-offs, next steps) with a ready-to-paste continuation prompt. Plans are structured with chunk boundaries for parallel handoff |
-| **Topology awareness** — AI doesn't know how services relate | `map-services` auto-discovers workspace dependencies (pnpm, lerna, Go workspaces), caches a bidirectional graph, and expands task scope to include affected services |
-
-### Known Limitations
-
-| Problem | Status |
-|---------|--------|
-| **Context window saturation** — large codebases exceed what AI can hold | Partially addressed. Session preservation and on-demand skill loading help, but there's no automatic selective code loading for very large codebases |
-| **Multi-repo blindness** — AI only sees the repo it's in | Partially addressed. Service-map covers monorepo workspaces but doesn't span separate Git repositories or trace cross-repo contracts |
-
-## How It Works
-
-Before any code action, three gates fire in order:
-
-1. **Rules Gate** — reads learned rules (`rules/global.md` + `rules/{domain}.md`)
-2. **Docs & Codebase Gate** — searches for documentation via [qmd](https://github.com/tobi/qmd) and discovers service topology in parallel
-3. **Domain Gate** — matches request against registry triggers, returns applicable skills
-
-Skills declare composition via frontmatter: `depends-on` (hard prereq), `chains-to` (hard successor), `suggests` (soft recommendation).
-
-## Usage
-
-### Workflow Pipeline
-
-For any non-trivial task, the plugin enforces this sequence:
-
-```
-brainstorm → write-plan → execute-plan / subagent-dev → verify → finish-branch
-```
-
-You can enter at any stage if prior artifacts exist (e.g., you already have a spec).
-
-### Self-Learning
-
-When you correct the AI — "don't mock the database", "always use snake_case for API fields" — the `learn-correction` skill detects the correction and persists it to the appropriate rule file. Next session, that rule loads automatically via Gate 1.
-
-### Service Topology
-
-On first run in a workspace, `map-services` scans for workspace configs and builds `.service-map.json`. When you touch a service, the plugin expands scope to include its dependents and dependencies so nothing breaks silently.
-
-### Session Continuity
-
-Before running `/compact` or ending a session, invoke `session-summary`. It saves a journal of the session to `docs/sessions/` — TL;DR, decisions with trade-offs, discussion, accomplishments, next steps, files touched — plus a continuation prompt you can paste into the next session.
-
-## Project Configuration
-
-Initialize void-grimoire in your project to unlock per-project config, learned rules, and decision history:
-
-```
-/skill init-project
-```
-
-This creates a `.void-grimoire/` directory with:
-
-- **`config.json`** — feature toggles and tool configuration
-- **`rules/`** — learned rules from your sessions (populated by `learn-correction`)
-- **`history/`** — decision artifacts grouped by initiative (brainstorms, plans, implementation records)
-- **`service-map.json`** — cached workspace topology (gitignored)
-
-### Configurable Features
-
-| Feature | Default | Description |
-|---------|---------|-------------|
-| `qmd` | disabled | Local hybrid search for markdown notes and docs |
-| `logAccess` | disabled | AI queries project logs during debugging (supports MCP tools like Sentry, Axiom) |
-| `decisionHistory` | enabled | Stores brainstorms, plans, and implementation records in `.void-grimoire/history/` |
-| `serviceMap` | enabled | Auto-discovers workspace topology and caches to `.void-grimoire/service-map.json` |
-
-Edit `.void-grimoire/config.json` to configure. See `docs/specs/2026-03-15-centralized-config-and-features-design.md` for details.
-
-## Domains
+13 skills across 6 domains. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **workflow** | verify-requirements, brainstorm, write-plan, execute-plan, develop-with-subagents, dispatch-parallel-agents, verify-before-completion, session-summary, prepare-compact, session-usage-summary | End-to-end development lifecycle |
-| **design** | 18 skills (design-frontend, audit, critique, polish, animate, etc.) | UI/UX design and implementation |
-| **dev** | develop-tdd, debug-systematically | Test-driven development and systematic debugging |
-| **git** | use-worktrees, request-review, receive-review, finish-branch, commit-push-pr, enforce-git-safety | Git workflow and code review |
-| **docs** | lookup-docs, index-docs | Documentation search and indexing |
-| **codebase** | map-services | Codebase structure awareness and service topology |
-| **void-grimoire** | use-void-grimoire, route-request, expand-prompt, learn-correction, write-skill, init-project | Plugin meta-skills and self-learning |
-| **npm** | enforce-release-safety | Package publishing safety |
+| **void-grimoire** | route-request, expand-prompt, learn-correction, autoresearch | Registry routing, prompt expansion, self-learning, skill optimization |
+| **workflow** | verify-requirements, session-summary, session-usage-summary | Requirements validation, session journaling, AI-usage feedback |
+| **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd) |
+| **codebase** | map-services | Auto-discover monorepo service topology and dependents |
+| **git** | enforce-git-safety, commit-push-pr | Block destructive git ops; commit/push/PR helper |
+| **npm** | enforce-release-safety | Pre-publish safety checks |
 
-**45 skills** total across 8 domains. (`use-void-grimoire` is loaded via hook, not routed.)
+### The Headline Skills
+
+- **`session-summary`** — Write a session journal: TL;DR, decisions with trade-offs, accomplishments, unfinished work, files touched. Use before `/compact` or at session end.
+- **`session-usage-summary`** — Retrospective on the human-AI loop in this session. Scores spec clarity, decision ownership, verification depth, and correction loops.
+- **`learn-correction`** — When you correct the AI ("don't mock the DB", "always use snake_case"), persists the correction to your project's `AGENTS.md` / `CLAUDE.md` so it survives future sessions.
+- **`expand-prompt`** — Turn a terse request ("add dark mode") into a structured intent: matched domains, applicable skills, learned rules, decomposed sub-tasks. Requires explicit user approval before any action.
+- **`autoresearch`** — Run a skill repeatedly, score outputs against binary evals, mutate the prompt, keep improvements. Karpathy-style autonomous skill optimization.
+
+## How It Works
+
+Each skill is a `SKILL.md` file with frontmatter (`name`, `description`, `depends-on`, `chains-to`, `suggests`). Skills are loaded on demand — there is no startup hook, no `.void-grimoire/` directory, no forced gate flow.
+
+Composition still works:
+- `depends-on` — listed skills must run first
+- `chains-to` — the named skill is invoked after this one completes
+- `suggests` — soft recommendation, agent checks if relevant
+
+`route-request` reads `skills/registry.json` to map a user request to applicable skills by trigger keywords. Invoke it manually when you want routing; nothing runs automatically.
+
+## What This Library Is Not
+
+It deliberately does **not** include:
+- Brainstorming, planning, TDD, debugging, worktrees, code review, or subagent workflows — those are core engineering skills better served by the [superpowers](https://github.com/obra/superpowers) plugin, which Void Grimoire used to mirror.
+- Design skills (frontend, audit, polish, etc.) — those live in the [Impeccable](https://github.com/dwillis/impeccable) plugin and belong with their authors.
+
+If you want any of the above, install those plugins alongside this one.
 
 ## Architecture
 
-See the full spec: [`docs/specs/2026-03-14-void-grimoire-architecture-design.md`](docs/specs/2026-03-14-void-grimoire-architecture-design.md)
+The original architecture spec described a three-gate flow with `.void-grimoire/` config and rules. That system has been retired — the spec is kept in `docs/specs/` for historical reference but no longer reflects the plugin.
 
 ## Lore
 
