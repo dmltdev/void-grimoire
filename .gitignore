@@ -54,5 +54,7 @@ dkms.conf
 # debug information files
 *.dwo
 
-# openspec
+# local ai docs
 openspec
+docs/sessions
+docs/plans
