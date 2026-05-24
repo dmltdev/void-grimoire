@@ -2,7 +2,7 @@
   "domains": {
     "void-grimoire": {
       "description": "Meta skills — prompt expansion, self-learning, skill optimization",
-      "skills": ["expand-prompt", "learn-correction", "autoresearch"],
+      "skills": ["expand-prompt", "learn-correction", "autoresearch", "token-budget-advisor", "strategic-compact"],
       "docs": []
     },
     "docs": {
@@ -28,6 +28,21 @@
     "npm": {
       "description": "NPM package management and publishing safety",
       "skills": ["enforce-release-safety"],
+      "docs": []
+    },
+    "patterns": {
+      "description": "Stack-specific reference skills — Nest.js, Next.js Turbopack, Postgres, Redis, MCP servers, Framer Motion. Read-on-demand, not auto-loaded.",
+      "skills": [
+        "nestjs-patterns",
+        "nextjs-turbopack",
+        "postgres-patterns",
+        "redis-patterns",
+        "mcp-server-patterns",
+        "motion-foundations",
+        "motion-patterns",
+        "motion-ui",
+        "motion-advanced"
+      ],
       "docs": []
     }
   }

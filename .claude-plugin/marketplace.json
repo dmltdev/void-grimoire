@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "void-grimoire",
-      "description": "Additive Claude Code skills: session journaling, learned-correction persistence, prompt expansion, and lookup/safety helpers",
-      "version": "2.0.1",
+      "description": "Additive Claude Code skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, stack-reference patterns (Nest.js, Next.js, Postgres, Redis, MCP, Framer Motion), and TypeScript/web rule baselines",
+      "version": "2.1.0",
       "source": {
         "source": "url",
         "url": "https://github.com/dmltdev/void-grimoire.git"
