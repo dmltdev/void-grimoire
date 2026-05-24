@@ -2,7 +2,7 @@
 
 ![Void Grimoire](void-grimoire.webp)
 
-A small, additive skill library for Claude Code. Covers what generic workflows don't: session journaling, learned-correction persistence, prompt expansion, and a handful of safety and lookup helpers.
+An additive Claude Code library — skills, agents, and rules. Covers what generic workflows don't: session journaling, learned-correction persistence, prompt expansion, context discipline (token budgets, strategic `/compact`), stack-reference patterns (Nest.js, Next.js, Postgres, Redis, MCP, Framer Motion), TypeScript/web rule baselines, plus a handful of safety and lookup helpers.
 
 This is **not** a workflow framework. It does not enforce phases, gate your work, or auto-inject context. Skills load on demand via the `Skill` tool. Use what you need, ignore the rest.
 
@@ -52,6 +52,8 @@ Plugin-local `rules/` reference tree under three buckets: `common/` (language-ag
 - **`session-usage-summary`** — Retrospective on the human-AI loop in this session. Scores spec clarity, decision ownership, verification depth, and correction loops.
 - **`learn-correction`** — When you correct the AI ("don't mock the DB", "always use snake_case"), persists the correction to your project's `AGENTS.md` / `CLAUDE.md` so it survives future sessions.
 - **`expand-prompt`** — Turn a terse request ("add dark mode") into a structured intent: relevant docs, learned rules, decomposed sub-tasks. Requires explicit user approval before any action.
+- **`token-budget-advisor`** — Offers an informed choice on response depth before answering. Triggers when you ask about budget, length, or want a short vs exhaustive answer.
+- **`strategic-compact`** — Suggests manual `/compact` at phase boundaries (planning -> implementing -> verifying) so context survives the next phase rather than waiting for arbitrary auto-compaction.
 - **`autoresearch`** — Run a skill repeatedly, score outputs against binary evals, mutate the prompt, keep improvements. Karpathy-style autonomous skill optimization.
 
 ## How It Works
@@ -69,7 +71,7 @@ Composition still works:
 
 It deliberately does **not** include:
 - Brainstorming, planning, TDD, debugging, worktrees, code review, or subagent workflows — those are core engineering skills better served by the [superpowers](https://github.com/obra/superpowers) plugin, which Void Grimoire used to mirror.
-- Design skills (frontend, audit, polish, etc.) — those live in the [Impeccable](https://github.com/dwillis/impeccable) plugin and belong with their authors.
+- Design skills (frontend, audit, polish, etc.) — those live in the Impeccable plugin and belong with their authors.
 
 If you want any of the above, install those plugins alongside this one.
 
