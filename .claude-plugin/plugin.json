@@ -16,5 +16,6 @@
     "prompt-expansion",
     "documentation",
     "monorepo"
-  ]
+  ],
+  "agents": ["./agents/"]
 }

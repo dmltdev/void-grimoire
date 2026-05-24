@@ -2,7 +2,7 @@
   "domains": {
     "void-grimoire": {
       "description": "Meta skills — prompt expansion, self-learning, skill optimization",
-      "skills": ["expand-prompt", "learn-correction", "autoresearch"],
+      "skills": ["expand-prompt", "learn-correction", "autoresearch", "token-budget-advisor", "strategic-compact"],
       "docs": []
     },
     "docs": {
