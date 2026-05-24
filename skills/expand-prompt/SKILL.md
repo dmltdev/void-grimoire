@@ -2,7 +2,7 @@
 name: expand-prompt
 domain: void-grimoire
 description: Use when a user request is terse or ambiguous — expands it with domain context, docs, and learned rules before proceeding
-depends-on: [route-request, lookup-docs]
+depends-on: [lookup-docs]
 chains-to: null
 suggests: []
 user-invokable: true
@@ -24,20 +24,16 @@ Take a terse user request and flesh it out with domain context, documentation, a
 
 ## Process
 
-1. **Identify domains** — Run `route-request` (dependency) to match the request against registry triggers.
-
-2. **Gather context:**
+1. **Gather context:**
    - Read project AGENTS.md / CLAUDE.md for learned rules and conventions
    - Run `lookup-docs` (dependency) for relevant documentation
    - Check recent git history for related changes
 
-3. **Expand the prompt** into a structured intent:
+2. **Expand the prompt** into a structured intent:
    ```
    Original: "<user's terse prompt>"
 
    Expanded:
-   - Domains: [matched domains]
-   - Applicable skills: [skills from routing]
    - Relevant docs: [findings from lookup-docs]
    - Learned rules: [applicable rules]
    - Decomposed sub-tasks:
@@ -45,12 +41,12 @@ Take a terse user request and flesh it out with domain context, documentation, a
      2. [sub-task]
    ```
 
-4. **Present to user** for confirmation. ALWAYS end the expansion with an explicit handoff:
+3. **Present to user** for confirmation. ALWAYS end the expansion with an explicit handoff:
    > "Approve, modify, or reject?"
 
    Do NOT omit this. Do NOT proceed without it. The user must explicitly approve before anything happens.
 
-5. **On approval** → proceed with the expanded intent.
+4. **On approval** → proceed with the expanded intent.
 
 ## Key Constraint
 

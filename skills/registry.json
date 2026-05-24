@@ -1,38 +1,32 @@
 {
   "domains": {
     "void-grimoire": {
-      "description": "Meta skills — registry routing, prompt expansion, self-learning, skill optimization",
-      "triggers": ["skill", "plugin", "void-grimoire", "remember", "learn", "rule", "correction", "optimize skill", "improve skill"],
-      "skills": ["route-request", "expand-prompt", "learn-correction", "autoresearch"],
+      "description": "Meta skills — prompt expansion, self-learning, skill optimization",
+      "skills": ["expand-prompt", "learn-correction", "autoresearch"],
       "docs": []
     },
     "docs": {
       "description": "Documentation lookup and indexing via qmd",
-      "triggers": ["docs", "documentation", "reference", "API docs", "lookup"],
       "skills": ["lookup-docs", "index-docs"],
       "docs": []
     },
     "codebase": {
       "description": "Codebase structure awareness — service topology, dependency graphs",
-      "triggers": ["service", "monorepo", "workspace", "service-map", "cross-service", "multi-service"],
       "skills": ["map-services"],
       "docs": []
     },
     "workflow": {
       "description": "Lightweight workflow helpers — requirements validation, session journaling, usage feedback",
-      "triggers": ["session", "summary", "compact", "requirements", "spec", "PRD", "ticket", "feasibility", "validate", "journal"],
       "skills": ["verify-requirements", "session-summary", "session-usage-summary"],
       "docs": []
     },
     "git": {
       "description": "Git safety and commit/push/PR workflow",
-      "triggers": ["commit", "push", "PR", "pull request", "branch", "force push", "reset", "destructive git"],
       "skills": ["enforce-git-safety", "commit-push-pr"],
       "docs": []
     },
     "npm": {
       "description": "NPM package management and publishing safety",
-      "triggers": ["npm", "publish", "release", "package", "version"],
       "skills": ["enforce-release-safety"],
       "docs": []
     }
