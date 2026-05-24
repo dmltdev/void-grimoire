@@ -11,7 +11,7 @@ suggests: ["session-usage-summary"]
 
 ## Overview
 
-Capture a session into a single readable artifact: TL;DR up top, then decisions with trade-offs, valuable discussion, accomplishments, unfinished work, and files touched. Replaces the older `prepare-compact` skill — same handoff capability, plus retrospective journaling.
+Capture a session into a single readable artifact: TL;DR up top, then decisions with trade-offs, valuable discussion, accomplishments, unfinished work, and files touched. Covers both handoff (before `/compact`) and retrospective journaling.
 
 **Announce at start:** "I'm using the session-summary skill to write up this session."
 
@@ -28,7 +28,7 @@ Walk the conversation and extract:
 5. **Accomplished** — concrete done items: features, fixes, files written.
 6. **Unfinished / Next Steps** — work remaining, in execution order.
 7. **Files Changed** — modified or created paths with one-line notes.
-8. **Decision history pointer** — if `.void-grimoire/history/` was used, note which initiative(s) were touched in *Discussion* so the next session can read them.
+8. **Decision history pointer** — if the project tracks decisions in a known location (e.g. `docs/decisions/`, `docs/sessions/`, an ADR folder), note which artifact(s) were touched in *Discussion* so the next session can read them.
 
 ### Step 2: Resolve Filename and Write the File
 
@@ -88,7 +88,7 @@ Read @docs/sessions/{filename} and continue from where we left off — {one-sent
 - User wants a journal of what happened ("summarize the session", "journal this", "session summary")
 - Session is getting long and needs preservation before `/compact` ("prepare for compact", "save session", "compact")
 - Switching to a different task in the same session
-- User invokes `/session-summary` (or the legacy `/prepare-compact` alias)
+- User invokes `/session-summary`
 
 ## Rules
 

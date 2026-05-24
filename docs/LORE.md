@@ -2,7 +2,7 @@
 
 > *A spellbook born from nothingness, that fills itself with the wisdom of its wielder.*
 
-In the fantasy world of dragons, magic, and swords, a **Grimoire of the Void** is no ordinary spellbook. It draws power from *absence* — its pages are blank until the mage's experience fills them. It enforces discipline by making the caster stop and think before acting. Wild magic awaits those who skip the ritual.
+In the fantasy world of dragons, magic, and swords, a **Grimoire of the Void** is no ordinary spellbook. It draws power from *absence* — its pages are blank until the mage's experience fills them. The wielder chooses which spells to invoke.
 
 This plugin works the same way.
 
@@ -10,19 +10,16 @@ This plugin works the same way.
 
 | Fantasy | Plugin |
 |---|---|
-| Must be **consulted before casting** any spell — skipping it causes wild magic and backfire | Three-gate flow — the agent MUST check rules, docs, and routing before acting |
-| **Learns from its wielder** — pages fill themselves based on the mage's experiences and mistakes | `learn-correction` — self-learning from user corrections, rules append themselves |
-| Organizes spells into **schools of magic** (necromancy, illusion, conjuration...) | 7 domains: workflow, dev, git, design, docs, void-grimoire, npm |
+| **Learns from its wielder** — pages fill themselves based on the mage's experiences and mistakes | `learn-correction` — persists user corrections to project AGENTS.md / CLAUDE.md |
+| Organizes spells into **schools of magic** (necromancy, illusion, conjuration...) | 6 domains: void-grimoire, workflow, docs, codebase, git, npm |
 | Spells have **prerequisites and chains** — you must know Fireball before Meteor | `depends-on`, `chains-to`, `suggests` — skill composition model |
-| Starts as **blank pages from the void** — the book is empty until knowledge fills it | `rules/*.md` files start empty, accumulate learned rules over time |
-| The grimoire **summons familiars** to do parallel work | Subagent dispatch via `develop-with-subagents` and `dispatch-parallel-agents` |
 | Contains **wards and protections** against forbidden acts | `enforce-git-safety`, `enforce-release-safety` — guardrails against destructive actions |
-| A **ritual of opening** must be performed each time the book is used | SessionStart hook injects `use-void-grimoire` and the registry into the session |
+| The mage **chooses which spell to cast** rather than the book casting on its own | Skills load on demand via the `Skill` tool — no startup ritual, no auto-injection |
 
 ## Why "Void"?
 
-A void grimoire is specifically one that draws power from *absence*. Its strength is not in what it contains, but in what it *prevents* — reckless action without thought.
+A void grimoire is specifically one that draws power from *absence*. Its strength is not in what it contains, but in what it leaves to the wielder's judgement.
 
-The three gates are the ritual. The blank rule files are the void. The agent's learned corrections are the ink that fills the pages. And the skill registry is the table of contents that grows with each school of magic the mage masters.
+The agent's learned corrections are the ink that fills the pages. The skill registry is the table of contents that grows with each school of magic the mage masters.
 
 The void is where the agent starts. The grimoire is what makes it wise.

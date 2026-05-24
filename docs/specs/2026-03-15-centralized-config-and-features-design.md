@@ -1,7 +1,7 @@
 # Centralized Config, Debug Log Access & Decision History
 
 **Date:** 2026-03-15
-**Status:** Approved
+**Status:** OBSOLETE (2026-05-23) — the `.void-grimoire/` config and history system has been retired. Kept for historical reference only.
 
 ## Overview
 

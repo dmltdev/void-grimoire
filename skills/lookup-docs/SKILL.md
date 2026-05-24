@@ -1,7 +1,7 @@
 ---
 name: lookup-docs
 domain: docs
-description: Use before any code change to check for relevant documentation — searches via qmd if available, falls back to local file search
+description: Use before any code change to check for relevant documentation — scans qmd, `./openspec/specs/`, `./docs/`, README/CONTRIBUTING, and inline comments. Excludes `./openspec/changes/` by default.
 depends-on: []
 chains-to: null
 suggests: []
@@ -9,43 +9,42 @@ suggests: []
 
 # Documentation Lookup
 
-Check for relevant documentation before writing code. This is Gate 2 of the three-gate flow.
+Check for relevant documentation before writing code. "No docs found" is a valid result — the gate passed because you looked.
+
+## Sources
+
+1. **qmd index** (if installed)
+2. **`./openspec/specs/**/*.md`** — accepted, canonical project specs (treat as first-class docs)
+3. **`./docs/**`** + **README.md** + **CONTRIBUTING.md**
+4. **Inline comments** in files the task will touch
+5. **Framework artifacts** in the project (e.g. `.storybook/`, `typedoc.json`)
+
+**Excluded by default:** `./openspec/changes/**` — in-flight proposals are contradictory and not yet accepted. Only scan them when the caller passes an explicit change name to scope to.
 
 ## Process
 
-### 1. Check qmd config
-If `.void-grimoire/config.json` was loaded in Gate 1, read `features.qmd`:
-- `enabled: true` → use qmd with the configured `command`
-- `enabled: false` or config absent → skip qmd, use local search only
+### 1. Detect qmd
+Run `which qmd`. If installed, use `qmd search` as the default search path. If not, skip silently and fall through to local search.
 
-**Deprecated:** The `<!-- void-grimoire:qmd:enabled -->` HTML comment approach in CLAUDE.md is no longer used. If encountered, ignore it and follow config.json.
+### 2. Search
+**If qmd is available AND has an `openspec` or `specs` collection configured:** route openspec-specs queries through qmd first. Only fall back to raw glob if qmd returns zero results.
 
-**Intentional behavior change:** The old interactive "install qmd?" prompt is removed. qmd is now configured explicitly via `init-project` + config.json. This avoids prompting users who don't want qmd on every first run.
-
-### 2. If no config exists and qmd status is unknown
-Check if qmd is installed: `which qmd`
-
-If qmd is NOT installed, skip it silently. If installed but no config, use `qmd search` as default command.
-
-**Note:** To configure qmd, run `/skill init-project` and set `features.qmd.enabled: true` in `.void-grimoire/config.json`.
-
-### 3. Search for docs
-
-**If qmd enabled:**
-```bash
-{configured command} "<task keywords>"
-```
-If qmd returns results, read the most relevant ones.
-If no results, fall through to local search.
-
-**Local search (always runs, qmd or not):**
-- Grep README.md, CONTRIBUTING.md for task-related keywords
-- Check `docs/` directory for relevant files
+**Always run local search alongside:**
+- Grep `./openspec/specs/**/*.md` (skip if dir absent — non-fatal)
+- Grep `README.md`, `CONTRIBUTING.md`, `./docs/**` for task keywords
 - Check inline comments in files the task will touch
-- Check for framework/library docs in the project (e.g., `.storybook/`, `typedoc.json`)
+- Check framework/library docs in the project
+
+**If a change name is explicitly passed:** also scan `./openspec/changes/<name>/**/*.md`.
+
+### 3. Label provenance
+- Spec results → `openspec:specs/<capability>`
+- Change-scoped results → `openspec:changes/<name>`
+- Other results → file path
 
 ### 4. Return findings
-Report what was found. "No docs found" is a valid result — the gate passed because you looked.
+Report what was found grouped by provenance. If `./openspec/` doesn't exist in the project, silently skip — do not warn or error.
 
 ## Key Principle
+
 This gate is about the act of looking, not about finding. Even a negative result means the agent checked before coding.

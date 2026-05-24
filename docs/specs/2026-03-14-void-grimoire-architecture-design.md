@@ -1,6 +1,6 @@
 # Void Grimoire Architecture Design
 
-> **For agentic workers:** REQUIRED: Use write-plan to create an implementation plan from this spec.
+> **STATUS: OBSOLETE (2026-05-23).** This spec describes the original three-gate, registry-driven, superpowers-mirroring architecture. That system has been retired. The plugin is now an additive skill library — no gates, no `.void-grimoire/` directory, no auto-injection. Kept for historical reference only. See README.md for current state.
 
 **Goal:** Build a Claude Code plugin that organizes skills by domain, enforces doc-lookup and skill-routing before code actions, supports prompt expansion, and self-learns from user corrections.
 

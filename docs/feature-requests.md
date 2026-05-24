@@ -18,7 +18,7 @@ If the user tries to skip critical steps (brainstorming, planning, risk assessme
 
 ### Problem
 
-Currently, the three-gate flow checks rules, docs, and routing — but it doesn't prevent the model from diving into implementation without understanding *why* a change is being made. A user can say "refactor the auth module" and the model will comply without questioning whether the refactor makes architectural sense.
+Currently, nothing in the plugin prevents the model from diving into implementation without understanding *why* a change is being made. A user can say "refactor the auth module" and the model will comply without questioning whether the refactor makes architectural sense.
 
 ### Desired Behavior
 

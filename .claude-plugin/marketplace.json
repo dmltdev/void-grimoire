@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "void-grimoire",
-      "description": "Domain-organized skill system with three-gate flow, self-learning, and prompt expansion for Claude Code",
-      "version": "1.5.0",
+      "description": "Additive Claude Code skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, stack-reference patterns (Nest.js, Next.js, Postgres, Redis, MCP, Framer Motion), and TypeScript/web rule baselines",
+      "version": "2.1.0",
       "source": {
         "source": "url",
         "url": "https://github.com/dmltdev/void-grimoire.git"
