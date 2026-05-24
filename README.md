@@ -23,16 +23,28 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-12 skills across 6 domains. Pick by name:
+23 skills across 7 domains, plus a 2-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch | Prompt expansion, self-learning, skill optimization |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact | Prompt expansion, self-learning, skill optimization, context discipline |
 | **workflow** | verify-requirements, session-summary, session-usage-summary | Requirements validation, session journaling, AI-usage feedback |
-| **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd) |
+| **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **codebase** | map-services | Auto-discover monorepo service topology and dependents |
 | **git** | enforce-git-safety, commit-push-pr | Block destructive git ops; commit/push/PR helper |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
+| **patterns** | nestjs-patterns, nextjs-turbopack, postgres-patterns, redis-patterns, mcp-server-patterns, motion-foundations, motion-patterns, motion-ui, motion-advanced | Stack-specific reference skills. Read-on-demand, not auto-loaded. |
+
+### Agents
+
+Read-on-demand subagents under `agents/`:
+
+- **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
+- **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
+
+### Rules
+
+Plugin-local `rules/` reference tree under three buckets: `common/` (language-agnostic baselines), `typescript/` (TS/JS-specific guidance with the matching common baseline inlined), and `web/` (frontend/web-specific guidance with the same flattening). Read on demand; never auto-injected.
 
 ### The Headline Skills
 
