@@ -31,8 +31,8 @@
       "docs": []
     },
     "concilium": {
-      "description": "Multi-agent code review — parallel quality lenses (correctness, security, maintainability, scalability), pragmatic and non-blocking",
-      "skills": ["convene-concilium"],
+      "description": "Multi-agent code review — parallel quality lenses (correctness, security, maintainability, scalability) plus evidence-gated self-correction, pragmatic and non-blocking",
+      "skills": ["convene-concilium", "verify-and-correct"],
       "docs": []
     },
     "patterns": {
