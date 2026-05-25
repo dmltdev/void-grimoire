@@ -23,7 +23,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-23 skills across 7 domains, plus a 2-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+24 skills across 8 domains, plus a 6-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -33,6 +33,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 | **codebase** | map-services | Auto-discover monorepo service topology and dependents |
 | **git** | enforce-git-safety, commit-push-pr | Block destructive git ops; commit/push/PR helper |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
+| **concilium** | convene-concilium | Multi-lens parallel code review (correctness, security, maintainability, scalability). Pragmatic, non-blocking. |
 | **patterns** | nestjs-patterns, nextjs-turbopack, postgres-patterns, redis-patterns, mcp-server-patterns, motion-foundations, motion-patterns, motion-ui, motion-advanced | Stack-specific reference skills. Read-on-demand, not auto-loaded. |
 
 ### Agents
@@ -41,6 +42,13 @@ Read-on-demand subagents under `agents/`:
 
 - **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
 - **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
+
+The **concilium** — four pragmatic, read-only reviewer lenses dispatched in parallel by `convene-concilium`, each citing the shared `quality-dimensions.md` bar:
+
+- **`dev-in-test`** — correctness, edge cases, silent failures, test presence/quality.
+- **`dev-in-security`** — secrets, injection, authz, unsafe sinks, dependency risk (OWASP-class).
+- **`dev-in-maintainability`** — readability, type design, documentation, code-standards (one folded lens).
+- **`dev-in-scalability`** — performance hot paths, data-access patterns, resource/cost, concurrency.
 
 ### Rules
 
@@ -70,7 +78,7 @@ Composition still works:
 ## What This Library Is Not
 
 It deliberately does **not** include:
-- Brainstorming, planning, TDD, debugging, worktrees, code review, or subagent workflows — those are core engineering skills better served by the [superpowers](https://github.com/obra/superpowers) plugin, which Void Grimoire used to mirror.
+- Brainstorming, planning, TDD, debugging, worktrees, or subagent *workflows* — those are core engineering skills better served by the [superpowers](https://github.com/obra/superpowers) plugin, which Void Grimoire used to mirror. (The `concilium` domain is the deliberate exception: specialized review *agents* and a dispatcher, not a workflow framework.)
 - Design skills (frontend, audit, polish, etc.) — those live in the Impeccable plugin and belong with their authors.
 
 If you want any of the above, install those plugins alongside this one.
