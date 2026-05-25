@@ -1,7 +1,7 @@
 ---
 name: learn-correction
 domain: void-grimoire
-description: Use when a user corrects agent behavior — persists the correction as a rule to the appropriate scope (global, domain, or project CLAUDE.md)
+description: Use when a user corrects agent behavior — persists the correction as a rule, defaulting to project AGENTS.md/CLAUDE.md unless the user names another destination
 depends-on: []
 chains-to: null
 suggests: []
@@ -23,21 +23,20 @@ Persist user corrections as rules so the same mistake is not repeated in future 
 - User implicitly changes agent output (aspirational — requires future diffing mechanism)
 - Agent self-detects it deviated from a prior correction
 
-## Storage Tier Classification
+## Where to Save (precedence)
 
-```
-Correction detected
-  ├─ Specific to THIS project/codebase? → Append to project AGENTS.md / CLAUDE.md
-  ├─ Specific to a domain or technology used in this project? → Append to project AGENTS.md / CLAUDE.md under the relevant heading
-  └─ General cross-project behavior? → Append to user's global ~/.claude/CLAUDE.md (with permission)
-```
+Resolve the destination in this order. Stop at the first match.
 
-**Decision heuristics:**
-- Mentions specific files, paths, or project names → project AGENTS.md / CLAUDE.md
-- About a technology, pattern, or domain practice → project AGENTS.md / CLAUDE.md (grouped under a domain heading)
-- About communication style, output format, general approach → user's global ~/.claude/CLAUDE.md (with permission)
+1. **User stated the destination explicitly** — "save this to `X.md`", "put it in the global config", "add it under the styles heading." Write exactly there. Do NOT redirect or correct the choice.
+2. **User mentioned (or the project clearly uses) another rules file** — if the user has pointed at a specific conventions/rules `.md` for this kind of guidance, append there instead of the default.
+3. **Default** — project `AGENTS.md` or `CLAUDE.md` at repo root.
 
-**Path resolution:** Default to the project's AGENTS.md or CLAUDE.md at repo root. Only write to the global ~/.claude/CLAUDE.md when the rule is clearly cross-project AND the user confirms.
+**Default file and heading (when falling through to step 3):**
+- Mentions specific files, paths, or project names → project `AGENTS.md` / `CLAUDE.md`.
+- About a technology, pattern, or domain practice → same file, grouped under the relevant domain heading (create it if absent).
+- About communication style, output format, or general approach → user's global `~/.claude/CLAUDE.md` (with permission).
+
+**Tiebreaker:** if both `AGENTS.md` and `CLAUDE.md` exist, prefer the one that already carries rules of this kind; otherwise `AGENTS.md`. Write to the global `~/.claude/CLAUDE.md` only when the rule is clearly cross-project AND the user confirms.
 
 ## Rule Format
 
@@ -55,8 +54,8 @@ Append to the appropriate file:
 When the conversation is ending and ambiguous corrections are queued:
 
 > "I noticed these potential rules from our session:
-> 1. [correction summary] — **Save to:** global / [matched domain] / project CLAUDE.md / skip?
-> 2. [correction summary] — **Save to:** global / [matched domain] / project CLAUDE.md / skip?"
+> 1. [correction summary] — **Save to:** project AGENTS.md/CLAUDE.md / global ~/.claude/CLAUDE.md / [mentioned rules file] / skip?
+> 2. [correction summary] — **Save to:** project AGENTS.md/CLAUDE.md / global ~/.claude/CLAUDE.md / [mentioned rules file] / skip?"
 
 User picks per item. Skipped items are discarded.
 
