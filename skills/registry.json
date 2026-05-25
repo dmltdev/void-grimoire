@@ -30,6 +30,11 @@
       "skills": ["enforce-release-safety"],
       "docs": []
     },
+    "concilium": {
+      "description": "Multi-agent code review — parallel quality lenses (correctness, security, maintainability, scalability) plus evidence-gated self-correction, pragmatic and non-blocking",
+      "skills": ["convene-concilium", "verify-and-correct"],
+      "docs": []
+    },
     "patterns": {
       "description": "Stack-specific reference skills — Nest.js, Next.js Turbopack, Postgres, Redis, MCP servers, Framer Motion. Read-on-demand, not auto-loaded.",
       "skills": [
