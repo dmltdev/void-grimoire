@@ -6,8 +6,13 @@
       "docs": []
     },
     "tools": {
-      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, adhd, herdr.",
-      "skills": ["using-herdr", "using-codex", "using-omp", "using-adhd"],
+      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, adhd, herdr, agent-browser, chrome-devtools-mcp.",
+      "skills": ["using-herdr", "using-codex", "using-omp", "using-adhd", "using-agent-browser", "using-chrome-devtools-mcp"],
+      "docs": []
+    },
+    "qa": {
+      "description": "Evidence-based verification of UI work — drive a browser, capture screenshots/console/network, write a report. Read-on-demand.",
+      "skills": ["test-with-browser"],
       "docs": []
     },
     "docs": {
