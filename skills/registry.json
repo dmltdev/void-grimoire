@@ -35,6 +35,11 @@
       "skills": ["convene-concilium", "verify-and-correct"],
       "docs": []
     },
+    "react": {
+      "description": "React-specific patterns — state management, hooks, component composition. Read-on-demand.",
+      "skills": ["using-zustand"],
+      "docs": []
+    },
     "patterns": {
       "description": "Stack-specific reference skills — Nest.js, Next.js Turbopack, Postgres, Redis, MCP servers, Framer Motion. Read-on-demand, not auto-loaded.",
       "skills": [

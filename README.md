@@ -23,7 +23,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-25 skills across 8 domains, plus a 7-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+26 skills across 9 domains, plus a 7-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -34,6 +34,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 | **git** | enforce-git-safety, commit-push-pr | Block destructive git ops; commit/push/PR helper |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
 | **concilium** | convene-concilium, verify-and-correct | Multi-lens parallel code review (correctness, security, maintainability, scalability) plus evidence-gated self-correction. Pragmatic, non-blocking. |
+| **react** | using-zustand | React-specific patterns — state management, hooks, component composition. Read-on-demand. |
 | **patterns** | nestjs-patterns, nextjs-turbopack, postgres-patterns, redis-patterns, mcp-server-patterns, motion-foundations, motion-patterns, motion-ui, motion-advanced | Stack-specific reference skills. Read-on-demand, not auto-loaded. |
 
 ### Agents
