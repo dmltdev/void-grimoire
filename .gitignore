@@ -58,3 +58,6 @@ dkms.conf
 openspec
 docs/sessions
 docs/plans
+
+# lean-ctx cache
+.lean-ctx/
