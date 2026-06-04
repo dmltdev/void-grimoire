@@ -47,11 +47,14 @@ Before dispatch in CHAOS, surface omp's current default to the user and let them
 - **Raw `codex` / `claude`**: one-shot prompts, simple scripted runs, when you do not need omp's tool layer.
 - **adhd**: brainstorming. Don't use omp for divergent thinking — wrong tool.
 
-## Fallback chain (ask user before applying)
+## Fallback chain (auto-pick by prefer-list, announce, do not prompt unless nothing works)
 
-1. `omp` missing → fall back to `pi` (the upstream project; same harness shape, mutually exclusive — do not run both). If neither is installed, fall back to the raw provider CLI (`codex`, `claude`, `gemini`).
-2. Provider unreachable inside omp → switch provider via `--model` or `/model`. Ask the user which.
-3. All providers down → stop and report.
+Within CHAOS the orchestrator probes the harness prefer-list: `omp` → `pi` → `claude` → `codex`. Outside CHAOS, when invoking omp directly:
+
+1. `omp` missing → fall back to `pi` (the upstream project; same shape, mutually exclusive — never run both). Announce the switch.
+2. Both `omp` and `pi` missing → fall back to a raw provider CLI (`claude`, `codex`, `gemini`). Announce.
+3. Provider unreachable inside omp → switch provider via `--model` or `/model`. Surface the harness's current default; let the user override.
+4. Nothing works → stop and ask the user.
 
 ## Dispatch inside a herdr pane
 
