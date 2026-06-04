@@ -23,11 +23,12 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-26 skills across 9 domains, plus a 7-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+31 skills across 10 domains, plus an 8-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact | Prompt expansion, self-learning, skill optimization, context discipline |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch |
+| **tools** | using-herdr, using-codex, using-omp, using-adhd | External CLI wrappers — preflight, invocation, fallbacks for herdr, Codex, oh-my-pi, adhd |
 | **workflow** | verify-requirements, session-summary, session-usage-summary | Requirements validation, session journaling, AI-usage feedback |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **codebase** | map-services | Auto-discover monorepo service topology and dependents |
@@ -43,6 +44,7 @@ Read-on-demand subagents under `agents/`:
 
 - **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
 - **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
+- **`herdr-orchestrator`** — coordinator for multi-pane parallel work in a herdr workspace. Decomposes goals, spawns worker Claude / omp / adhd instances in sibling panes, monitors, aggregates. Driven by `orchestrate-chaos`.
 
 The **concilium** — four pragmatic, read-only reviewer lenses dispatched in parallel by `convene-concilium`, each citing the shared `quality-dimensions.md` bar:
 

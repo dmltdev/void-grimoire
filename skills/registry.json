@@ -1,8 +1,13 @@
 {
   "domains": {
     "void-grimoire": {
-      "description": "Meta skills — prompt expansion, self-learning, skill optimization",
-      "skills": ["expand-prompt", "learn-correction", "autoresearch", "token-budget-advisor", "strategic-compact"],
+      "description": "Meta skills — prompt expansion, self-learning, skill optimization, multi-agent orchestration",
+      "skills": ["expand-prompt", "learn-correction", "autoresearch", "token-budget-advisor", "strategic-compact", "orchestrate-chaos"],
+      "docs": []
+    },
+    "tools": {
+      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, adhd, herdr.",
+      "skills": ["using-herdr", "using-codex", "using-omp", "using-adhd"],
       "docs": []
     },
     "docs": {
