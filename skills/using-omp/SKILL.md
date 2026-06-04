@@ -1,7 +1,7 @@
 ---
 name: using-omp
 domain: tools
-description: Use when launching or dispatching to the oh-my-pi (`omp`) coding agent — typically as a CHAOS worker inside a herdr pane, or standalone for interactive terminal coding. Covers install check, model/provider selection (40+ providers including Codex/GPT, Anthropic, Gemini, local Ollama), and fallbacks when omp or the chosen provider is unavailable.
+description: Use when launching or dispatching to the oh-my-pi (`omp`) coding agent — typically as a CHAOS worker inside a herdr pane, or standalone for interactive terminal coding. Covers install check, model/provider selection (40+ providers including Codex, Anthropic, Gemini, local Ollama), and fallbacks when omp or the chosen provider is unavailable. omp and `pi` (the upstream project omp forked from) are mutually exclusive harnesses — pick one per workspace.
 depends-on: []
 chains-to: null
 suggests: ["using-codex"]
@@ -31,17 +31,15 @@ irm https://omp.sh/install.ps1 | iex
 
 ## Model selection
 
+Codex is the **recommended** provider, but never assumed. Always confirm the model with the user before dispatch — or let omp use whatever it has configured as default.
+
 Common flags (verify against current `omp --help`):
 
-- `--model <id>` — explicit model (e.g. `gpt-5.5`, `claude-opus-4-7`).
+- `--model <id>` — explicit model. Do not hardcode a model id; let the user pick or use omp's configured default.
 - `--smol` / `--slow` / `--plan` — preset profiles (small/fast, deeper, planning).
 - In-session: `Ctrl+P` or `/model` to cycle providers mid-run.
 
-Before dispatch in CHAOS, confirm the target provider responds:
-
-```bash
-omp --model gpt-5.5 --dry-run "ping" 2>&1 | head -5   # adapt to current CLI
-```
+Before dispatch in CHAOS, surface omp's current default to the user and let them confirm or override.
 
 ## When to use omp (vs raw provider CLI)
 
@@ -51,7 +49,7 @@ omp --model gpt-5.5 --dry-run "ping" 2>&1 | head -5   # adapt to current CLI
 
 ## Fallback chain (ask user before applying)
 
-1. `omp` missing → install, or fall back to the raw provider CLI (`codex`, `claude`, `gemini`).
+1. `omp` missing → fall back to `pi` (the upstream project; same harness shape, mutually exclusive — do not run both). If neither is installed, fall back to the raw provider CLI (`codex`, `claude`, `gemini`).
 2. Provider unreachable inside omp → switch provider via `--model` or `/model`. Ask the user which.
 3. All providers down → stop and report.
 
@@ -60,7 +58,7 @@ omp --model gpt-5.5 --dry-run "ping" 2>&1 | head -5   # adapt to current CLI
 The orchestrator typically runs:
 
 ```bash
-herdr pane run "$NEW_PANE" "omp --model gpt-5.5"
+herdr pane run "$NEW_PANE" "omp"                       # or: omp --model <user-confirmed model>
 herdr wait output "$NEW_PANE" --match "$|>" --timeout 15000
 herdr pane run "$NEW_PANE" "<self-contained task prompt>"
 ```
