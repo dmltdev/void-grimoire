@@ -23,14 +23,14 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-34 skills across 12 domains, plus an 8-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+37 skills across 12 domains, plus an 8-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
 | **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch |
 | **tools** | using-herdr, using-codex, using-omp, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | verify-requirements, session-summary, session-usage-summary | Requirements validation, session journaling, AI-usage feedback |
+| **workflow** | verify-requirements, session-summary, session-usage-summary, grill-me, grill-with-docs, docs-source-of-truth | Requirements validation, session journaling, AI-usage feedback, plan-grilling, DDD-shaped docs-as-source-of-truth workflow (replaces OpenSpec-style flows) |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **codebase** | map-services | Auto-discover monorepo service topology and dependents |
 | **git** | enforce-git-safety, commit-push-pr | Block destructive git ops; commit/push/PR helper |

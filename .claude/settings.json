@@ -17,6 +17,9 @@
       "Bash(tsc:*)",
       "Bash(find:*)",
 
+      "Bash(touch:*)",
+      "Bash(mkdir:*)",
+
       "Bash(pnpm run lint*)",
       "Bash(pnpm run format*)",
       "Bash(pnpm run test*)",
@@ -47,13 +50,7 @@
       "Bash(docker inspect:*)",
       "Bash(docker logs:*)"
     ],
-    "ask": [
-      "Bash(echo:*)",
-      "Bash(mv:*)",
-      "Bash(cp:*)",
-      "Bash(mkdir:*)",
-      "Bash(chmod:*)"
-    ],
+    "ask": ["Bash(echo:*)", "Bash(mv:*)", "Bash(cp:*)", "Bash(mkdir:*)"],
     "deny": ["Bash(env:*)"]
   },
   "hooks": {

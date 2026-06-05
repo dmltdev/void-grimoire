@@ -61,3 +61,6 @@ docs/plans
 
 # lean-ctx cache
 .lean-ctx/
+
+# pi-crew
+.crew
