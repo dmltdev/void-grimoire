@@ -50,13 +50,17 @@
       "skills": ["using-zustand"],
       "docs": []
     },
+    "node": {
+      "description": "Node.js library wrappers — TypeScript-facing client patterns. Read-on-demand.",
+      "skills": ["using-ioredis"],
+      "docs": []
+    },
     "patterns": {
-      "description": "Stack-specific reference skills — Nest.js, Next.js Turbopack, Postgres, Redis, MCP servers, Framer Motion. Read-on-demand, not auto-loaded.",
+      "description": "Stack-specific reference skills — Nest.js, Next.js Turbopack, Postgres, MCP servers, Framer Motion. Read-on-demand, not auto-loaded.",
       "skills": [
         "nestjs-patterns",
         "nextjs-turbopack",
         "postgres-patterns",
-        "redis-patterns",
         "mcp-server-patterns",
         "motion-foundations",
         "motion-patterns",
