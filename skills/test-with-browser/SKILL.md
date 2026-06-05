@@ -22,7 +22,7 @@ Drive a real browser to produce **visual evidence** that a change satisfies its 
 3. **Authenticate if needed.** The skill takes no position on auth — the user is responsible for providing access (cookies, local backdoor, test creds, dev-only auth bypass, whatever they use). If the target needs auth and the user has not provided a path, stop and ask.
 4. **Drive the browser against the AC.** Prefer durable selectors: visible labels, ARIA roles, accessible names, stable test ids, route changes. Coordinate clicks last resort.
 5. **Verify post-action state that matters to the AC** — the row appears, the button toggles, the status changes, the route opens, the error reproduces. Visible UI state is the primary signal; console errors, network requests, and URL changes are supporting evidence.
-6. **Capture evidence.** Save under `.claude/test-results/<task-slug>/`. For ≥2 meaningful steps or when the user asks for a report, write `index.html` with embedded screenshots. For a one-step check, a single `screenshot.png` plus a final summary is enough. Add `.claude/test-results/` to `.gitignore` on first use if missing.
+6. **Capture evidence.** Save under `.test-results/<task-slug>/` at the repo root (harness-agnostic). For ≥2 meaningful steps or when the user asks for a report, write `index.html` with embedded screenshots. For a one-step check, a single `screenshot.png` plus a final summary is enough. Add `.test-results/` to `.gitignore` on first use if missing.
 7. **Report.** Tested URL, environment, role used (no secrets), steps performed, observed outcome per AC bullet, evidence paths, remaining risks.
 
 ## Tool cascade (deterministic)
@@ -55,7 +55,7 @@ When the UI doesn't match AC:
 
 ## Evidence report contract
 
-`.claude/test-results/<task-slug>/index.html` contains:
+`.test-results/<task-slug>/index.html` contains:
 
 - Target URL and environment label (local / staging / prod).
 - Role used (label only, never credentials).
