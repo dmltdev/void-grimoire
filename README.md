@@ -23,11 +23,11 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-37 skills across 12 domains, plus an 8-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+39 skills across 12 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos, orchestrate-chaos-2, babysitter-orchestrator | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat variant), babysitter playbook |
 | **tools** | using-herdr, using-codex, using-omp, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
 | **workflow** | verify-requirements, session-summary, session-usage-summary, grill-me, grill-with-docs, docs-source-of-truth | Requirements validation, session journaling, AI-usage feedback, plan-grilling, DDD-shaped docs-as-source-of-truth workflow (replaces OpenSpec-style flows) |
@@ -47,6 +47,7 @@ Read-on-demand subagents under `agents/`:
 - **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
 - **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
 - **`herdr-orchestrator`** — coordinator for multi-pane parallel work in a herdr workspace. Decomposes goals, spawns worker Claude / omp / adhd instances in sibling panes, monitors, aggregates. Driven by `orchestrate-chaos`.
+- **`babysitter-orchestrator`** — context/session babysitter for persistent orchestrators. Watches phase drift, context decay, verifier failures, and prompt quality; writes verifier/relaunch prompts into a `.chaos/interventions.md` audit trail. Spawned as a sibling pane by `orchestrate-chaos-2`.
 
 The **concilium** — four pragmatic, read-only reviewer lenses dispatched in parallel by `convene-concilium`, each citing the shared `quality-dimensions.md` bar:
 
