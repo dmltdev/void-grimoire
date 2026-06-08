@@ -25,8 +25,9 @@ Walk the conversation and extract:
 2. **TL;DR material** — what was the session about, what's the outcome, is continuation expected?
 3. **Decisions** — choices made *with trade-offs*. A decision needs alternatives considered and reasons for the pick. If there are no trade-offs, it's not a decision — it's an accomplishment.
 4. **Discussion** — constraints discovered, insights, rejected approaches *with the reason they were rejected*. Skip tool churn, dead ends without lessons, small talk.
+   - Optional **Stable facts** subsection: long-lived constraints worth surfacing next session (e.g. "ship by Jan 22", "Node 24 only"). Bullets only, no IDs. Omit if none.
 5. **Accomplished** — concrete done items: features, fixes, files written.
-6. **Unfinished / Next Steps** — work remaining, in execution order.
+6. **Unfinished / Next Steps** — work remaining, in execution order. Tag items with `[high]` / `[med]` only when priority is load-bearing for ordering; otherwise leave untagged.
 7. **Files Changed** — modified or created paths with one-line notes.
 8. **Decision history pointer** — if the project tracks decisions in a known location (e.g. `docs/decisions/`, `docs/sessions/`, an ADR folder), note which artifact(s) were touched in *Discussion* so the next session can read them.
 
@@ -57,11 +58,14 @@ Walk the conversation and extract:
 ## Discussion
 - {Valuable threads only — constraints, insights, rejected approaches with reasons.}
 
+### Stable facts
+- {Long-lived constraints worth carrying forward. Omit the subsection if none.}
+
 ## Accomplished
 - {Concrete done items.}
 
 ## Unfinished / Next Steps
-1. {Numbered, only if work remains.}
+1. {Numbered, only if work remains. Prefix with `[high]` / `[med]` when ordering matters.}
 
 ## Files Changed
 - `path/to/file` — one-line note.
