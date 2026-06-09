@@ -52,6 +52,7 @@ docs/
 ├── glossary.md            ← ubiquitous language; one term, one definition
 ├── context-map.md         ← bounded contexts and how they communicate
 ├── domain/<context>.md    ← per-context behavior, invariants, contracts
+├── patterns/<name>.md     ← OPTIONAL: cross-context structural patterns (≥ 2 contexts)
 ├── adr/NNNN-*.md          ← append-only decision log (Nygard format)
 ├── brainstorms/           ← throwaway exploration, not source of truth
 ├── references/            ← imported external docs, not authored here
@@ -65,6 +66,7 @@ docs/
 | A domain noun's meaning | `glossary.md` |
 | How two contexts talk | `context-map.md` |
 | A context's behavior, invariants, contracts | `domain/<context>.md` |
+| A reusable structural choice used by ≥ 2 contexts | `patterns/<name>.md` + establishing ADR (optional slot) |
 | A tradeoff, reversal, or non-obvious choice | `adr/NNNN-title.md` |
 | Long-form vision / narrative | `product-brief.md` |
 | Throwaway exploration | `brainstorms/` |
@@ -84,6 +86,10 @@ docs/
 ## Domain doc shape
 
 See [DOMAIN-FORMAT.md](./DOMAIN-FORMAT.md). Skip any section with nothing to say.
+
+## Pattern shape and rules (optional)
+
+See [PATTERN-FORMAT.md](./PATTERN-FORMAT.md). Only adopt when ≥ 2 contexts have independently grown the same structural choice. Requires an establishing ADR.
 
 ## ADR shape and rules
 

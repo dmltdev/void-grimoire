@@ -23,6 +23,15 @@ What we are doing. One sentence is ideal. Active voice. No hedging.
 
 What becomes easier, what becomes harder, what we lock ourselves into. Positive, negative, neutral — honest.
 
+## Cross-links
+
+How this decision sits in the broader docs graph. Omit any line with nothing to say; delete the whole section if all four are empty.
+
+- **Supersedes:** ADR-NNNN (and update that ADR's status in the same change)
+- **Honors:** glossary terms, invariants, or prior ADRs this decision depends on. Format: `glossary:term`, `domain/<context>#invariant-slug`, `adr/NNNN`.
+- **Constrains:** future decisions or contexts this one narrows. Format as above.
+- **Defines:** new glossary term(s) or invariant(s) this ADR introduces. Add them to `glossary.md` / the owning `domain/<context>.md` in the same change; this line is the back-reference.
+
 ## Alternatives considered
 
 - **Option A** — why rejected.
@@ -40,6 +49,7 @@ What becomes easier, what becomes harder, what we lock ourselves into. Positive,
 - Status values: `Proposed` | `Accepted` | `Superseded by NNNN` | `Deprecated`.
 - Keep each ADR under ~1 page. Link out instead of restating context.
 - Update `docs/adr/README.md` index when adding an ADR.
+- **Cross-links are append-only too.** When a later ADR supersedes this one, append a line to its `Supersedes:` and update this ADR's status — never rewrite the body. Dangling refs (`adr/0099` that doesn't exist, `glossary:foo` not in the glossary) are a defect; fix on the same change that introduced them.
 
 ## When to write one
 
