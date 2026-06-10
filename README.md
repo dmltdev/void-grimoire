@@ -23,7 +23,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-40 skills across 12 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+41 skills across 12 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -33,7 +33,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 | **workflow** | verify-requirements, session-summary, session-usage-summary, grill-me, grill-with-docs, docs-source-of-truth | Requirements validation, session journaling, AI-usage feedback, plan-grilling, DDD-shaped docs-as-source-of-truth workflow (replaces OpenSpec-style flows) |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **codebase** | map-services | Auto-discover monorepo service topology and dependents |
-| **git** | enforce-git-safety, commit-push-pr | Block destructive git ops; commit/push/PR helper |
+| **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
 | **concilium** | convene-concilium, verify-and-correct | Multi-lens parallel code review (correctness, security, maintainability, scalability) plus evidence-gated self-correction. Pragmatic, non-blocking. |
 | **react** | using-zustand | React-specific patterns — state management, hooks, component composition. Read-on-demand. |

@@ -32,7 +32,7 @@
     },
     "git": {
       "description": "Git safety and commit/push/PR workflow",
-      "skills": ["enforce-git-safety", "commit-push-pr"],
+      "skills": ["enforce-git-safety", "commit-push-pr", "create-pr"],
       "docs": []
     },
     "npm": {

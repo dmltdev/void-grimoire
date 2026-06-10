@@ -4,7 +4,7 @@ domain: git
 description: Commit changes, push to GitHub, and open a PR. Includes quality checks (security, patterns, simplification). Use --quick to skip checks.
 allowed-tools: Bash, Read, Write, Edit, Grep, Glob, AskUserQuestion
 depends-on: []
-chains-to: null
+chains-to: create-pr
 suggests: [enforce-git-safety]
 ---
 
@@ -248,38 +248,13 @@ git push
 
 ### Step 8: Create or Report PR
 
-1. Check if PR already exists:
-```bash
-gh pr list --head "$(git branch --show-current)" --json number,url,title
-```
+1. Check if a PR already exists for the current branch (host-appropriate query: `gh pr list --head ...` on GitHub, `bitbucket` MCP on Bitbucket).
 
-2. **If PR exists:**
-   - Report: "Changes pushed to existing PR: <URL>"
-   - Show PR title and number
+2. **If PR exists:** report "Changes pushed to existing PR: <URL>" with the title and number. Done.
 
-3. **If no PR exists:**
-   - Generate PR title from commit message (first line)
-   - Generate PR body with summary of changes
-   - Create PR:
+3. **If no PR exists:** delegate to the `create-pr` skill. Do **not** inline a PR body template here — `create-pr` owns host detection, title shape, and the risk-sized body rubric (trivial / standard / critical). It explicitly forbids `## Summary` / `## Test Plan` / "Affected files" boilerplate.
 
-```bash
-gh pr create --title "type(scope): description" --body "$(cat <<'EOF'
-## Summary
-
-- Brief description of changes
-
-## Changes
-
-- List of key changes made
-
-## Test Plan
-
-- How to verify these changes work
-EOF
-)"
-```
-
-4. Report the new PR URL to the user
+4. Report the new PR URL.
 
 ---
 
