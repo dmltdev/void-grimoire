@@ -4,7 +4,7 @@ domain: git
 description: Use when opening a pull/merge request on GitHub, Bitbucket, or any other remote. Enforces a concise, reviewer-respecting PR shape — body detail scales with change risk, not change size. No "Affected files", no "How to test", no AI boilerplate.
 depends-on: []
 chains-to: null
-suggests: [work-git, commit-push-pr]
+suggests: [commit-push-pr]
 ---
 
 # Create PR
