@@ -40,14 +40,13 @@ Resolve the destination in this order. Stop at the first match.
 
 ## Rule Format
 
-Append to the appropriate file:
+Append the rule as a plain imperative bullet under the most relevant existing heading (create one only if no fit exists). Keep it to a single line.
 
 ```markdown
-## [Rule title — imperative, e.g., "Use Tailwind classes instead of inline styles"]
-- **Source:** User correction, YYYY-MM-DD
-- **Context:** [What the user said or what triggered this]
-- **Scope:** [domain name or "global"]
+- [Imperative rule, e.g., "Use Tailwind classes instead of inline styles."]
 ```
+
+Do NOT add `Source`, `Scope`, `Context`, dates, or other metadata per entry — it bloats the rules file and adds no signal the heading and wording don't already carry.
 
 ## Batch Prompt (session wind-down)
 
