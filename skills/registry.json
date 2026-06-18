@@ -27,7 +27,7 @@
     },
     "workflow": {
       "description": "Lightweight workflow helpers — requirements validation, session journaling, usage feedback",
-      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "grill-me", "grill-with-docs", "docs-source-of-truth"],
+      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "grill-me", "grill-me-fast", "grill-with-docs", "docs-source-of-truth"],
       "docs": []
     },
     "git": {
