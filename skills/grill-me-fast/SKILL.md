@@ -1,7 +1,7 @@
 ---
 name: grill-me-fast
 domain: workflow
-description: Fast grilling session for plans and designs. Batches related questions, provides recommended defaults up front, and uses disagreement-driven follow-ups to preserve pressure without one-question-at-a-time latency.
+description: Fast grilling session for plans and designs. Batches related questions, provides recommended defaults up front, avoids blocking the user on slow-mode selection, and gives a post-session heads-up when full grilling would fit better.
 depends-on: []
 chains-to: null
 suggests: ["grill-me", "grill-with-docs", "using-adhd"]
@@ -20,6 +20,9 @@ Default mode: **batched grilling**.
 5. Wait for the user to answer the whole batch before continuing.
 6. After each batch, update the decision map and choose the next smallest useful batch.
 7. Stop when every load-bearing branch is resolved or the remaining questions are low-risk defaults the user has accepted.
+8. After grilling is finished, add a brief heads-up if the request was vague, large, high-deviation, or domain-heavy enough that slow grilling would have been safer. Recommend `/grill-me` or `/grill-with-docs` next time for similar work.
+
+Never switch to slow mode before asking just because the request is big or vague. The point of this skill is to keep the user moving. If the user explicitly asks to slow down, or explicitly invokes `/grill-me` / `/grill-with-docs`, use the slow skill instead.
 
 Never ask unrelated questions in the same batch. Never exceed five questions. If one answer can invalidate the rest of the batch, ask only that question.
 
