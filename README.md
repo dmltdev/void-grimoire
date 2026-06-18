@@ -23,11 +23,11 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-44 skills across 12 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+45 skills across 12 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos, orchestrate-chaos-2, orchestrate-subagents, babysitter-orchestrator, unslop | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat variant), minimal in-session subagent orchestrator, babysitter playbook, inline slop classifier |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos, orchestrate-chaos-2, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat variant), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, inline slop classifier |
 | **tools** | using-herdr, using-codex, using-omp, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
 | **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, grill-me, grill-me-fast, grill-with-docs, docs-source-of-truth | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, plan-grilling, fast batched plan-grilling, DDD-shaped docs-as-source-of-truth workflow (replaces OpenSpec-style flows) |
@@ -87,11 +87,9 @@ Composition still works:
 
 ## What This Library Is Not
 
-It deliberately does **not** include:
-- Brainstorming, planning, TDD, debugging, worktrees, or subagent *workflows* — those are core engineering skills better served by the [superpowers](https://github.com/obra/superpowers) plugin, which Void Grimoire used to mirror. (The `concilium` domain is the deliberate exception: specialized review *agents* and a dispatcher, not a workflow framework.)
-- Design skills (frontend, audit, polish, etc.) — those live in the Impeccable plugin and belong with their authors.
+It deliberately does **not** enforce workflows by default. Orchestration skills are opt-in control-plane helpers; they do not create startup hooks, mandatory gates, or hidden state.
 
-If you want any of the above, install those plugins alongside this one.
+Design/audit/polish skills still live in the Impeccable plugin and belong with their authors.
 
 ## Architecture
 
