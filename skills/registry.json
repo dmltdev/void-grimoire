@@ -2,7 +2,7 @@
   "domains": {
     "void-grimoire": {
       "description": "Meta skills — prompt expansion, self-learning, skill optimization, multi-agent orchestration",
-      "skills": ["expand-prompt", "learn-correction", "autoresearch", "token-budget-advisor", "strategic-compact", "orchestrate-chaos", "orchestrate-chaos-2", "orchestrate-subagents", "mission-control", "babysitter-orchestrator", "unslop"],
+      "skills": ["expand-prompt", "learn-correction", "autoresearch", "strategic-compact", "orchestrate-chaos", "orchestrate-subagents", "mission-control", "babysitter-orchestrator", "unslop"],
       "docs": []
     },
     "tools": {
@@ -18,11 +18,6 @@
     "docs": {
       "description": "Documentation lookup and indexing via qmd",
       "skills": ["lookup-docs", "index-docs"],
-      "docs": []
-    },
-    "codebase": {
-      "description": "Codebase structure awareness — service topology, dependency graphs",
-      "skills": ["map-services"],
       "docs": []
     },
     "workflow": {

@@ -13,7 +13,7 @@ Inline slop classifier for orchestration runs. Three jobs: inject the catalog in
 
 ## Project-local file
 
-`.chaos/slop-examples.md` at repo root. Same directory as `orchestrate-chaos-2`'s state/intervention files. Create lazily.
+`.chaos/slop-examples.md` at repo root. Same directory as babysat `orchestrate-chaos` state/intervention files. Create lazily.
 
 ## Bootstrap (first run only)
 

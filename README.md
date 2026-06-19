@@ -23,16 +23,15 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-45 skills across 12 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+42 skills across 11 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, token-budget-advisor, strategic-compact, orchestrate-chaos, orchestrate-chaos-2, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat variant), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, inline slop classifier |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, inline slop classifier |
 | **tools** | using-herdr, using-codex, using-omp, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
 | **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, grill-me, grill-me-fast, grill-with-docs, docs-source-of-truth | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, plan-grilling, fast batched plan-grilling, DDD-shaped docs-as-source-of-truth workflow (replaces OpenSpec-style flows) |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
-| **codebase** | map-services | Auto-discover monorepo service topology and dependents |
 | **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
 | **concilium** | convene-concilium, verify-and-correct | Multi-lens parallel code review (correctness, security, maintainability, scalability) plus evidence-gated self-correction. Pragmatic, non-blocking. |
@@ -47,7 +46,7 @@ Read-on-demand subagents under `agents/`:
 - **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
 - **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
 - **`herdr-orchestrator`** — coordinator for multi-pane parallel work in a herdr workspace. Decomposes goals, spawns worker Claude / omp / adhd instances in sibling panes, monitors, aggregates. Driven by `orchestrate-chaos`.
-- **`babysitter-orchestrator`** — context/session babysitter for persistent orchestrators. Watches phase drift, context decay, verifier failures, and prompt quality; writes verifier/relaunch prompts into a `.chaos/interventions.md` audit trail. Spawned as a sibling pane by `orchestrate-chaos-2`.
+- **`babysitter-orchestrator`** — context/session babysitter for persistent orchestrators. Watches phase drift, context decay, verifier failures, and prompt quality; writes verifier/relaunch prompts into a `.chaos/interventions.md` audit trail. Spawned as a sibling pane by babysat `orchestrate-chaos`.
 
 The **concilium** — four pragmatic, read-only reviewer lenses dispatched in parallel by `convene-concilium`, each citing the shared `quality-dimensions.md` bar:
 
@@ -70,7 +69,6 @@ Plugin-local `rules/` reference tree under three buckets: `common/` (language-ag
 - **`session-usage-summary`** — Retrospective on the human-AI loop in this session. Scores spec clarity, decision ownership, verification depth, and correction loops.
 - **`learn-correction`** — When you correct the AI ("don't mock the DB", "always use snake_case"), persists the correction to your project's `AGENTS.md` / `CLAUDE.md` so it survives future sessions.
 - **`expand-prompt`** — Turn a terse request ("add dark mode") into a structured intent: relevant docs, learned rules, decomposed sub-tasks. Requires explicit user approval before any action.
-- **`token-budget-advisor`** — Offers an informed choice on response depth before answering. Triggers when you ask about budget, length, or want a short vs exhaustive answer.
 - **`strategic-compact`** — Suggests manual `/compact` at phase boundaries (planning -> implementing -> verifying) so context survives the next phase rather than waiting for arbitrary auto-compaction.
 - **`autoresearch`** — Run a skill repeatedly, score outputs against binary evals, mutate the prompt, keep improvements. Karpathy-style autonomous skill optimization.
 

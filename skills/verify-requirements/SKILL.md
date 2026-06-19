@@ -4,7 +4,7 @@ domain: workflow
 description: Use when receiving external requirements, specs, PRDs, or tickets that need validation before design — checks feasibility against codebase, surfaces ambiguity, hidden scope, and contradictions
 depends-on: []
 chains-to: null
-suggests: [map-services]
+suggests: []
 ---
 
 # Verify Requirements

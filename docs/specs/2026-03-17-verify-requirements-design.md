@@ -6,7 +6,7 @@
 
 ## 1. Purpose
 
-Standalone skill for adversarial review of external requirements (Jira tickets, Confluence pages, PRDs, spec docs, pasted text). Validates requirements against the codebase and service map before design begins. Produces a feasibility report and a prioritized stakeholder question list.
+Standalone skill for adversarial review of external requirements (Jira tickets, Confluence pages, PRDs, spec docs, pasted text). Validates requirements against the codebase before design begins. Produces a feasibility report and a prioritized stakeholder question list.
 
 **Core framing:** Every requirement is ambiguous until disambiguated, simple until the dependency chain proves it, and feasible until the codebase says otherwise.
 
@@ -18,7 +18,7 @@ domain: workflow
 description: Use when receiving external requirements, specs, PRDs, or tickets that need validation before design — checks feasibility against codebase, surfaces ambiguity, hidden scope, and contradictions
 depends-on: []
 chains-to: null
-suggests: [brainstorm, map-services]
+suggests: []
 ```
 
 **Registry triggers:** `requirements`, `spec`, `PRD`, `ticket`, `feasibility`, `verify`, `validate`

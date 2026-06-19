@@ -1,7 +1,7 @@
 ---
 name: babysitter-orchestrator
 domain: void-grimoire
-description: Use when designing or running long-lived multi-agent orchestration, babysitter/subconscious agents, phase-gate verification agents, context compaction, session handoff, validator tuning, or systems meant to steer AI work away from unusable slop toward a tiny desirable output subset. Authoritative playbook for the babysitter-orchestrator agent and for orchestrate-chaos-2.
+description: Use when designing or running long-lived multi-agent orchestration, babysitter/subconscious agents, phase-gate verification agents, context compaction, session handoff, validator tuning, or systems meant to steer AI work away from unusable slop toward a tiny desirable output subset. Authoritative playbook for the babysitter-orchestrator agent and babysat orchestrate-chaos mode.
 depends-on: []
 chains-to: null
 suggests: []

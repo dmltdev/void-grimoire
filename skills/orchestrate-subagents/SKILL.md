@@ -1,7 +1,7 @@
 ---
 name: orchestrate-subagents
 domain: void-grimoire
-description: Use when the user invokes /orchestrate-subagents or asks for a minimal in-session orchestrator that holds spec/decisions/tasks and dispatches dev + test + validation work via subagents. The lightweight sibling to orchestrate-chaos / orchestrate-chaos-2 — no herdr panes, no babysitter, no external CLIs. Master never writes code; only plans, dispatches, merges, decides.
+description: Use when the user invokes /orchestrate-subagents or asks for a minimal in-session orchestrator that holds spec/decisions/tasks and dispatches dev + test + validation work via subagents. The lightweight sibling to orchestrate-chaos — no herdr panes, no babysitter, no external CLIs. Master never writes code; only plans, dispatches, merges, decides.
 depends-on: []
 chains-to: null
 suggests: ["docs-source-of-truth", "brainstorming", "verify-and-correct", "adversarial-verifier"]
