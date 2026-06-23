@@ -39,30 +39,6 @@
       "description": "Multi-agent code review — parallel quality lenses (correctness, security, maintainability, scalability) plus evidence-gated self-correction, pragmatic and non-blocking",
       "skills": ["convene-concilium", "verify-and-correct"],
       "docs": []
-    },
-    "react": {
-      "description": "React-specific patterns — state management, hooks, component composition. Read-on-demand.",
-      "skills": ["using-zustand"],
-      "docs": []
-    },
-    "node": {
-      "description": "Node.js library wrappers — TypeScript-facing client patterns. Read-on-demand.",
-      "skills": ["using-ioredis"],
-      "docs": []
-    },
-    "patterns": {
-      "description": "Stack-specific reference skills — Nest.js, Next.js Turbopack, Postgres, MCP servers, Framer Motion. Read-on-demand, not auto-loaded.",
-      "skills": [
-        "nestjs-patterns",
-        "nextjs-turbopack",
-        "postgres-patterns",
-        "mcp-server-patterns",
-        "motion-foundations",
-        "motion-patterns",
-        "motion-ui",
-        "motion-advanced"
-      ],
-      "docs": []
     }
   }
 }

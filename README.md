@@ -2,7 +2,7 @@
 
 ![Void Grimoire](void-grimoire.webp)
 
-An additive Claude Code library — skills, agents, and rules. Covers what generic workflows don't: session journaling, learned-correction persistence, prompt expansion, context discipline (token budgets, strategic `/compact`), stack-reference patterns (Nest.js, Next.js, Postgres, ioredis, MCP, Framer Motion), TypeScript/web rule baselines, plus a handful of safety and lookup helpers.
+An additive Claude Code library — skills, agents, and rules. Covers what generic workflows don't: session journaling, learned-correction persistence, prompt expansion, context discipline (token budgets, strategic `/compact`), TypeScript/web rule baselines, plus a handful of safety and lookup helpers.
 
 This is **not** a workflow framework. It does not enforce phases, gate your work, or auto-inject context. Skills load on demand via the `Skill` tool. Use what you need, ignore the rest.
 
@@ -23,7 +23,7 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-42 skills across 11 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+32 skills across 8 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -35,9 +35,6 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 | **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
 | **concilium** | convene-concilium, verify-and-correct | Multi-lens parallel code review (correctness, security, maintainability, scalability) plus evidence-gated self-correction. Pragmatic, non-blocking. |
-| **react** | using-zustand | React-specific patterns — state management, hooks, component composition. Read-on-demand. |
-| **node** | using-ioredis | Node.js library wrappers — TypeScript-facing client patterns. Read-on-demand. |
-| **patterns** | nestjs-patterns, nextjs-turbopack, postgres-patterns, mcp-server-patterns, motion-foundations, motion-patterns, motion-ui, motion-advanced | Stack-specific reference skills. Read-on-demand, not auto-loaded. |
 
 ### Agents
 
