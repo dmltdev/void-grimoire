@@ -13,18 +13,32 @@ Use the smallest template that satisfies the mission. Keep phases explicit in th
 
 1. Preflight: define goal, constraints, source of truth, and risk.
 2. Research: inspect relevant code/docs; use external docs only when needed.
-3. Plan Review: dispatch reviewer/planner critique for feasibility, hidden scope, and verification.
-4. Signoff: deliver task graph, packets-ready scope, assumptions, and open questions.
+3. Architect Review: for non-trivial/risky work, analyze standards, influence, blast radius, alternatives, and design risks.
+4. Plan Review: dispatch reviewer/planner critique for feasibility, hidden scope, TDD plan, and verification.
+5. Signoff: deliver task graph, packets-ready scope, assumptions, risk register, and open questions.
 
 ## build
 
-1. Preflight: define behavior, scope, state convention, risk, worker graph, verification.
-2. Test Contract: write failing tests first when feasible; otherwise write explicit verification contract.
-3. Implementation: dispatch implementers with packets and test contract.
-4. Review: risky diffs get focused reviewers or concilium.
-5. Verification: independent verifier runs commands/probes for risky/user-visible/multi-file changes.
-6. Correction: one fresh fix-worker round for blockers, then one re-verify.
-7. Signoff: operational report.
+1. Preflight: define behavior, scope, state convention, risk, worker graph, verification, and human gates.
+2. Contract: write the task contract: goal, non-goals, acceptance, constraints, blast radius, risk areas, test plan, verification, rollback.
+3. TDD: write failing tests first when feasible; otherwise write explicit verification contract.
+4. Implementation: dispatch implementers with packets and test contract.
+5. Review: risky/broad diffs get concilium; low-risk or narrow diffs may get focused reviewers.
+6. Verification: independent verifier runs commands/probes for risky/user-visible/multi-file changes.
+7. Correction: one fresh fix-worker round for blockers, then one re-verify.
+8. Git Handoff: prepare commit/PR package and ask for explicit commit approval.
+9. Signoff: operational report.
+
+## batch
+
+1. Preflight: intake all tasks, preserve intent, identify source-of-truth docs, and use `.mission-control/run.md` for state.
+2. Queue Triage: risk-sort tasks, detect dependencies, define at most 2 active build lanes.
+3. Contract/Plan: create a task contract per queued task; high-risk contracts require user approval before implementation.
+4. Run Lanes: dispatch TDD and implementation by lane; serialize shared contracts/files/schemas/manifests.
+5. Review/Verify: independently verify high-risk, multi-file, sensitive, or user-visible changes.
+6. Correction: one fresh fix-worker round per blocked lane, then one re-verify.
+7. Git Handoff: after green verification, ask for commit approval and delegate to `commit-push-pr`.
+8. Daily Signoff: shipped, blocked, active decisions, memory candidates, next queue.
 
 ## review
 
@@ -42,24 +56,30 @@ Use the smallest template that satisfies the mission. Keep phases explicit in th
 ## Risk routing
 
 Low-risk/local:
+- inline task contract
 - one implementer or reviewer
 - focused self-verification
 - independent verifier optional
+- session-only state unless user asks otherwise
 
-High-risk:
+Non-trivial/risky:
+- architect/blast-radius worker first
+- high-risk plan approval before implementation
 - test author first when build mode
+- user approval for high-risk/new-behavior tests
 - implementer
 - independent verifier required
 - concilium for broad/risky diffs
 - one fresh fix-worker if blocked
+- `.mission-control/run.md` state for long-running or batch missions
 
 ## Parallel routing
 
-Parallel-safe only when every worker owns disjoint scope:
+Parallel-safe only when every build lane owns disjoint scope:
 
 ```text
-Worker A: files/contracts X
-Worker B: files/contracts Y
+Lane A: files/contracts X
+Lane B: files/contracts Y
 Shared dependency: none
 Verification: after both complete
 ```
@@ -67,7 +87,8 @@ Verification: after both complete
 Serialize when:
 
 ```text
-Worker B depends on Worker A output
-Both touch same file/contract/schema
+Lane B depends on Lane A output
+Both touch same file/contract/schema/manifest/generated file
 A failing result changes B acceptance
+A public contract/API/architecture decision is unresolved
 ```
