@@ -6,8 +6,8 @@
       "docs": []
     },
     "tools": {
-      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, adhd, herdr, agent-browser, chrome-devtools-mcp.",
-      "skills": ["using-herdr", "using-codex", "using-omp", "using-adhd", "using-agent-browser", "using-chrome-devtools-mcp"],
+      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, omp plugin installs, adhd, herdr, agent-browser, chrome-devtools-mcp.",
+      "skills": ["using-herdr", "using-codex", "using-omp", "omp-plugins", "using-adhd", "using-agent-browser", "using-chrome-devtools-mcp"],
       "docs": []
     },
     "qa": {
