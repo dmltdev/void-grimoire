@@ -23,14 +23,14 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-34 skills across 8 domains, plus a 9-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+38 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
 | **void-grimoire** | expand-prompt, learn-correction, autoresearch, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, inline slop classifier, product UI unslopping |
 | **tools** | using-herdr, using-codex, using-omp, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, grill-me, grill-me-fast, grill-with-docs, docs-source-of-truth, ideal-example-clone | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, plan-grilling, fast batched plan-grilling, DDD-shaped docs-as-source-of-truth workflow, and ideal-example cloning from code-first exemplars |
+| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, grill-me, grill-me-fast, grill-with-docs, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, plan-grilling, fast batched plan-grilling, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, and operational failure memory |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
@@ -42,6 +42,7 @@ Read-on-demand subagents under `agents/`:
 
 - **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
 - **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
+- **`blast-radius-cartographer`** — read-only impact mapper for implementation planning. Produces DOCS/CODE/TESTS/MEMORY impact maps with evidence anchors before edits.
 - **`herdr-orchestrator`** — coordinator for multi-pane parallel work in a herdr workspace. Decomposes goals, spawns worker Claude / omp / adhd instances in sibling panes, monitors, aggregates. Driven by `orchestrate-chaos`.
 - **`babysitter-orchestrator`** — context/session babysitter for persistent orchestrators. Watches phase drift, context decay, verifier failures, and prompt quality; writes verifier/relaunch prompts into a `.chaos/interventions.md` audit trail. Spawned as a sibling pane by babysat `orchestrate-chaos`.
 

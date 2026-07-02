@@ -1,7 +1,7 @@
 ---
 name: docs-source-of-truth
 domain: workflow
-description: DDD-shaped docs-as-source-of-truth workflow that replaces spec-driven flows (OpenSpec, propose/apply/archive). Treats the repo as a set of bounded contexts with a ubiquitous language. Behavior lives in tests + Zod/typed schemas, *what the domain means* lives in `docs/domain/<context>.md` + `docs/glossary.md` + `docs/context-map.md`, *why we chose this* lives in `docs/adr/NNNN-*.md`. Use when proposing/implementing any non-trivial change, when naming a new concept, when asked to "write a spec", "propose a change", "add to openspec", or when the user wants guidance on where new behavior, terminology, or decisions belong.
+description: DDD-shaped docs-as-source-of-truth workflow for `.md`/`.mdx` docs that replaces spec-driven flows (OpenSpec, propose/apply/archive). Treats the repo as bounded contexts with a ubiquitous language; Atlas docs may sit beside it for technical repo/service/flow maps. Behavior lives in tests + Zod/typed schemas, *what the domain means* lives in `docs/domain/<context>.md(x)` + `docs/glossary.md(x)` + `docs/context-map.md(x)`, *why we chose this* lives in `docs/adr/NNNN-*.md(x)`. Use when proposing/implementing a non-trivial change, naming a concept, writing source-of-truth docs, or deciding where Atlas/domain/ADR docs belong.
 depends-on: []
 chains-to: null
 suggests: ["lookup-docs", "grill-with-docs"]
@@ -33,6 +33,7 @@ This is light **Domain-Driven Design** applied to documentation:
 - **Ubiquitous language** (`glossary.md`) — one term, one definition. Code, tests, docs, commits all speak it. No synonyms, no parallel vocabulary.
 - **Bounded contexts** (`domain/<context>.md`) — each context owns its concepts, invariants, and contracts. A term can mean different things in different contexts, but only if both contexts list it explicitly.
 - **Context map** (`context-map.md`) — how contexts talk: upstream/downstream, anti-corruption layers, shared kernels, published languages. Cross-context interaction is documented here, never duplicated inside a single context doc.
+- **Atlas** (`atlas/`) — technical repo/service/flow map. Atlas owns cross-repo runtime relationships and public surfaces; context maps own bounded-context relationships.
 - **Aggregates and invariants** — captured as invariant bullets in the context doc; enforced by tests and Zod schemas. Not as prose narratives.
 
 The docs are the *strategic* DDD layer (language, boundaries, contracts). The code is the *tactical* layer (entities, value objects, aggregates). Tactical patterns belong in code; if a tactical choice is non-obvious, it's an ADR.
@@ -49,12 +50,16 @@ If asked to "propose a change", "add to openspec", or open a `specs/` / `openspe
 docs/
 ├── README.md              ← the rules below, restated for the repo
 ├── product-brief.md       ← vision, narrative, non-goals; topics not yet carved into a domain doc
+├── atlas/                 ← OPTIONAL: technical repo/service/flow maps
+│   ├── repos/<repo>.md    ← repo inventory, public surfaces, dependencies
+│   └── flows/<flow>.md    ← cross-repo runtime flows with evidence anchors
 ├── glossary.md            ← ubiquitous language; one term, one definition
 ├── context-map.md         ← bounded contexts and how they communicate
 ├── domain/<context>.md    ← per-context behavior, invariants, contracts
 ├── patterns/<name>.md     ← OPTIONAL: cross-context structural patterns (≥ 2 contexts)
 ├── adr/NNNN-*.md          ← append-only decision log (Nygard format)
-├── brainstorms/           ← throwaway exploration, not source of truth
+├── research/              ← Atlas research notes: exploratory findings, uncertain traces, evidence ledgers
+├── brainstorms/           ← throwaway ideation, not source of truth
 ├── references/            ← imported external docs, not authored here
 └── sessions/              ← session journals, not source of truth
 ```
@@ -63,13 +68,16 @@ docs/
 
 | Capturing... | Goes in... |
 |---|---|
+| Technical repo/service inventory | `atlas/repos/<repo>.md` |
+| Cross-repo runtime flow | `atlas/flows/<flow>.md` |
+| Exploratory Atlas findings, uncertain traces, evidence ledgers | `research/<date>-<topic>.md` |
 | A domain noun's meaning | `glossary.md` |
 | How two contexts talk | `context-map.md` |
 | A context's behavior, invariants, contracts | `domain/<context>.md` |
 | A reusable structural choice used by ≥ 2 contexts | `patterns/<name>.md` + establishing ADR (optional slot) |
 | A tradeoff, reversal, or non-obvious choice | `adr/NNNN-title.md` |
 | Long-form vision / narrative | `product-brief.md` |
-| Throwaway exploration | `brainstorms/` |
+| Throwaway ideation | `brainstorms/` |
 | Executable assertion / "SHALL" / scenario | a test (Vitest/Playwright) — never a doc |
 | Contract shape | a Zod schema in `@<pkg>/types` — never a doc |
 
@@ -82,6 +90,7 @@ docs/
 5. **Decisions => ADR.** New tradeoff or reversal => new ADR. Don't rewrite history in domain docs.
 6. **Delete on supersede.** When a topic moves from `product-brief.md` into `docs/domain/<context>.md`, delete the brief section in the same change. No "moved to X" pointers. Two docs are never both authoritative for the same topic.
 7. **`AGENTS.MD` / `CLAUDE.MD` are tracked.** Committed in the same change that motivates the edit. Never gitignored. Drift between local and committed is a defect.
+8. **Markdown or MDX.** Use `.md` by default. Use `.mdx` only when the target docs workspace already renders MDX or the user asks. MDX must remain readable as Markdown.
 
 ## Domain doc shape
 
@@ -115,5 +124,7 @@ If any of the three is missing, skip the ADR.
 - Inventing a synonym for a glossary term instead of reusing it.
 - One concept owned by two context docs. Pick an owner or split the boundary.
 - Cross-context details duplicated inside a single context doc instead of being captured in `context-map.md`.
+- Duplicating Atlas facts inside domain docs instead of linking to the Atlas.
+- Using MDX-only components for source-of-truth docs when Markdown would work.
 
 </supporting-info>
