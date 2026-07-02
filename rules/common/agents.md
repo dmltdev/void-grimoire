@@ -49,3 +49,7 @@ For complex problems, use split role sub-agents:
 - Security expert
 - Consistency reviewer
 - Redundancy checker
+
+## Commit Messages
+
+- When a commit includes a version change, include the version number in the conventional commit scope before the feature area, e.g. `feat(2.7.10/unslop-design): add UI redesign skill`.
