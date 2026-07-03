@@ -1,5 +1,5 @@
 ---
-name: proof-before-plan
+name: human-typed-plan
 domain: workflow
 description: Use when a developer wants AI help with a feature, bugfix, refactor, or implementation approach while keeping human ownership of code, typing, decisions, and understanding; especially requests to plan, explain logic, compare approaches, or provide implementation steps for the developer to write.
 depends-on: ["test-driven-development"]
@@ -7,7 +7,7 @@ chains-to: null
 suggests: ["grill-me-fast", "grill-with-docs", "ideal-example-clone", "refactor-transaction", "invariant-hunter"]
 ---
 
-# Proof Before Plan
+# Human Typed Plan
 
 Preserve developer agency. The AI evaluates options, names the proof, explains the logic, and hands the human a plan they can type themselves.
 
