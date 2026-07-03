@@ -9,7 +9,7 @@
     {
       "name": "void-grimoire",
       "description": "Additive Claude Code skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, context discipline, and TypeScript/web rule baselines",
-      "version": "2.21.0",
+      "version": "2.21.1",
       "source": "./",
       "author": {
         "name": "Dmytro L.",

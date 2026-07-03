@@ -4,7 +4,7 @@ domain: workflow
 description: Use when a developer wants AI help planning or implementing code without losing ownership, comprehension, TDD discipline, or decision control; especially when asking for concise implementation details, tradeoffs, proof targets, or user-consulted planning before code.
 depends-on: ["test-driven-development"]
 chains-to: null
-suggests: ["grill-me-fast", "grill-with-docs", "invariant-hunter"]
+suggests: ["grill-me-fast", "grill-with-docs", "ideal-example-clone", "refactor-transaction", "invariant-hunter"]
 ---
 
 # Proof Before Plan
@@ -27,6 +27,12 @@ Then give a compact route:
 4. **Grill gate** - pause only for load-bearing user decisions.
 5. **TDD loop** - RED -> GREEN -> REFACTOR -> evidence recap.
 
+## Companion Skills
+
+Use these before planning when their trigger is present:
+- `ideal-example-clone` - user names a reference implementation, says "do it like this", or a proven local pattern should set architecture, tests, or conventions.
+- `refactor-transaction` - route includes rename, move, extraction, migration, public API cutover, caller migration, or shim/alias/re-export pressure.
+
 ## Grill Gates
 
 Ask the user before code when the answer changes architecture, public API, domain meaning, data semantics, security posture, or how much code the human wants to write.
@@ -42,6 +48,7 @@ Do not ask when tools, docs, tests, or code can answer. Look it up and continue.
 ```markdown
 **Proof:** <failing test/repro/invariant/acceptance check>
 **Route:** <3-6 concrete steps, smallest verified path>
+**Companion:** <ideal-example-clone/refactor-transaction/etc., or "none">
 **Decisions:** <only if real; default + why + reverse if>
 **Grill gate:** <question, or "none">
 **Next turn:** <what the developer or agent does first>
@@ -88,6 +95,7 @@ User: "Plan the auth error-state fix fast. I want to do it myself."
 ```markdown
 **Proof:** failing component/API test: auth failure shows the expected error state and does not stay loading or redirect.
 **Route:** reproduce state -> find existing auth error mapping -> add one RED test -> patch only that branch -> run targeted test + repro.
+**Companion:** none.
 **Decisions:** no auth refactor; reverse if the error state is produced by duplicated mappings in multiple flows.
 **Grill gate:** What is broken: missing message, wrong message, stuck loading, or redirect?
 **Next turn:** You write the RED test; I can review it before implementation.
