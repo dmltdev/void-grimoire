@@ -7,7 +7,7 @@
     },
     "tools": {
       "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, omp plugin installs, adhd, herdr, agent-browser, chrome-devtools-mcp.",
-      "skills": ["using-herdr", "using-codex", "using-omp", "omp-plugins", "using-adhd", "using-agent-browser", "using-chrome-devtools-mcp"],
+      "skills": ["using-herdr", "using-codex", "using-omp", "omp-plugins", "using-adhd", "using-agent-browser", "using-chrome-devtools-mcp", "using-elevenlabs-tts"],
       "docs": []
     },
     "qa": {
@@ -22,7 +22,7 @@
     },
     "workflow": {
       "description": "Lightweight workflow helpers — requirements validation, session journaling, usage feedback",
-      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "grill-me", "grill-me-fast", "grill-with-docs", "proof-before-plan", "docs-source-of-truth", "atlas-research", "ideal-example-clone", "refactor-transaction", "invariant-hunter", "failure-memory-compiler"],
+      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "grill-me", "grill-me-fast", "grill-with-docs", "proof-before-plan", "docs-source-of-truth", "atlas-research", "ideal-example-clone", "refactor-transaction", "invariant-hunter", "failure-memory-compiler", "audio-plan", "audio-recap"],
       "docs": []
     },
     "git": {
