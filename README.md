@@ -23,11 +23,11 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-40 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+44 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, inline slop classifier, product UI unslopping |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, inline slop classifier, product UI unslopping |
 | **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
 | **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, grill-me, grill-me-fast, grill-with-docs, human-typed-plan, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, plan-grilling, fast batched plan-grilling, docs-aware grilling, human-typed implementation planning, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, and operational failure memory |
