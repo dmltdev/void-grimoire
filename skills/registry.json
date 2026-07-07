@@ -22,7 +22,7 @@
     },
     "workflow": {
       "description": "Lightweight workflow helpers — requirements validation, session journaling, usage feedback",
-      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "grill-me", "grill-me-fast", "grill-with-docs", "human-typed-plan", "docs-source-of-truth", "atlas-research", "ideal-example-clone", "refactor-transaction", "invariant-hunter", "failure-memory-compiler", "audio-plan", "audio-recap"],
+      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "quick-recap", "grill-me", "grill-me-fast", "grill-with-docs", "human-typed-plan", "docs-source-of-truth", "atlas-research", "ideal-example-clone", "refactor-transaction", "invariant-hunter", "failure-memory-compiler", "audio-plan", "audio-recap"],
       "docs": []
     },
     "git": {

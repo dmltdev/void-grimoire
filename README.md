@@ -23,14 +23,14 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 
 ## What You Get
 
-45 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+46 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
 | **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, code slop cleanup with agent-instruction memory, product UI unslopping |
-| **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-chrome-devtools-mcp | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp |
+| **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-chrome-devtools-mcp, using-elevenlabs-tts | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp, and ElevenLabs TTS |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, grill-me, grill-me-fast, grill-with-docs, human-typed-plan, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, plan-grilling, fast batched plan-grilling, docs-aware grilling, human-typed implementation planning, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, and operational failure memory |
+| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, quick-recap, grill-me, grill-me-fast, grill-with-docs, human-typed-plan, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler, audio-plan, audio-recap | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, plan-grilling, fast batched plan-grilling, docs-aware grilling, human-typed implementation planning, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, operational failure memory, and TTS-ready plan/recap scripts |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
@@ -65,6 +65,7 @@ Plugin-local `rules/` reference tree under three buckets: `common/` (language-ag
 
 - **`session-summary`** — Write a session journal: TL;DR, decisions with trade-offs, accomplishments, unfinished work, files touched. Use before `/compact` or at session end.
 - **`session-usage-summary`** — Retrospective on the human-AI loop in this session. Scores spec clarity, decision ownership, verification depth, and correction loops.
+- **`quick-recap`** — Adds the final red/yellow/green status-line convention for finished, pending, or blocked responses.
 - **`learn-correction`** — When you correct the AI ("don't mock the DB", "always use snake_case"), persists the correction to your project's `AGENTS.md` / `CLAUDE.md` so it survives future sessions.
 - **`expand-prompt`** — Turn a terse request ("add dark mode") into a structured intent: relevant docs, learned rules, decomposed sub-tasks. Requires explicit user approval before any action.
 - **`strategic-compact`** — Suggests manual `/compact` at phase boundaries (planning -> implementing -> verifying) so context survives the next phase rather than waiting for arbitrary auto-compaction.
@@ -72,7 +73,7 @@ Plugin-local `rules/` reference tree under three buckets: `common/` (language-ag
 
 ## How It Works
 
-Each skill is a `SKILL.md` file with frontmatter (`name`, `description`, `depends-on`, `chains-to`, `suggests`). Skills are loaded on demand — there is no startup hook, no `.void-grimoire/` directory, no forced gate flow.
+Each skill is a `SKILL.md` file with frontmatter (`name`, `description`; some older skills also include `depends-on`, `chains-to`, `suggests`). Skills are loaded on demand — there is no startup hook, no `.void-grimoire/` directory, no forced gate flow.
 
 Composition still works:
 - `depends-on` — listed skills must run first
