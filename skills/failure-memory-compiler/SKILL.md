@@ -14,7 +14,7 @@ Turn failure evidence into operational memory. Operational memory changes future
 | User corrects an agent after a wrong answer, bad edit, or missed constraint | Yes |
 | Verifier fails a worker output | Yes |
 | PR comment identifies a recurring review issue | Yes |
-| Session-friction or slop catalog shows a pattern | Yes |
+| Session-friction or agent-instruction history shows a pattern | Yes |
 | Agent repeats a known mistake across tasks | Yes |
 | User asks for a boss deck, failure deck, lessons learned, memory-to-test conversion, or gate design | Yes |
 | One-off journal, handoff, status recap, or narrative RCA with no future gate | No |
@@ -35,7 +35,7 @@ Do not call a note "memory" unless it changes a future decision, check, prompt, 
 | DOCS | Skill rule, AGENTS/CLAUDE rule, runbook section, PR template note | Reviewer checks required output fields before merge |
 | CODE | Source fix, type/API invariant, static check, runtime guard | Bad input cannot silently fall through |
 | TESTS | Unit, integration, e2e, regression, fixture, verifier scenario | Negative example fails; positive example passes |
-| MEMORY | Boss deck card, session-friction reflection, slop catalog entry, dispatch constraint | Future verifier receives the failure card before judging work |
+| MEMORY | Boss deck card, session-friction reflection, agent-instruction rule, dispatch constraint | Future verifier receives the failure card before judging work |
 
 Pick one primary pillar. Add a secondary pillar only when the failure crosses a boundary, e.g. a PR comment (`DOCS`) proves a missing regression test (`TESTS`).
 
