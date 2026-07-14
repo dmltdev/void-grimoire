@@ -21,6 +21,16 @@ This is **not** a workflow framework. It does not enforce phases, gate your work
 /plugin install void-grimoire@dmltdev
 ```
 
+### Individual Skills (skills.sh)
+
+Download only the skill you need with [`npx skills`](https://skills.sh/docs):
+
+```bash
+npx skills add dmltdev/void-grimoire --skill session-summary
+```
+
+Replace `session-summary` with any skill name from the list below.
+
 ## What You Get
 
 46 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
