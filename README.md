@@ -33,14 +33,14 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-46 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+44 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
 | **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, code slop cleanup with agent-instruction memory, product UI unslopping |
 | **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-chrome-devtools-mcp, using-elevenlabs-tts | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp, and ElevenLabs TTS |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, quick-recap, grill-me, grill-me-fast, grill-with-docs, human-typed-plan, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler, audio-plan, audio-recap | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, plan-grilling, fast batched plan-grilling, docs-aware grilling, human-typed implementation planning, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, operational failure memory, and TTS-ready plan/recap scripts |
+| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, quick-recap, grill-with-docs, human-typed-plan, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler, audio-plan, audio-recap | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, docs-aware plan grilling, human-typed implementation planning, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, operational failure memory, and TTS-ready plan/recap scripts |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |

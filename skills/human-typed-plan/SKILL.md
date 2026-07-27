@@ -4,7 +4,7 @@ domain: workflow
 description: Use when a developer wants AI help with a feature, bugfix, refactor, or implementation approach while keeping human ownership of code, typing, decisions, and understanding; especially requests to plan, explain logic, compare approaches, or provide implementation steps for the developer to write.
 depends-on: ["test-driven-development"]
 chains-to: null
-suggests: ["grill-me-fast", "grill-with-docs", "ideal-example-clone", "refactor-transaction", "invariant-hunter"]
+suggests: ["grill-with-docs", "ideal-example-clone", "refactor-transaction", "invariant-hunter"]
 ---
 
 # Human Typed Plan
@@ -55,9 +55,7 @@ Use these before planning when their trigger is present:
 
 Ask the user before the packet only when the answer changes architecture, public API, domain meaning, data semantics, security posture, or how much code the human wants to write.
 
-Use:
-- `grill-me-fast` for implementation choices, collaboration mode, and agency level.
-- `grill-with-docs` for domain terms, glossary conflicts, docs updates, and ADR-worthy decisions.
+Use `grill-with-docs` for domain terms, glossary conflicts, docs updates, ADR-worthy decisions, implementation choices, collaboration mode, and agency level.
 
 Do not ask when tools, docs, tests, or code can answer. Look it up and continue.
 
