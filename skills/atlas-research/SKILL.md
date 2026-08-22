@@ -7,7 +7,7 @@ description: Use when researching or documenting one or more codebases into sour
 
 ## Core rule
 
-Build an evidence-backed **Atlas** before deep prose. The Atlas owns technical repo/service/flow maps. Domain docs own business language, invariants, and contracts. Use `docs-source-of-truth` for glossary, context-map, domain docs, and ADR rules.
+Build an evidence-backed **Atlas** before deep prose. The Atlas owns technical repo/service/flow maps. Domain language, invariants, contracts, and ADRs belong to whatever authority the target project defines; if that authority is unclear, report it instead of writing permanent domain docs.
 
 ## Start contract
 
@@ -34,12 +34,11 @@ If the prompt names a docs path but inspection does not show it owns global docs
 
 ## Authority model
 
-| Fact type | Owner |
+| Fact type | Default handling |
 |---|---|
-| Cross-repo relationships, repo roles, runtime flows, public surfaces | Global Atlas |
-| Repo-local domain language, standards, invariants, ADRs | Per-repo docs |
-| Bounded-context relationships | `docs/context-map.md` or `.mdx` |
-| Business terms | `docs/glossary.md` or existing `CONTEXT.md` |
+| Cross-repo relationships, repo roles, runtime flows, public surfaces | Global Atlas when a global docs workspace exists |
+| Repo-local technical facts | Per-repo Atlas or implementation docs |
+| Domain language, invariants, contracts, ADRs | Project-defined authority; do not assume Atlas owns them |
 | Exploratory findings and uncertain traces | `docs/research/<date>-<topic>.md` only inside an explicit docs root; otherwise inline report or user-provided temp path |
 
 Never make one service repo the source of truth for the whole system. If global scope is clear but no destination is provided, ask where the global docs workspace lives.
