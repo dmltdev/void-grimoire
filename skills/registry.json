@@ -1,8 +1,8 @@
 {
   "domains": {
     "void-grimoire": {
-      "description": "Meta skills — prompt expansion, self-learning, skill optimization, multi-agent orchestration",
-      "skills": ["expand-prompt", "learn-correction", "autoresearch", "skill-forge", "infer-patterns", "strategic-compact", "orchestrate-chaos", "orchestrate-subagents", "mission-control", "babysitter-orchestrator", "unslop", "unslop-design"],
+      "description": "Meta skills — prompt expansion, self-learning, skill optimization, context discipline, and slop cleanup",
+      "skills": ["expand-prompt", "learn-correction", "autoresearch", "skill-forge", "infer-patterns", "strategic-compact", "unslop", "unslop-design"],
       "docs": []
     },
     "tools": {
@@ -21,8 +21,8 @@
       "docs": []
     },
     "workflow": {
-      "description": "Lightweight workflow helpers — requirements validation, session journaling, usage feedback",
-      "skills": ["verify-requirements", "session-summary", "session-usage-summary", "session-friction", "quick-recap", "grill-with-docs", "human-typed-plan", "docs-source-of-truth", "atlas-research", "ideal-example-clone", "refactor-transaction", "invariant-hunter", "failure-memory-compiler", "audio-plan", "audio-recap"],
+      "description": "Lightweight workflow helpers — session journaling, human-owned plans, examples, refactor discipline, failure memory, and TTS artifacts",
+      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap"],
       "docs": []
     },
     "git": {
@@ -33,11 +33,6 @@
     "npm": {
       "description": "NPM package management and publishing safety",
       "skills": ["enforce-release-safety"],
-      "docs": []
-    },
-    "concilium": {
-      "description": "Multi-agent code review — parallel quality lenses (correctness, security, maintainability, scalability) plus evidence-gated self-correction, pragmatic and non-blocking",
-      "skills": ["convene-concilium", "verify-and-correct"],
       "docs": []
     }
   }

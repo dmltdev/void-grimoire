@@ -33,18 +33,17 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-44 skills across 8 domains, plus a 10-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+34 skills across 7 domains, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, orchestrate-chaos, orchestrate-subagents, mission-control, babysitter-orchestrator, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, CHAOS multi-agent dispatch (plain + babysat mode), minimal in-session subagent orchestration, mission-control coordination, babysitter playbook, code slop cleanup with agent-instruction memory, product UI unslopping |
+| **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, code slop cleanup with agent-instruction memory, and product UI unslopping |
 | **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-chrome-devtools-mcp, using-elevenlabs-tts | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp, and ElevenLabs TTS |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | verify-requirements, session-summary, session-usage-summary, session-friction, quick-recap, grill-with-docs, human-typed-plan, docs-source-of-truth, atlas-research, ideal-example-clone, refactor-transaction, invariant-hunter, failure-memory-compiler, audio-plan, audio-recap | Requirements validation, session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, docs-aware plan grilling, human-typed implementation planning, DDD-shaped docs-as-source-of-truth workflow, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, invariant-driven test design, operational failure memory, and TTS-ready plan/recap scripts |
+| **workflow** | session-summary, session-usage-summary, session-friction, quick-recap, human-typed-plan, atlas-research, ideal-example-clone, refactor-transaction, failure-memory-compiler, audio-plan, audio-recap | Session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, human-owned implementation planning, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, operational failure memory, and TTS-ready plan/recap scripts |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **git** | enforce-git-safety, commit-push-pr, create-pr | Block destructive git ops; commit/push/PR helper; concise risk-sized PR body rubric |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
-| **concilium** | convene-concilium, verify-and-correct | Multi-lens parallel code review (correctness, security, maintainability, scalability) plus evidence-gated self-correction. Pragmatic, non-blocking. |
 
 ### Agents
 
@@ -53,19 +52,6 @@ Read-on-demand subagents under `agents/`:
 - **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
 - **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
 - **`blast-radius-cartographer`** — read-only impact mapper for implementation planning. Produces DOCS/CODE/TESTS/MEMORY impact maps with evidence anchors before edits.
-- **`herdr-orchestrator`** — coordinator for multi-pane parallel work in a herdr workspace. Decomposes goals, spawns worker Claude / omp / adhd instances in sibling panes, monitors, aggregates. Driven by `orchestrate-chaos`.
-- **`babysitter-orchestrator`** — context/session babysitter for persistent orchestrators. Watches phase drift, context decay, verifier failures, and prompt quality; writes verifier/relaunch prompts into a `.chaos/interventions.md` audit trail. Spawned as a sibling pane by babysat `orchestrate-chaos`.
-
-The **concilium** — four pragmatic, read-only reviewer lenses dispatched in parallel by `convene-concilium`, each citing the shared `quality-dimensions.md` bar:
-
-- **`dev-in-test`** — correctness, edge cases, silent failures, test presence/quality.
-- **`dev-in-security`** — secrets, injection, authz, unsafe sinks, dependency risk (OWASP-class).
-- **`dev-in-maintainability`** — readability, type design, documentation, code-standards (one folded lens).
-- **`dev-in-scalability`** — performance hot paths, data-access patterns, resource/cost, concurrency.
-
-And the verifier that proves work instead of judging it:
-
-- **`adversarial-verifier`** — evidence-gated QA. Proves a change works by *running* it (tests, app/CLI, lint) and citing the output; refuses to PASS without execution. Driven by `verify-and-correct` in a bounded verify → fix → re-verify → escalate cycle.
 
 ### Rules
 
@@ -94,7 +80,7 @@ Composition still works:
 
 ## What This Library Is Not
 
-It deliberately does **not** enforce workflows by default. Orchestration skills are opt-in control-plane helpers; they do not create startup hooks, mandatory gates, or hidden state.
+It deliberately does **not** enforce workflows by default. Agentic SDLC orchestration lives outside this plugin; Void Grimoire stays a utility/helper library with no mandatory gates or hidden state.
 
 Most design/audit/polish skills still live in the Impeccable plugin and belong with their authors. `unslop-design` is the narrow exception: a product-workflow redesign helper for rough SaaS/admin screens.
 
