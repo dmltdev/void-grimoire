@@ -2,9 +2,9 @@
 
 ![Void Grimoire](void-grimoire.webp)
 
-An additive Claude Code library — skills, agents, and rules. Covers what generic workflows don't: session journaling, learned-correction persistence, prompt expansion, context discipline (token budgets, strategic `/compact`), TypeScript/web rule baselines, plus a handful of safety and lookup helpers.
+Utility skills, agents, and rules for Claude Code. It covers operational gaps around session journaling, learned-correction persistence, prompt expansion, context discipline, TypeScript/web baselines, safety checks, lookup helpers, and small workflow assists.
 
-This is **not** a workflow framework. It does not enforce phases, gate your work, or auto-inject context. Skills load on demand via the `Skill` tool. Use what you need, ignore the rest.
+Boundary: this is a utility library, not a product-delivery framework. It does not enforce phases, own acceptance criteria, gate implementation, or maintain hidden project state. Skills load on demand via the `Skill` tool. Use the helper that matches the moment; ignore the rest.
 
 ## Installation
 
@@ -78,11 +78,13 @@ Composition still works:
 
 `skills/registry.json` is a domain → skills catalog used for documentation. Claude Code loads relevant skills automatically via their descriptions; invoke any skill by name when you want it explicitly.
 
-## What This Library Is Not
+## Boundaries
 
-It deliberately does **not** enforce workflows by default. Agentic SDLC orchestration lives outside this plugin; Void Grimoire stays a utility/helper library with no mandatory gates or hidden state.
+Void Grimoire deliberately stays small and additive:
 
-Most design/audit/polish skills still live in the Impeccable plugin and belong with their authors. `unslop-design` is the narrow exception: a product-workflow redesign helper for rough SaaS/admin screens.
+- **Utilities, not orchestration.** It helps with prompts, sessions, docs lookup, safety checks, cleanup, and tool use; it does not run a full SDLC.
+- **On-demand, not ambient.** No startup hook, no hidden `.void-grimoire/` state directory, no mandatory gate flow.
+- **Project-owned truth.** Your repo's tests, docs, schemas, issues, and agent instructions remain authoritative. These skills help find, update, or summarize them; they do not replace them.
 
 ## Architecture
 
