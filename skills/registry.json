@@ -27,7 +27,7 @@
     },
     "git": {
       "description": "Git safety and commit/push/PR workflow",
-      "skills": ["enforce-git-safety", "commit-push-pr", "create-pr"],
+      "skills": ["enforce-git-safety", "git-workflow", "git-active-remote", "git-commit", "git-branch-policy", "git-push", "git-pr", "gh-workflow", "glab-workflow"],
       "docs": []
     },
     "npm": {
