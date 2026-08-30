@@ -33,7 +33,7 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-42 skills across 7 domains, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+40 skills across 7 domains, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -42,7 +42,7 @@ Replace `session-summary` with any skill name from the list below.
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
 | **workflow** | session-summary, session-usage-summary, session-friction, quick-recap, human-typed-plan, atlas-research, ideal-example-clone, refactor-transaction, failure-memory-compiler, audio-plan, audio-recap | Session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, human-owned implementation planning, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, operational failure memory, and TTS-ready plan/recap scripts |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
-| **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow, commit-push-pr, create-pr | Destructive git safety; explicit-intent routing; active-remote resolution; commitlinted commits; branch-policy and pre-push gates; GitHub/GitLab CLI adapters; concise PR/MR descriptions; legacy compatibility routers |
+| **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow | Destructive git safety; explicit-intent routing; active-remote resolution; commitlinted commits; branch-policy and pre-push gates; GitHub/GitLab CLI adapters; concise PR/MR descriptions |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
 
 ### Agents

@@ -66,4 +66,4 @@ End with:
 | Opening a PR after push because it is convenient. | Stop and report pushed branch; wait for explicit PR request. |
 | Creating a branch during push policy without permission. | `git-branch-policy` classifies only; ask before branch mutation. |
 | Selecting `gh` because any remote is GitHub. | Resolve the active push remote with `git-active-remote`. |
-| Bundling old `commit-push-pr` behavior. | Route old entrypoints through this skill. |
+| Bundling commit, push, and PR into one automatic flow. | Route each explicit action to its narrow skill. |

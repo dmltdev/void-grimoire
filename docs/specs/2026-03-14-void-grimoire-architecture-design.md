@@ -44,7 +44,14 @@ void-grimoire/
 │       ├── debug-systematically/
 │       │
 │       ├── enforce-git-safety/
-│       ├── commit-push-pr/
+│       ├── git-workflow/
+│       ├── git-active-remote/
+│       ├── git-commit/
+│       ├── git-branch-policy/
+│       ├── git-push/
+│       ├── git-pr/
+│       ├── gh-workflow/
+│       ├── glab-workflow/
 │       ├── use-worktrees/
 │       ├── request-review/
 │       ├── receive-review/
@@ -141,7 +148,7 @@ Supporting files (prompts, references, anti-pattern docs) live inside their resp
     "git": {
       "description": "Git workflow — commits, branches, PRs, reviews",
       "triggers": ["commit", "push", "PR", "pull request", "branch", "merge", "review", "rebase"],
-      "skills": ["enforce-git-safety", "commit-push-pr", "use-worktrees", "request-review", "receive-review", "finish-branch"],
+      "skills": ["enforce-git-safety", "git-workflow", "git-active-remote", "git-commit", "git-branch-policy", "git-push", "git-pr", "gh-workflow", "glab-workflow", "use-worktrees", "request-review", "receive-review", "finish-branch"],
       "docs": []
     },
     "design": {
@@ -494,7 +501,14 @@ debug-systematically     → depends-on: [], chains-to: null, suggests: [develop
 
 # git domain
 enforce-git-safety       → depends-on: [], chains-to: null, suggests: []
-commit-push-pr           → depends-on: [], chains-to: null, suggests: [enforce-git-safety]
+git-workflow             → explicit-intent router for commit/push/PR flows
+git-active-remote        → active push remote and host resolution
+git-commit               → commitlinted local commits
+git-branch-policy        → branch push policy classification
+git-push                 → pre-push gates and explicit refspec push
+git-pr                   → concise PR/MR creation and description
+gh-workflow              → GitHub CLI adapter
+glab-workflow            → GitLab CLI adapter
 use-worktrees            → depends-on: [], chains-to: null, suggests: []
 request-review           → depends-on: [], chains-to: null, suggests: [enforce-git-safety]
 receive-review           → depends-on: [], chains-to: null, suggests: []
