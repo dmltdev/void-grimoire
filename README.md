@@ -33,14 +33,14 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-40 skills across 7 domains, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+41 skills across 7 domains, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
 | **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, code slop cleanup with agent-instruction memory, and product UI unslopping |
 | **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-chrome-devtools-mcp, using-elevenlabs-tts | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, chrome-devtools-mcp, and ElevenLabs TTS |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | session-summary, session-usage-summary, session-friction, quick-recap, human-typed-plan, atlas-research, ideal-example-clone, refactor-transaction, failure-memory-compiler, audio-plan, audio-recap | Session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, human-owned implementation planning, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, operational failure memory, and TTS-ready plan/recap scripts |
+| **workflow** | session-summary, session-usage-summary, session-friction, quick-recap, human-typed-plan, design-implementation, atlas-research, ideal-example-clone, refactor-transaction, failure-memory-compiler, audio-plan, audio-recap | Session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, human-owned implementation planning, repo-grounded approval-gated implementation design, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, operational failure memory, and TTS-ready plan/recap scripts |
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow | Destructive git safety; explicit-intent routing; active-remote resolution; commitlinted commits; branch-policy and pre-push gates; GitHub/GitLab CLI adapters; concise PR/MR descriptions |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
