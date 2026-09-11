@@ -22,12 +22,12 @@
     },
     "workflow": {
       "description": "Lightweight workflow helpers — session journaling, human-owned plans, examples, refactor discipline, failure memory, and TTS artifacts",
-      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap"],
+      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "design-implementation", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap"],
       "docs": []
     },
     "git": {
       "description": "Git safety and commit/push/PR workflow",
-      "skills": ["enforce-git-safety", "commit-push-pr", "create-pr"],
+      "skills": ["enforce-git-safety", "git-workflow", "git-active-remote", "git-commit", "git-branch-policy", "git-push", "git-pr", "gh-workflow", "glab-workflow"],
       "docs": []
     },
     "npm": {
