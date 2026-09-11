@@ -1,7 +1,7 @@
 ---
 name: enforce-release-safety
 domain: npm
-description: Release safety rules. INVOKE WHEN: yarn release, npm publish, release canary, release packages, publishing, skip checks, skip tests. NEVER skip checks or tests without explicit permission.
+description: Use when running npm or yarn releases, publishing packages, creating release canaries, or handling requests to skip release checks or tests.
 depends-on: []
 chains-to: null
 suggests: []
