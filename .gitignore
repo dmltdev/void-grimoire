@@ -55,12 +55,9 @@ dkms.conf
 *.dwo
 
 # local ai docs
-openspec
 docs/sessions
 docs/plans
 
-# lean-ctx cache
-.lean-ctx/
 
 # pi-crew
 .crew

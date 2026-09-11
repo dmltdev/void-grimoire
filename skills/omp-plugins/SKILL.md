@@ -87,7 +87,7 @@ omp copies a local marketplace source with `fs.cp`, not gitignore semantics. Aft
 
 ```bash
 CACHE="$HOME/.omp/plugins/cache/plugins/void-grimoire-dev___void-grimoire___X.Y.Z"
-rm -rf "$CACHE/.crew" "$CACHE/.lean-ctx" "$CACHE/openspec" "$CACHE/docs/plans" "$CACHE/docs/sessions"
+rm -rf "$CACHE/.crew" "$CACHE/docs/plans" "$CACHE/docs/sessions"
 ```
 
 Only delete inside the versioned plugin cache path.
@@ -110,4 +110,4 @@ Then search for the old version under `.claude-plugin`, `.omp-plugin`, `README.m
 | `discover` shows old version | Marketplace still points at stale remote cache | Remove and re-add marketplace from `./.` |
 | `upgrade --dry-run` says old version | Dry-run prints planned update without changing local catalog source | Repoint marketplace, then install with `--force` |
 | `doctor` reports `plugin:void-grimoire Missing package.json` | Stale npm dependency entry | Run `omp plugin uninstall void-grimoire`, or remove it from `~/.omp/plugins/package.json` |
-| Installed cache includes `.crew` / `.lean-ctx` | Local copy ignores gitignore | Prune only inside versioned cache |
+| Installed cache includes `.crew` | Local copy ignores gitignore | Prune only inside versioned cache |
