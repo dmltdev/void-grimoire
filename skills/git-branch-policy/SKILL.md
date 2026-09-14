@@ -30,10 +30,10 @@ requires feature branch
 
 Meanings:
 
-- `allow push` — Current branch and repo policy allow a normal non-force push after checks pass.
-- `block push` — Push would violate a known rule or target a protected branch in a way the agent must not perform.
-- `ask user` — Policy cannot be resolved from repo evidence and the next action would affect a shared/default/protected branch.
-- `requires feature branch` — Repo policy or safety requires branch work before pushing; caller must stop unless branch creation/switching was explicitly authorized.
+- `allow push` - Current branch and repo policy allow a normal non-force push after checks pass.
+- `block push` - Push would violate a known rule or target a protected branch in a way the agent must not perform.
+- `ask user` - Policy cannot be resolved from repo evidence and the next action would affect a shared/default/protected branch.
+- `requires feature branch` - Repo policy or safety requires branch work before pushing; caller must stop unless branch creation/switching was explicitly authorized.
 
 ## Evidence to inspect
 

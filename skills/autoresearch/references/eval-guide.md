@@ -17,7 +17,7 @@ Why: Scales compound variability. If you have 4 evals scored 1-7, your total sco
 ### Text/copy skills (newsletters, tweets, emails, landing pages)
 
 **Bad evals:**
-- "Is the writing good?" (too vague — what's "good"?)
+- "Is the writing good?" (too vague - what's "good"?)
 - "Rate the engagement potential 1-10" (scale = unreliable)
 - "Does it sound like a human?" (subjective, inconsistent scoring)
 
@@ -37,7 +37,7 @@ Why: Scales compound variability. If you have 4 evals scored 1-7, your total sco
 **Good evals:**
 - "Is all text in the image legible with no truncated or overlapping words?" (binary, specific)
 - "Does the color palette use only soft/pastel tones with no neon, bright red, or high-saturation colors?" (binary, checkable)
-- "Is the layout linear — flowing either left-to-right or top-to-bottom with no scattered elements?" (binary, structural)
+- "Is the layout linear - flowing either left-to-right or top-to-bottom with no scattered elements?" (binary, structural)
 - "Is the image free of numbered steps, ordinals, or sequential numbering?" (binary, specific)
 
 ### Code/technical skills (code generation, configs, scripts)
@@ -47,7 +47,7 @@ Why: Scales compound variability. If you have 4 evals scored 1-7, your total sco
 - "Does it follow best practices?" (vague, which best practices?)
 
 **Good evals:**
-- "Does the code run without errors?" (binary, testable — actually execute it)
+- "Does the code run without errors?" (binary, testable - actually execute it)
 - "Does the output contain zero TODO or placeholder comments?" (binary, greppable)
 - "Are all function and variable names descriptive (no single-letter names except loop counters)?" (binary, checkable)
 - "Does the code include error handling for all external calls (API, file I/O, network)?" (binary, structural)
@@ -69,22 +69,22 @@ Why: Scales compound variability. If you have 4 evals scored 1-7, your total sco
 ## common mistakes
 
 ### 1. Too many evals
-More than 6 evals and the skill starts gaming them — it optimizes for passing the test instead of producing good output. Like a student who memorizes answers without understanding the material.
+More than 6 evals and the skill starts gaming them - it optimizes for passing the test instead of producing good output. Like a student who memorizes answers without understanding the material.
 
 **Fix:** Pick the 3-6 checks that matter most. If everything passes those, the output is probably good.
 
 ### 2. Too narrow/rigid
-"Must contain exactly 3 bullet points" or "Must use the word 'because' at least twice" — these create skills that technically pass but produce weird, stilted output.
+"Must contain exactly 3 bullet points" or "Must use the word 'because' at least twice" - these create skills that technically pass but produce weird, stilted output.
 
 **Fix:** Evals should check for qualities you care about, not arbitrary structural constraints.
 
 ### 3. Overlapping evals
-If eval 1 is "Is the text grammatically correct?" and eval 4 is "Are there any spelling errors?" — these overlap. A grammar fail often includes spelling. You're double-counting.
+If eval 1 is "Is the text grammatically correct?" and eval 4 is "Are there any spelling errors?" - these overlap. A grammar fail often includes spelling. You're double-counting.
 
 **Fix:** Each eval should test something distinct.
 
 ### 4. Unmeasurable by an agent
-"Would a human find this engaging?" — an agent can't reliably answer this. It'll say "yes" almost every time.
+"Would a human find this engaging?" - an agent can't reliably answer this. It'll say "yes" almost every time.
 
 **Fix:** Translate subjective qualities into observable signals. "Engaging" might mean: "Does the first sentence contain a specific claim, story, or question (not a generic statement)?"
 
@@ -107,8 +107,8 @@ Copy this for each eval:
 ```
 EVAL [N]: [Short name]
 Question: [Yes/no question]
-Pass: [What "yes" looks like — one sentence, specific]
-Fail: [What triggers "no" — one sentence, specific]
+Pass: [What "yes" looks like - one sentence, specific]
+Fail: [What triggers "no" - one sentence, specific]
 ```
 
 Example:

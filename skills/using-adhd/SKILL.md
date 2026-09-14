@@ -1,7 +1,7 @@
 ---
 name: using-adhd
 domain: tools
-description: Use when invoking the external `adhd` CLI (UditAkhourii/adhd) for parallel divergent brainstorming — N isolated frames, generator/critic split, pruning to top survivors. Covers install check, flag surface (`--frames`, `--ideas`, `--top`), and fallbacks when adhd is unavailable (suggest local brainstorming/research skills, not silent substitution).
+description: Use when invoking the external `adhd` CLI (UditAkhourii/adhd) for parallel divergent brainstorming - N isolated frames, generator/critic split, pruning to top survivors. Covers install check, flag surface (`--frames`, `--ideas`, `--top`), and fallbacks when adhd is unavailable (suggest local brainstorming/research skills, not silent substitution).
 depends-on: []
 chains-to: null
 suggests: []
@@ -26,8 +26,8 @@ If `adhd` is missing, do **not** silently substitute. Tell the user explicitly a
    # or
    npm install -g adhd-agent
    ```
-2. Use a locally available alternative — check loaded skills for one of: `brainstorming`, `adhd` (local), `superpowers:brainstorming`, or any `research`/`analysis` skill in the current session. Name the candidates back to the user; let them pick.
-3. Skip divergent thinking and proceed straight to convergent execution (risky — premature convergence is exactly what adhd guards against).
+2. Use a locally available alternative - check loaded skills for one of: `brainstorming`, `adhd` (local), `superpowers:brainstorming`, or any `research`/`analysis` skill in the current session. Name the candidates back to the user; let them pick.
+3. Skip divergent thinking and proceed straight to convergent execution (risky - premature convergence is exactly what adhd guards against).
 
 ## Invocation
 
@@ -38,9 +38,9 @@ adhd "name this function" --frames 3 --ideas 8 --top 2
 
 Common flags (verify against current `adhd --help`):
 
-- `--frames N` — number of structurally different cognitive frames to fan out under.
-- `--ideas N` — ideas generated per frame.
-- `--top N` — how many survivors to deepen after pruning.
+- `--frames N` - number of structurally different cognitive frames to fan out under.
+- `--ideas N` - ideas generated per frame.
+- `--top N` - how many survivors to deepen after pruning.
 
 ## When to use adhd (vs other tools)
 
@@ -56,7 +56,7 @@ herdr wait agent-status "$NEW_PANE" --status done --timeout 180000
 herdr pane read "$NEW_PANE" --source recent --lines 200
 ```
 
-Treat the pane's final output as input to the next phase. Do not let an omp/codex worker run in parallel against the same question — that defeats the generator/critic separation.
+Treat the pane's final output as input to the next phase. Do not let an omp/codex worker run in parallel against the same question - that defeats the generator/critic separation.
 
 ## Notes
 

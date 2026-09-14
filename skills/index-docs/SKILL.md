@@ -1,7 +1,7 @@
 ---
 name: index-docs
 domain: docs
-description: Use when the user wants to index documentation for qmd search — fetches and indexes URLs or local paths
+description: Use when the user wants to index documentation for qmd search - fetches and indexes URLs or local paths
 depends-on: []
 chains-to: null
 suggests: []

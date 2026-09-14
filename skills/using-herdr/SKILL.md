@@ -1,13 +1,13 @@
 ---
 name: herdr
-description: "Control herdr from inside it. Manage workspaces and tabs, split panes, spawn agents, read output, and wait for state changes — all via CLI commands that talk to the running herdr instance over a local unix socket. Use when running inside herdr (HERDR_ENV=1)."
+description: "Control herdr from inside it. Manage workspaces and tabs, split panes, spawn agents, read output, and wait for state changes - all via CLI commands that talk to the running herdr instance over a local unix socket. Use when running inside herdr (HERDR_ENV=1)."
 ---
 
-# herdr — agent skill
+# herdr - agent skill
 
 before using this skill, check that `HERDR_ENV=1`. if it is not set to `1`, say you are not running inside a herdr-managed pane and stop. do not inspect or control the focused herdr pane from outside herdr.
 
-you are running inside herdr, a terminal-native agent multiplexer. herdr gives you workspaces, tabs, and panes — each pane is a real terminal with its own shell, agent, server, or log stream — and you can control all of it from the cli.
+you are running inside herdr, a terminal-native agent multiplexer. herdr gives you workspaces, tabs, and panes - each pane is a real terminal with its own shell, agent, server, or log stream - and you can control all of it from the cli.
 
 this means you can:
 
@@ -25,21 +25,21 @@ if you need the raw protocol or full api reference, read the [socket api docs](h
 
 ## concepts
 
-**workspaces** are project contexts. each workspace has one or more tabs. unless manually renamed, a workspace's label follows the first tab's root pane — usually the repo name, otherwise the root pane's current folder name.
+**workspaces** are project contexts. each workspace has one or more tabs. unless manually renamed, a workspace's label follows the first tab's root pane - usually the repo name, otherwise the root pane's current folder name.
 
 **tabs** are subcontexts inside a workspace. each tab has one or more panes.
 
-**panes** are terminal splits inside a tab. each pane runs its own process — a shell, an agent, a server, anything.
+**panes** are terminal splits inside a tab. each pane runs its own process - a shell, an agent, a server, anything.
 
 **agent status** is detected automatically by herdr. the api exposes one public field for it:
 
-- `agent_status` — `idle`, `working`, `blocked`, `done`, `unknown`
+- `agent_status` - `idle`, `working`, `blocked`, `done`, `unknown`
 
 `done` means the agent finished, but you have not looked at that finished pane yet.
 
 plain shells still exist as panes, but herdr's sidebar agent section intentionally focuses on detected agents rather than listing every shell.
 
-**ids** — workspace ids look like `1`, `2`. tab ids look like `1:1`, `1:2`, `2:1`. pane ids look like `1-1`, `1-2`, `2-1`. these are compact public ids for the current live session.
+**ids** - workspace ids look like `1`, `2`. tab ids look like `1:1`, `1:2`, `2:1`. pane ids look like `1-1`, `1-2`, `2-1`. these are compact public ids for the current live session.
 
 important: ids can compact when tabs, panes, or workspaces are closed. do not treat them as durable ids. re-read ids from `workspace list`, `tab list`, `pane list`, or create/split responses when you need a current id. do not guess that an older `1-3` is still the same pane later.
 

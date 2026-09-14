@@ -1,7 +1,7 @@
 ---
 name: expand-prompt
 domain: void-grimoire
-description: Use when a user request is terse or ambiguous — expands it with domain context, docs, and learned rules before proceeding
+description: Use when a user request is terse or ambiguous - expands it with domain context, docs, and learned rules before proceeding
 depends-on: [lookup-docs]
 chains-to: null
 suggests: []

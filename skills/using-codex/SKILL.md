@@ -9,7 +9,7 @@ suggests: []
 
 # using-codex
 
-Codex CLI is OpenAI's official terminal coding agent, billed via a ChatGPT subscription (or API key). In CHAOS it is the **recommended** model layer underneath `omp` (or `pi`), but never the assumed one — the user picks the model. It can also be invoked standalone.
+Codex CLI is OpenAI's official terminal coding agent, billed via a ChatGPT subscription (or API key). In CHAOS it is the **recommended** model layer underneath `omp` (or `pi`), but never the assumed one - the user picks the model. It can also be invoked standalone.
 
 ## Preflight
 
@@ -45,4 +45,4 @@ Never hardcode a model. Ask the user which Codex model to use, or use whatever C
 ## Notes
 
 - Codex CLI surface changes often. Always re-read `codex --help` at session start rather than relying on memory.
-- Authentication is per-machine. If a worker pane fails to auth, the user must log in interactively — orchestrator cannot solve this for them.
+- Authentication is per-machine. If a worker pane fails to auth, the user must log in interactively - orchestrator cannot solve this for them.
