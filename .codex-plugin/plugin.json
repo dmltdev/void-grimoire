@@ -1,0 +1,38 @@
+{
+  "name": "void-grimoire",
+  "version": "3.0.2",
+  "description": "Additive coding-agent skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, context discipline, and TypeScript/web rule baselines",
+  "author": {
+    "name": "Dmytro L.",
+    "email": "dmltdev@proton.me"
+  },
+  "homepage": "https://github.com/dmltdev/void-grimoire",
+  "repository": "https://github.com/dmltdev/void-grimoire",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "session-summary",
+    "self-learning",
+    "prompt-expansion",
+    "documentation",
+    "monorepo"
+  ],
+  "skills": [
+    "./skills/",
+    "./.agents/skills/"
+  ],
+  "interface": {
+    "displayName": "Void Grimoire",
+    "shortDescription": "Additive workflow and utility skills",
+    "longDescription": "Utility skills, agents, and rules for coding agents: session journaling, learned-correction persistence, prompt expansion, context discipline, TypeScript/web baselines, safety checks, lookup helpers, and small workflow assists.",
+    "developerName": "Dmytro L.",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/dmltdev/void-grimoire",
+    "defaultPrompt": [
+      "Summarize this session before compacting",
+      "Expand this terse implementation request",
+      "Reinstall Void Grimoire skills locally"
+    ]
+  }
+}

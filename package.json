@@ -1,0 +1,22 @@
+{
+  "name": "void-grimoire",
+  "version": "3.0.2",
+  "description": "Utility skills, agents, and rules for coding agents",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/dmltdev/void-grimoire",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmltdev/void-grimoire.git"
+  },
+  "keywords": [
+    "pi-package",
+    "skills",
+    "void-grimoire",
+    "session-summary",
+    "prompt-expansion"
+  ],
+  "pi": {
+    "skills": ["skills", ".agents/skills"]
+  }
+}

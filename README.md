@@ -33,7 +33,7 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-42 skills across 7 domains, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+43 skills across 7 domains, one repo-local operational skill, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -57,6 +57,10 @@ Read-on-demand subagents under `agents/`:
 
 Plugin-local `rules/` reference tree under three buckets: `common/` (language-agnostic baselines), `typescript/` (TS/JS-specific guidance with the matching common baseline inlined), and `web/` (frontend/web-specific guidance with the same flattening). Read on demand; never auto-injected.
 
+### Repo-local operational skill
+
+`.agents/skills/void-install-skills` reinstalls the local plugin into supported harnesses after skill or manifest changes. `.claude/skills` is a symlink to `.agents/skills` so Claude Code sees the same repo-local operational skills.
+
 ### The Headline Skills
 
 - **`session-summary`** — Write a session journal: TL;DR, decisions with trade-offs, accomplishments, unfinished work, files touched. Use before `/compact` or at session end.
@@ -77,6 +81,8 @@ Composition still works:
 - `suggests` — soft recommendation, agent checks if relevant
 
 `skills/registry.json` is a domain → skills catalog used for documentation. Claude Code loads relevant skills automatically via their descriptions; invoke any skill by name when you want it explicitly.
+
+Repo-local operational skills live in `.agents/skills`; `.claude/skills` points there by symlink.
 
 ## Boundaries
 
