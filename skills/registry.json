@@ -6,8 +6,8 @@
       "docs": []
     },
     "tools": {
-      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, omp plugin installs, adhd, herdr, agent-browser, chrome-devtools-mcp.",
-      "skills": ["using-herdr", "using-codex", "using-omp", "omp-plugins", "using-adhd", "using-agent-browser", "using-chrome-devtools-mcp", "using-elevenlabs-tts"],
+      "description": "External CLI tool wrappers — preflight checks, invocation patterns, fallbacks. Codex, omp, omp plugin installs, adhd, herdr, agent-browser, ElevenLabs TTS, and OpenResearch.",
+      "skills": ["using-herdr", "using-codex", "using-omp", "omp-plugins", "using-adhd", "using-agent-browser", "using-elevenlabs-tts", "using-orx"],
       "docs": []
     },
     "qa": {
@@ -22,7 +22,7 @@
     },
     "workflow": {
       "description": "Lightweight workflow helpers — session journaling, human-owned plans, examples, refactor discipline, failure memory, long-doc briefs, peer communication, and TTS artifacts",
-      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "design-implementation", "engineering-recap", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap", "brief", "peer-communication", "document-adr"],
+      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "design-implementation", "engineering-recap", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap", "brief", "peer-communication", "document-ideas", "document-adr"],
       "docs": []
     },
     "git": {

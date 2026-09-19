@@ -4,7 +4,7 @@ domain: qa
 description: Use when a code change touches a web UI and needs visual evidence it works against acceptance criteria - bugfix, feature, refactor, copy change. Use when the user asks to "verify in the browser", "screenshot the change", "prove it works", or attaches a UI ticket/PR. Use before claiming a UI task is done. Do not use for backend-only changes, CLI/TUI verification (use /verify), or writing durable e2e regression tests in a project that already owns its e2e suite.
 depends-on: []
 chains-to: null
-suggests: [using-agent-browser, using-chrome-devtools-mcp, lookup-docs]
+suggests: [using-agent-browser, lookup-docs]
 ---
 
 # test-with-browser
@@ -30,9 +30,8 @@ Drive a real browser to produce **visual evidence** that a change satisfies its 
 Probe in order. Announce the picked tool; never silently degrade.
 
 1. **agent-browser** - if `command -v agent-browser` succeeds. Default. Fast, accessibility-tree based, parallel-safe, low token cost. See `using-agent-browser`.
-2. **chrome-devtools-mcp** - if the `mcp__plugin_chrome-devtools-mcp_chrome-devtools__*` tool family is loaded in this session. Reach for it when you need DevTools-grade diagnostics: performance traces, heap snapshots, deeper network/console inspection. See `using-chrome-devtools-mcp`.
-3. **Project Playwright** - *only if* the project already owns Playwright: `package.json` lists `@playwright/test`, OR `playwright.config.{ts,js,mjs}` exists, OR an `e2e/` / `tests/e2e/` dir exists. In that case, **add or extend a spec matching the project's existing convention and run it**. Never scaffold Playwright into a project that doesn't have it. Playwright MCP is unfavored - do not reach for it.
-4. **None available** - stop. Report what's missing. Suggest the user install agent-browser (https://github.com/vercel-labs/agent-browser). Do not fall back to ad-hoc curl/headless tricks.
+2. **Project Playwright** - *only if* the project already owns Playwright: `package.json` lists `@playwright/test`, OR `playwright.config.{ts,js,mjs}` exists, OR an `e2e/` / `tests/e2e/` dir exists. In that case, **add or extend a spec matching the project's existing convention and run it**. Never scaffold Playwright into a project that doesn't have it. Playwright MCP is unfavored - do not reach for it.
+3. **None available** - stop. Report what's missing. Suggest the user install agent-browser (https://github.com/vercel-labs/agent-browser). Do not fall back to ad-hoc curl/headless tricks.
 
 ## Hard rules
 
