@@ -9,11 +9,8 @@
     {
       "name": "void-grimoire",
       "description": "Additive Claude Code skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, context discipline, and TypeScript/web rule baselines",
-      "version": "3.1.0",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/dmltdev/void-grimoire.git"
-      },
+      "version": "3.3.1",
+      "source": "./",
       "author": {
         "name": "Dmytro L.",
         "email": "dmltdev@proton.me"

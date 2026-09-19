@@ -66,6 +66,7 @@ Plugin-local `rules/` reference tree under three buckets: `common/` (language-ag
 - **`session-summary`** — Write a session journal: TL;DR, decisions with trade-offs, accomplishments, unfinished work, files touched. Use before `/compact` or at session end.
 - **`session-usage-summary`** — Retrospective on the human-AI loop in this session. Scores spec clarity, decision ownership, verification depth, and correction loops.
 - **`quick-recap`** — Adds the final red/yellow/green status-line convention for finished, pending, or blocked responses.
+- **`engineering-recap`**: Reports completed engineering work as Problem, Decision, Check, and Next; use it for delivery summaries and handoffs, not generic document briefs.
 - **`learn-correction`** — When you correct the AI ("don't mock the DB", "always use snake_case"), persists the correction to your project's `AGENTS.md` / `CLAUDE.md` so it survives future sessions.
 - **`expand-prompt`** — Turn a terse request ("add dark mode") into a structured intent: relevant docs, learned rules, decomposed sub-tasks. Requires explicit user approval before any action.
 - **`strategic-compact`** — Suggests manual `/compact` at phase boundaries (planning -> implementing -> verifying) so context survives the next phase rather than waiting for arbitrary auto-compaction.
