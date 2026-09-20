@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "skills": {
+    "atlas-research": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "2b7d8642a56c901c6a14bf85cf90b05f0b1557b9b9e657fb2a03fd4e8241a8d3"
+    },
+    "audio-plan": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "266980f6c0977b9d7713afb77d1ff548761ffc7e8452ae83e8d8d5982f498e8f"
+    },
+    "audio-recap": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "e277cf7e82697cefc8a749fc322d0f31d3e47a16475ae8d6d84d1230a9bf0122"
+    },
+    "autonomous": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "1a786bf935f87dfb4e07fbc3f15e389ebb68457a022d9de7705090e17e149d6d"
+    },
+    "autoresearch": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "e8f9e43a768f0e06244c38bdf2cb1f7940450395def9ededff1c5db7d5835b46"
+    },
+    "brief": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "0994c889e2f5b25719a44eadf8d814e7e5c12c46d68e7c04439b4629e64e9bfc"
+    },
+    "design-implementation": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "4de92080f914bd66db2da3dca8e5a84f87b3c09ed8a6c3dfebc9b8670f311c1c"
+    },
+    "document-adr": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "eccb01db6d7f34365adb40db445314c6fa73d3d746191d69c95e0d644b7f15ac"
+    },
+    "document-ideas": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "6537b1b106a9bc25f3aa3f3c50c3f38fde794e56437bfcb0d1a0c8b21387cf22"
+    },
+    "enforce-git-safety": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "d3c01785216824427294aa5e8333a265dcdbe6b8d0e680fb25c695073096ced4"
+    },
+    "enforce-release-safety": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "b1695c06fdf5c278c7b287192cd279f97e0f8e043aa5801008a08532728311a6"
+    },
+    "engineering-recap": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "e57337c31d64f330079a316bf93afff1f990140fa11315d64f80c146ad4763b1"
+    },
+    "expand-prompt": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "4f12b8378782d8584388510d0a2339d09e1a167790ffdf45e175f88eefaa19ae"
+    },
+    "failure-memory-compiler": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "2ed63bd06ff65a8c243c81439cb7acc14bba4661483361d0e3b7cacac3270ba6"
+    },
+    "five-reasons-why": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "aa2de871d33d691cee3957e2bc9dcd229aea2e6557a14b76f8f84b69bc40abbf"
+    },
+    "gh-workflow": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "1af9965b995358c4422cf0c245c02625aa53e2002fc9beda04514f1edc7287f9"
+    },
+    "git-active-remote": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "cf4d8c765d186ac6e4e1979cab0c22f4d01eaf367df9d4b7757d18a2c182b20c"
+    },
+    "git-branch-policy": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "5b0103ae1c30d67c21ead1b61a81383ace2625b3a2339255e5ea889400b51aca"
+    },
+    "git-commit": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "bff83609e237ba37a267bcced342d8771414b7878198d0ebc44776a35beef58e"
+    },
+    "git-pr": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "93b1bb63a7fadd0f922baff7828e609817b61224d28533c994c8a622ec38922a"
+    },
+    "git-push": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "e00995e287d403d3f574edd70d7f89c8d1379daad5b74d2365c97be2845d8e7a"
+    },
+    "git-workflow": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "0361340edc70c88efc01907c41cd68badf72479e634a962bb023de8fcfff4df7"
+    },
+    "glab-workflow": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "fb55c8bd1b7cbacb3cd0222194e8534bda766f2f26dcc8351890315e3edb16dd"
+    },
+    "herdr": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "0a652f35504bb38e7101deb62ba89de15ee210dcbad22191cd50a9ef479a7193"
+    },
+    "human-typed-plan": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "374ecb17528e1615bd4fbb2a84e2f9ff1fdd5847e9ced5e83b3b020bf04505ed"
+    },
+    "ideal-example-clone": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "20fdcd9e0963b65436eb0a0e2e9dca089f16c5e9dbab14901b891ad193da2c7e"
+    },
+    "index-docs": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "5386af0d2ffd6fb0afd55324660f3448deb729af4c6fad2d8d1a56d172e9be83"
+    },
+    "infer-patterns": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "87261da07d7f690700e3846d7aed0f5bdcaa71008d78f82ea64cb9d9a672add0"
+    },
+    "learn-correction": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "af34cc5bf48d491df62ce67714693d299367e7e24ecbea7d71db11eebc024ddf"
+    },
+    "lookup-docs": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "c9e6d4be4871ffc6e9c0d8e1a00b3d98534c31f6571d36db850bbc38ecab6347"
+    },
+    "omp-plugins": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "a94ccd28005cfffbed725212774ef20bd8a583a165c4bbf8fa6f3ca717d769c6"
+    },
+    "peer-communication": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "603dec64193578b6a3cd3ba4eaccb27c4afae7eb34989bfbdb348ce3b130f2a3"
+    },
+    "quick-recap": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "913639e2bfdde954a349a4b90584a8b6f34950a29db0719b8fbe2edf479a5384"
+    },
+    "refactor-transaction": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "dfd4a9b01688cd5da866af3fb3cb278a1611f421ef263ec5f06a88ded6b9984b"
+    },
+    "session-friction": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "ce6a80178caa546d1a5b00b6de2e274eda6f51f76151360054d7f65212ef63ed"
+    },
+    "session-summary": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "8bc4295aa8f775546cc60c7e7f756543eaa421dc6ecebedb8f2b2bd56538c65b"
+    },
+    "session-usage-summary": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "5e1f2adadf1eb2059dcb2293d511842dc0292280b1b7353580c214dc297007b1"
+    },
+    "skill-forge": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "68c4b4597081e77c1dc34f277728df64626c4878c7bec0b7631e43bfdafd6ed0"
+    },
+    "strategic-compact": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "049fcd5d44759d73c76008963207b6fa5fe82994f79690ab3459f8e0e24fc79d"
+    },
+    "test-with-browser": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "1ba5eaf36666ad3a7d2aff42a97b7a9c31bfb55c3cf660be5c73e8e1ff9d2e35"
+    },
+    "unslop": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "0c5cad07feceed38834334ecb704ac80f6b8c749fdee640db9b92efb030b71ec"
+    },
+    "unslop-design": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "101925c2cec333313ec430a2cb77efb949367f941077486f12c2aaba17eed32a"
+    },
+    "using-adhd": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "8e3b3e67927696149aeb5e128feac5027827824dfea55e5a87da2287ec3460a4"
+    },
+    "using-agent-browser": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "8a6312afdf214e5080c1a532a1e5dfe9bd11ac0b1a3870d3544fb2bfd3b5675f"
+    },
+    "using-codex": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "67e7cee6491a1820ea89efcf41ffb27e8f83963e30ca656b5587c9f42bb9e36c"
+    },
+    "using-elevenlabs-tts": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "cb2a976639147733413f0ae0dcd696bc7bd6435025cee887fde6af4326ec5fcc"
+    },
+    "using-omp": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "ba06a8ff0d7716a98d4772e45e27a5e169f302f320fa1ccbaf3ceed23f706181"
+    },
+    "using-orx": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "d9e228f9c1124b421bc251e2fa0e6ab1c72f17361d407f0ac7ab59a398a5929b"
+    },
+    "using-simple-english": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "ac0f8754f3f249754514cbd678406e14521a6b226d4d1ef7a51fdc273d76d1cb"
+    },
+    "void-install-skills": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "75057432d225aeb7059867d13788fa0c53e1dc876a06097d7eb559d3a47f4c06"
+    },
+    "what-if": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "2f2d34b5ad5e43835fc5d229c863bfcbe8da9466e2e1f20ffc7f7dbeab98ac34"
+    }
+  }
+}

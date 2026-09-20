@@ -22,7 +22,7 @@
     },
     "workflow": {
       "description": "Lightweight workflow helpers — session journaling, human-owned plans, task-scoped autonomous completion, examples, refactor discipline, failure memory, long-doc briefs, simple-English chat, peer communication, and TTS artifacts",
-      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "design-implementation", "autonomous", "engineering-recap", "use-simple-english", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap", "brief", "peer-communication", "document-ideas", "document-adr"],
+      "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "design-implementation", "autonomous", "engineering-recap", "using-simple-english", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap", "brief", "peer-communication", "document-ideas", "document-adr"],
       "docs": []
     },
     "thinking": {

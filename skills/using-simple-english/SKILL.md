@@ -1,9 +1,9 @@
 ---
-name: use-simple-english
+name: using-simple-english
 description: Use when the user asks for simple English, plain language, easier wording, less jargon, a clearer explanation, or easier-to-read assistant chat responses.
 ---
 
-# Use Simple English
+# Using Simple English
 
 Make assistant chat easy to understand without making the reader sound inexperienced or changing technical meaning.
 
