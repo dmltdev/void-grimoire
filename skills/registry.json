@@ -26,8 +26,8 @@
       "docs": []
     },
     "thinking": {
-      "description": "Focused reasoning tools for causal explanation, investigation, and decisions",
-      "skills": ["five-reasons-why"],
+      "description": "Focused reasoning tools for causal explanation, bounded scenario analysis, investigation, and decisions",
+      "skills": ["five-reasons-why", "what-if"],
       "docs": []
     },
     "git": {
