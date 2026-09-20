@@ -25,6 +25,11 @@
       "skills": ["session-summary", "session-usage-summary", "session-friction", "quick-recap", "human-typed-plan", "design-implementation", "engineering-recap", "use-simple-english", "atlas-research", "ideal-example-clone", "refactor-transaction", "failure-memory-compiler", "audio-plan", "audio-recap", "brief", "peer-communication", "document-ideas", "document-adr"],
       "docs": []
     },
+    "thinking": {
+      "description": "Focused reasoning tools for causal explanation, investigation, and decisions",
+      "skills": ["five-reasons-why"],
+      "docs": []
+    },
     "git": {
       "description": "Git safety and commit/push/PR workflow",
       "skills": ["enforce-git-safety", "git-workflow", "git-active-remote", "git-commit", "git-branch-policy", "git-push", "git-pr", "gh-workflow", "glab-workflow"],
