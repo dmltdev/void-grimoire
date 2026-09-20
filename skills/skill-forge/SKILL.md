@@ -49,7 +49,28 @@ Run at least one baseline unless the harness forbids subagents/completions or th
 
 If a baseline cannot run, state the concrete blocker and still write the scenarios. "Fast" is not a blocker. Do not pretend the skill was tested.
 
-### 2. Read local conventions
+### 2. Research existing candidates
+
+Before creating or materially revising a skill, search skills.sh from three angles:
+
+1. The exact concept or proposed skill name.
+2. An adjacent method that solves the same user problem.
+3. The strongest alternative with a meaningfully different boundary.
+
+Inspect up to three useful candidates. Do not pad the set when fewer useful candidates exist. For each inspected candidate, capture in working notes:
+
+- candidate name and source
+- reusable strength
+- failure risk or overreach
+- how the proposed skill will differ, or why an existing candidate should be reused instead
+
+Candidate research informs the contract; local repository conventions still control structure, metadata, and installation. Never copy a candidate blindly or claim the new skill is unique.
+
+If no useful candidate exists, record `No useful candidate found` and proceed. If skills.sh is unavailable, retry with a different query or direct candidate URL. If it remains unavailable, record the exact limitation and proceed without uniqueness claims.
+
+Skip this gate only for audit, test, or install work that does not change the skill contract.
+
+### 3. Read local conventions
 
 Before creating files, inspect this local set:
 
@@ -60,7 +81,7 @@ Before creating files, inspect this local set:
 
 Clone the local convention. Do not introduce a second convention because a generic guide used different names.
 
-### 3. Choose the narrow contract
+### 4. Choose the narrow contract
 
 Pick one primary failure class:
 
@@ -74,7 +95,7 @@ Pick one primary failure class:
 
 Do not use prohibition lists to shape output. Give the exact shape instead.
 
-### 4. Write frontmatter for discovery
+### 5. Write frontmatter for discovery
 
 Use the host repo's required keys. For void-grimoire, use only:
 
@@ -93,7 +114,7 @@ Rules:
 - Include concrete trigger terms from the target skill's domain. For skill-authoring skills, useful terms include `SKILL.md`, plugin, slash command, registry, prompt, verifier, TDD, pressure scenario, package, and install.
 - Keep marketing out.
 
-### 5. Write the body as an execution contract
+### 6. Write the body as an execution contract
 
 Keep the happy path in `SKILL.md`. Move bulky examples or command catalogs into `references/` only when they are too large and actually reused.
 
@@ -118,7 +139,7 @@ Use OMP-quality prompt rules:
 - Evidence before "done": cite observed validation, not intention.
 - Keep user comprehension as a floor: report the trade-off, not just the artifact.
 
-### 6. Install in one clean cutover
+### 7. Install in one clean cutover
 
 For a plugin skill addition, update every source of truth that lists skills:
 
@@ -129,7 +150,7 @@ For a plugin skill addition, update every source of truth that lists skills:
 
 Delete stale names if replacing a skill. Do not leave compatibility aliases by default.
 
-### 7. Verify
+### 8. Verify
 
 Run the narrowest checks that prove the installed skill is coherent:
 
@@ -174,6 +195,7 @@ The body must then require local convention lookup, pressure scenarios, exact ou
 |---|---|
 | User request is vague | Use fast grilling defaults; ask only load-bearing questions. |
 | Existing repo has strong skills | Clone structure and quality bar from the best local example. |
+| Creating or materially revising a skill | Inspect up to three useful skills.sh candidates before writing. |
 | Skill is too broad | Split by trigger or failure class. |
 | Skill body is long | Keep happy path; move bulky rare paths to `references/`. |
 | Verification is unclear | Define metadata, registry, link, placeholder, and pressure-scenario checks. |
@@ -187,6 +209,7 @@ The body must then require local convention lookup, pressure scenarios, exact ou
 | Description explains workflow. | Make description trigger-only. |
 | Writing principles without steps. | Convert each principle into an action, gate, or output field. |
 | Asking broad discovery questions first. | Inspect repo conventions, then ask one batch only if needed. |
+| Skipping external candidate research because local examples exist. | Research exact, adjacent, and differently bounded candidates; let local conventions control the final shape. |
 | Creating support files for ceremony. | Add support files only when they reduce loaded context or provide reusable machinery. |
 | Updating `SKILL.md` but not registry/README. | Install in one clean cutover. |
 | Claiming tests passed from review alone. | Run validation or state unverified paths plainly. |
