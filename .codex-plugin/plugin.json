@@ -1,6 +1,6 @@
 {
   "name": "void-grimoire",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "Additive coding-agent skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, context discipline, and TypeScript/web rule baselines",
   "author": {
     "name": "Dmytro L.",
@@ -32,7 +32,8 @@
     "defaultPrompt": [
       "Summarize this session before compacting",
       "Expand this terse implementation request",
-      "Reinstall Void Grimoire skills locally"
+      "Reinstall Void Grimoire skills locally",
+      "Onboard me to the Void Grimoire repository"
     ]
   }
 }

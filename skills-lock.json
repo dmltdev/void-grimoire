@@ -246,6 +246,11 @@
       "sourceType": "local",
       "computedHash": "ac0f8754f3f249754514cbd678406e14521a6b226d4d1ef7a51fdc273d76d1cb"
     },
+    "using-void-grimoire": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "7792961622ae56f96cd97991ca69aea25fe0f1976fdb1d8307b808da4a3c1831"
+    },
     "void-install-skills": {
       "source": ".",
       "sourceType": "local",

@@ -1,8 +1,8 @@
 {
   "domains": {
     "void-grimoire": {
-      "description": "Meta skills — prompt expansion, self-learning, skill optimization, context discipline, and slop cleanup",
-      "skills": ["expand-prompt", "learn-correction", "autoresearch", "skill-forge", "infer-patterns", "strategic-compact", "unslop", "unslop-design"],
+      "description": "Meta skills: plugin onboarding, prompt expansion, self-learning, skill optimization, context discipline, and slop cleanup",
+      "skills": ["using-void-grimoire", "expand-prompt", "learn-correction", "autoresearch", "skill-forge", "infer-patterns", "strategic-compact", "unslop", "unslop-design"],
       "docs": []
     },
     "tools": {

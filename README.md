@@ -33,11 +33,11 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-50 skills across 8 domains, one repo-local operational skill, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+51 skills across 8 domains, one repo-local operational skill, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, unslop, unslop-design | Prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, code slop cleanup with agent-instruction memory, and product UI unslopping |
+| **void-grimoire** | using-void-grimoire, expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, unslop, unslop-design | Repository onboarding and plugin lifecycle routing, prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, code slop cleanup with agent-instruction memory, and product UI unslopping |
 | **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-elevenlabs-tts, using-orx | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, ElevenLabs TTS, and OpenResearch |
 | **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
 | **workflow** | session-summary, session-usage-summary, session-friction, quick-recap, human-typed-plan, design-implementation, autonomous, engineering-recap, using-simple-english, atlas-research, ideal-example-clone, refactor-transaction, failure-memory-compiler, audio-plan, audio-recap, brief, peer-communication, document-ideas, document-adr | Session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, human-owned implementation planning, repo-grounded approval-gated implementation design, task-scoped autonomous completion, completed engineering recaps, simple-English chat responses, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, operational failure memory, TTS-ready plan/recap scripts, plain-language long-doc briefing, channel-aware peer communication, repository-local idea documentation, and convention-first Architecture Decision Records |
@@ -65,6 +65,7 @@ Plugin-local `rules/` reference tree under three buckets: `common/` (language-ag
 ### The Headline Skills
 
 - **`session-summary`** — Write a session journal: TL;DR, decisions with trade-offs, accomplishments, unfinished work, files touched. Use before `/compact` or at session end.
+- **`using-void-grimoire`**: Orient work in this repository, identify canonical sources, preserve the utility-library boundary, apply version policy, and route skill authoring and local installation to their owning skills.
 - **`session-usage-summary`** — Retrospective on the human-AI loop in this session. Scores spec clarity, decision ownership, verification depth, and correction loops.
 - **`quick-recap`** — Adds the final red/yellow/green status-line convention for finished, pending, or blocked responses.
 - **`engineering-recap`**: Reports completed engineering work as Problem, Decision, Check, and Next; use it for delivery summaries and handoffs, not generic document briefs.

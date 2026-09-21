@@ -27,9 +27,11 @@ Run from the repository root.
 ### 1. Read version sources
 
 ```bash
+jq -r '.version' package.json
 jq -r '.version' .claude-plugin/plugin.json
 jq -r '.plugins[0].version' .claude-plugin/marketplace.json
 jq -r '.plugins[0].version' .omp-plugin/marketplace.json
+jq -r '.version' .codex-plugin/plugin.json
 ```
 
 All values must match. If they do not match, stop and fix the manifests before installing.
@@ -57,14 +59,17 @@ Use `--copy` only when the user asks for copied skills instead of the default in
 
 ### 4. Install into Claude Code
 
-Claude Code plugin installation is slash-command driven. If the current harness can execute Claude Code slash commands, run:
+If `claude` is available, refresh the local marketplace and plugin:
 
-```text
-/plugin marketplace add /absolute/path/to/void-grimoire
-/plugin install void-grimoire@void-grimoire-dev
+```bash
+claude plugin marketplace list
+claude plugin marketplace remove void-grimoire-dev
+claude plugin marketplace add /absolute/path/to/void-grimoire
+claude plugin install void-grimoire@void-grimoire-dev
+claude plugin list
 ```
 
-If slash commands cannot be executed from the current harness, report Claude Code as requiring manual reinstall and provide the two commands above with the absolute path filled in.
+Run `marketplace remove` only when `marketplace list` shows the existing entry. The current CLI removes the installed marketplace plugin with that marketplace, so do not run a separate uninstall afterward. `claude plugin list` must show `void-grimoire@void-grimoire-dev` with the intended version.
 
 ### 5. Install into Pi
 
@@ -72,9 +77,10 @@ If `pi` is available:
 
 ```bash
 pi install ./ -l --approve
+pi list --approve
 ```
 
-Use project-local install (`-l`) for development unless the user explicitly asks for a global Pi install. `--approve` is required when Pi says the project is not trusted; do not use a `git:file://` URL for a local directory.
+Use project-local install (`-l`) for development unless the user explicitly asks for a global Pi install. `--approve` is required when Pi says the project is not trusted; do not use a `git:file://` URL for a local directory. `pi list --approve` must show this repository under project packages.
 
 ### 6. Install into OMP
 
@@ -111,8 +117,8 @@ Before saying the reinstall is complete, provide evidence for each available har
 | Target | Evidence |
 |---|---|
 | skills.sh | command output from `npx skills add` |
-| Claude Code | slash-command output, or explicit manual-blocker note |
-| Pi | `pi install` output |
+| Claude Code | `plugin list` shows the intended version |
+| Pi | `pi install` output and `pi list --approve` show the local repository |
 | OMP | `plugin list` and `discover` show intended version |
 | Codex | `codex plugin add` output, or exact CLI blocker |
 
@@ -122,7 +128,7 @@ Before saying the reinstall is complete, provide evidence for each available har
 |---|---|---|
 | OMP install uses stale remote code | Marketplace still points at GitHub or cache | Remove and re-add `void-grimoire-dev` from `./` |
 | OMP reports `package.json not found` | Installed through npm plugin lane | Use marketplace install, not direct path install |
-| Claude Code commands cannot run | Current harness cannot execute Claude slash commands | Report manual commands with absolute path |
+| Claude Code install is stale | Marketplace or cached plugin still points at an old source | Remove and re-add the listed local marketplace, then install the plugin |
 | Codex rejects `--force` | Codex plugin CLI changed or lacks that flag | Read `codex plugin --help` and use supported update/remove flow |
 | Version mismatch after install | Manifests were not updated consistently | Fix manifests, then reinstall again |
 
