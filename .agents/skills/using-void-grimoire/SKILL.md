@@ -1,6 +1,6 @@
 ---
 name: using-void-grimoire
-description: Use when onboarding to, auditing, or changing the Void Grimoire repository, including its skill catalog, plugin manifests, version, repo-local rules, or supported harness installation.
+description: Use when onboarding to, auditing, or changing the Void Grimoire repository, including its skill catalog, plugin manifests, version, or supported harness installation.
 ---
 
 # Using Void Grimoire
@@ -27,7 +27,7 @@ Before editing, return this orientation packet:
 ```text
 Boundary: utility library, not delivery orchestration
 Canonical sources: exact files that own this change
-Route: skill-forge, void-install-skills, direct docs/rules edit, or a combination
+Route: skill-forge, void-install-skills, direct documentation or metadata edit, or a combination
 Version: major, minor, patch, or unchanged, with reason
 Catalog impact: registry and README updates required or not required
 Stop condition: unresolved product boundary, missing source of truth, or none
@@ -43,7 +43,6 @@ Base the packet on repository evidence. Do not invent files, registries, generat
 | Add, revise, rename, or remove a shipped skill | `skills/<skill-name>/SKILL.md` | `skills/registry.json`, README catalog/count when membership changes, version manifests, local reinstall |
 | Change the plugin catalog | `skills/registry.json` | README catalog/count |
 | Change user-facing plugin documentation | `README.md`, relevant `docs/` file | Version only when repository policy requires it |
-| Change reusable agent guidance | `agents/` or `rules/` | README only when the public inventory changes |
 | Change repo-local installation behavior | `.agents/skills/void-install-skills/SKILL.md` | `.claude/skills` follows the symlink; do not edit it separately |
 | Change package or plugin metadata | `package.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.omp-plugin/marketplace.json`, `.codex-plugin/plugin.json` | Keep all version fields aligned |
 
@@ -59,7 +58,7 @@ Choose the narrowest matching route:
 |---|---|
 | Create, revise, audit, test, rename, or remove a skill | Invoke `skill-forge` before editing |
 | Reinstall after any skill, manifest, or repo-local agent-instruction change | Invoke `void-install-skills` after verification |
-| Edit only prose, rules, or agent definitions | Use the source map and repository conventions directly |
+| Edit only prose or package metadata | Use the source map and repository conventions directly |
 | Add delivery phases, acceptance gates, ambient state, or product orchestration | Stop and identify the boundary conflict |
 
 A request can require both `skill-forge` and `void-install-skills`. Do not copy either skill's command catalog into this skill.

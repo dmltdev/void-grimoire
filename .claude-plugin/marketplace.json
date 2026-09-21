@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "void-grimoire",
-      "description": "Additive Claude Code skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, context discipline, and TypeScript/web rule baselines",
-      "version": "3.5.2",
+      "description": "Additive coding-agent skills: session journaling, learned-correction persistence, prompt expansion, context discipline, safety checks, lookup helpers, and workflow assists",
+      "version": "4.0.0",
       "source": "./",
       "author": {
         "name": "Dmytro L.",

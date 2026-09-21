@@ -2,7 +2,7 @@
 
 ![Void Grimoire](void-grimoire.webp)
 
-Utility skills, agents, and rules for Claude Code. It covers operational gaps around session journaling, learned-correction persistence, prompt expansion, context discipline, TypeScript/web baselines, safety checks, lookup helpers, and small workflow assists.
+Utility skills for coding agents. It covers operational gaps around session journaling, learned-correction persistence, prompt expansion, context discipline, safety checks, lookup helpers, and small workflow assists.
 
 Boundary: this is a utility library, not a product-delivery framework. It does not enforce phases, own acceptance criteria, gate implementation, or maintain hidden project state. Skills load on demand via the `Skill` tool. Use the helper that matches the moment; ignore the rest.
 
@@ -33,7 +33,7 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-51 skills across 8 domains, one repo-local operational skill, plus a 3-agent toolkit and a plugin-local `rules/` reference tree. Pick by name:
+51 skills across 8 domains, plus one repo-local operational skill. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -45,18 +45,6 @@ Replace `session-summary` with any skill name from the list below.
 | **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
 | **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow | Destructive git safety; explicit-intent routing; active-remote resolution; commitlinted commits; branch-policy and pre-push gates; GitHub/GitLab CLI adapters; concise PR/MR descriptions |
 | **npm** | enforce-release-safety | Pre-publish safety checks |
-
-### Agents
-
-Read-on-demand subagents under `agents/`:
-
-- **`silent-failure-hunter`** — zero-tolerance review for swallowed errors, empty catch blocks, dangerous fallbacks, broken error propagation.
-- **`type-design-analyzer`** — evaluates type design across encapsulation, invariant expression, usefulness, and enforcement.
-- **`blast-radius-cartographer`** — read-only impact mapper for implementation planning. Produces DOCS/CODE/TESTS/MEMORY impact maps with evidence anchors before edits.
-
-### Rules
-
-Plugin-local `rules/` reference tree under three buckets: `common/` (language-agnostic baselines), `typescript/` (TS/JS-specific guidance with the matching common baseline inlined), and `web/` (frontend/web-specific guidance with the same flattening). Read on demand; never auto-injected.
 
 ### Repo-local operational skill
 
@@ -95,10 +83,6 @@ Void Grimoire deliberately stays small and additive:
 - **Utilities, not orchestration.** It helps with prompts, sessions, docs lookup, safety checks, cleanup, and tool use; it does not run a full SDLC.
 - **On-demand, not ambient.** No startup hook, no hidden `.void-grimoire/` state directory, no mandatory gate flow.
 - **Project-owned truth.** Your repo's tests, docs, schemas, issues, and agent instructions remain authoritative. These skills help find, update, or summarize them; they do not replace them.
-
-## Architecture
-
-The original architecture spec described a multi-gate flow with `.void-grimoire/` config, rules, and registry-driven routing. That system has been retired — the spec is kept in `docs/specs/` for historical reference but no longer reflects the plugin.
 
 ## Lore
 

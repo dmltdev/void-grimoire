@@ -1,7 +1,7 @@
 {
   "name": "void-grimoire",
-  "version": "3.5.2",
-  "description": "Additive coding-agent skills, agents, and rules: session journaling, learned-correction persistence, prompt expansion, context discipline, and TypeScript/web rule baselines",
+  "version": "4.0.0",
+  "description": "Additive coding-agent skills: session journaling, learned-correction persistence, prompt expansion, context discipline, safety checks, lookup helpers, and workflow assists",
   "author": {
     "name": "Dmytro L.",
     "email": "dmltdev@proton.me"
@@ -24,7 +24,7 @@
   "interface": {
     "displayName": "Void Grimoire",
     "shortDescription": "Additive workflow and utility skills",
-    "longDescription": "Utility skills, agents, and rules for coding agents: session journaling, learned-correction persistence, prompt expansion, context discipline, TypeScript/web baselines, safety checks, lookup helpers, and small workflow assists.",
+    "longDescription": "Utility skills for coding agents: session journaling, learned-correction persistence, prompt expansion, context discipline, safety checks, lookup helpers, and small workflow assists.",
     "developerName": "Dmytro L.",
     "category": "Developer Tools",
     "capabilities": ["Interactive", "Write"],

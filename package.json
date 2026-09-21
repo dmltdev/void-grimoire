@@ -1,7 +1,7 @@
 {
   "name": "void-grimoire",
-  "version": "3.5.2",
-  "description": "Utility skills, agents, and rules for coding agents",
+  "version": "4.0.0",
+  "description": "Utility skills for coding agents",
   "private": true,
   "license": "MIT",
   "homepage": "https://github.com/dmltdev/void-grimoire",
