@@ -51,7 +51,7 @@ Rules:
 4. Merge those facts into exactly 7 bullets; use 8 or 9 only when a critical fact would be lost.
 5. Apply the translation table and replace domain jargon with everyday words.
 6. Output only the flat bullet list.
-7. Verify the bullet count and source coverage before replying.
+7. Run the output preflight below and revise any failed check before replying.
 
 ## Translation table
 
@@ -120,9 +120,11 @@ Brief:
 
 ## Verification gate
 
-- Exactly 7 bullets by default, or 8 to 9 only when a critical fact would otherwise be hidden.
-- No nested bullets.
-- Every bullet uses common words where possible.
-- Goal, main behavior, boundaries, risks, and success measures are covered when present.
-- No unsupported recommendations, plans, or claims were added.
-- Important names, dates, thresholds, money, owners, and approval gaps are preserved.
+Before replying, inspect the draft line by line:
+
+1. Count every visible bullet line. Use exactly 7 by default. Use fewer only when the source contains fewer than 7 distinct important facts; short wording alone does not make a source short. Never use more than 9.
+2. Ensure every non-empty output line starts with `- ` at the left margin. Remove headings, numbered items, indentation, nested bullets, and prose outside the list.
+3. For each left-column term that appears in the source, use the corresponding right-column wording. For `metric`, the exact success number alone is also valid.
+4. Remove recommendations, next steps, opinions, or implementation details that the source does not support. Do not add a bullet explaining that you omitted them.
+5. State every missing approval or unresolved decision as unresolved; never decide it for the source.
+6. Compare the draft with the extracted facts and retain the goal, behavior, boundaries, risks, approvals, success measures, names, dates, money, and thresholds that matter.
