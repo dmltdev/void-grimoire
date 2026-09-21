@@ -44,10 +44,10 @@ Void Grimoire uses these sources:
 - `.claude-plugin/marketplace.json`
 - `.omp-plugin/marketplace.json`
 - `.codex-plugin/plugin.json`
-- `skills/registry.json`
+- `skills/<category-name>/<skill-name>/SKILL.md`
 - `.agents/skills/void-install-skills/SKILL.md`
 
-The Aven, content-extraction, and dmltdev plugins also use five version-bearing manifests. They do not all use a skill registry. Each has a plugin-local installer.
+The Aven, content-extraction, and dmltdev plugins also use five version-bearing manifests. Each plugin uses its skill directory structure as the membership authority and keeps a plugin-local installer.
 
 The installers share these rules:
 
@@ -155,7 +155,6 @@ The agent uses an initial version of `0.1.0` unless the repository has another p
 
 The agent adds optional files only when the plugin needs them. Optional files include:
 
-- a skill registry;
 - a changelog;
 - scripts;
 - references;
@@ -355,14 +354,14 @@ Expected behavior:
 - create both local operational skills;
 - verify each harness separately.
 
-#### Add a skill to a registryless plugin
+#### Add a skill to a plugin
 
 Prompt: "Add a transcript-cleanup skill to this plugin and ship the local update."
 
 Expected behavior:
 
 - use the plugin's current sources of truth;
-- do not create `skills/registry.json`;
+- do not invent a registry;
 - apply the local version policy;
 - reinstall through the local installer.
 
@@ -372,8 +371,8 @@ Prompt: "Rename this skill and update the plugin."
 
 Expected behavior:
 
-- remove the old canonical name;
-- update `skills/registry.json`;
+- remove the old canonical name and directory;
+- place the renamed skill under exactly one category;
 - update the README table and count;
 - update all manifest versions;
 - reinstall without an alias;
@@ -389,7 +388,7 @@ Add `manage-skill-plugin` to `dmltdev-skills`. Update that plugin's existing sou
 
 ### 10.2 First local contract
 
-Add `using-void-grimoire` to this repository. Update its registry, README, five manifests, and version. Reinstall with `void-install-skills`.
+Add `using-void-grimoire` under the repository's plugin-management skill category. Update the README, five manifests, and version. Reinstall with `void-install-skills`.
 
 ### 10.3 Owned plugin rollout
 

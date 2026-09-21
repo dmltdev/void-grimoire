@@ -11,7 +11,7 @@ This plugin works the same way.
 | Fantasy | Plugin |
 |---|---|
 | **Learns from its wielder** — pages fill themselves based on the mage's experiences and mistakes | `learn-correction` — persists user corrections to project AGENTS.md / CLAUDE.md |
-| Organizes spells into **schools of magic** (necromancy, illusion, conjuration...) | 6 domains: void-grimoire, workflow, docs, codebase, git, npm |
+| Organizes spells into **schools of magic** (necromancy, illusion, conjuration...) | Skills are physically grouped under 12 domain directories: plugin management, context, session, communication, planning, implementation, quality, documentation, reasoning, tools, git, release |
 | Spells have **prerequisites and chains** — you must know Fireball before Meteor | `depends-on`, `chains-to`, `suggests` — skill composition model |
 | Contains **wards and protections** against forbidden acts | `enforce-git-safety`, `enforce-release-safety` — guardrails against destructive actions |
 | The mage **chooses which spell to cast** rather than the book casting on its own | Skills load on demand via the `Skill` tool — no startup ritual, no auto-injection |
@@ -20,6 +20,6 @@ This plugin works the same way.
 
 A void grimoire is specifically one that draws power from *absence*. Its strength is not in what it contains, but in what it leaves to the wielder's judgement.
 
-The agent's learned corrections are the ink that fills the pages. The skill registry is the table of contents that grows with each school of magic the mage masters.
+The agent's learned corrections are the ink that fills the pages. The categorized skill tree is both the table of contents and the map from each spell to its school.
 
 The void is where the agent starts. The grimoire is what makes it wise.

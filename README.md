@@ -33,18 +33,22 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-51 skills across 8 domains, plus one repo-local operational skill. Pick by name:
+51 skills physically grouped across 12 domains, plus one repo-local operational skill. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
-| **void-grimoire** | using-void-grimoire, expand-prompt, learn-correction, autoresearch, skill-forge, infer-patterns, strategic-compact, unslop, unslop-design | Repository onboarding and plugin lifecycle routing, prompt expansion, self-learning, skill optimization, high-quality skill authoring, repo-pattern skill pack generation, context discipline, code slop cleanup with agent-instruction memory, and product UI unslopping |
-| **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-elevenlabs-tts, using-orx | External CLI/MCP wrappers — preflight, invocation, fallbacks, and plugin install/update workflows for herdr, Codex, oh-my-pi, adhd, agent-browser, ElevenLabs TTS, and OpenResearch |
-| **qa** | test-with-browser | Evidence-based UI verification — drive a browser against acceptance criteria, capture screenshots/console/network, write a report under `.test-results/` |
-| **workflow** | session-summary, session-usage-summary, session-friction, quick-recap, human-typed-plan, design-implementation, autonomous, engineering-recap, using-simple-english, atlas-research, ideal-example-clone, refactor-transaction, failure-memory-compiler, audio-plan, audio-recap, brief, peer-communication, document-ideas, document-adr | Session journaling, AI-usage feedback, append-only friction log for correction events, final red/yellow/green response status, human-owned implementation planning, repo-grounded approval-gated implementation design, task-scoped autonomous completion, completed engineering recaps, simple-English chat responses, evidence-backed Atlas research, ideal-example cloning, clean refactor cutovers, operational failure memory, TTS-ready plan/recap scripts, plain-language long-doc briefing, channel-aware peer communication, repository-local idea documentation, and convention-first Architecture Decision Records |
-| **thinking** | five-reasons-why, what-if | Evidence-bounded causal chains and decision-relevant scenario analysis |
-| **docs** | lookup-docs, index-docs | Documentation search via [qmd](https://github.com/tobi/qmd), with first-class openspec/specs awareness |
-| **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow | Destructive git safety; explicit-intent routing; active-remote resolution; commitlinted commits; branch-policy and pre-push gates; GitHub/GitLab CLI adapters; concise PR/MR descriptions |
-| **npm** | enforce-release-safety | Pre-publish safety checks |
+| **plugin-management** | using-void-grimoire, skill-forge, autoresearch, infer-patterns | Void Grimoire onboarding, skill authoring, optimization, and convention extraction |
+| **context** | expand-prompt, learn-correction, failure-memory-compiler | Prompt expansion, learned corrections, and failure-derived operational memory |
+| **session** | session-summary, session-usage-summary, session-friction, strategic-compact | Session journaling, usage review, friction capture, context compaction, and handoff preparation |
+| **communication** | peer-communication, using-simple-english, brief, engineering-recap, quick-recap, audio-plan, audio-recap | Peer messages, concise summaries, change recaps, status output, and spoken artifacts |
+| **planning** | human-typed-plan, design-implementation | Human-owned and approval-gated implementation planning |
+| **implementation** | autonomous, ideal-example-clone, refactor-transaction | Autonomous execution, exemplar-driven implementation, and clean refactor cutovers |
+| **quality** | unslop, unslop-design, test-with-browser | Code and interface cleanup plus browser-backed UI verification |
+| **documentation** | lookup-docs, index-docs, atlas-research, document-ideas, document-adr | Documentation lookup, indexing, research, idea capture, and architecture decisions |
+| **reasoning** | five-reasons-why, what-if | Causal analysis and bounded counterfactual exploration |
+| **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-elevenlabs-tts, using-orx | External CLI and browser wrappers, invocation, preflight, fallbacks, and plugin operations |
+| **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow | Git safety, commit, push, branch policy, and GitHub or GitLab workflows |
+| **release** | enforce-release-safety | Package release and publication safety |
 
 ### Repo-local operational skill
 
@@ -65,14 +69,14 @@ Replace `session-summary` with any skill name from the list below.
 
 ## How It Works
 
-Each skill is a `SKILL.md` file with frontmatter (`name`, `description`; some older skills also include `depends-on`, `chains-to`, `suggests`). Skills are loaded on demand — there is no startup hook, no `.void-grimoire/` directory, no forced gate flow.
+Each shipped skill is a `skills/<domain>/<skill-name>/SKILL.md` file with frontmatter (`name`, `description`; some older skills also include `depends-on`, `chains-to`, `suggests`). Skills are loaded on demand — there is no startup hook, no `.void-grimoire/` directory, no forced gate flow.
 
 Composition still works:
 - `depends-on` — listed skills must run first
 - `chains-to` — the named skill is invoked after this one completes
 - `suggests` — soft recommendation, agent checks if relevant
 
-`skills/registry.json` is a domain → skills catalog used for documentation. Claude Code loads relevant skills automatically via their descriptions; invoke any skill by name when you want it explicitly.
+The categorized `skills/` directory tree is the single domain map for shipped skills. The README mirrors that structure for humans. Claude Code loads relevant skills automatically via their descriptions; invoke any skill by name when you want it explicitly.
 
 Repo-local operational skills live in `.agents/skills`; `.claude/skills` points there by symlink.
 
