@@ -116,11 +116,6 @@
       "sourceType": "local",
       "computedHash": "fb55c8bd1b7cbacb3cd0222194e8534bda766f2f26dcc8351890315e3edb16dd"
     },
-    "herdr": {
-      "source": ".",
-      "sourceType": "local",
-      "computedHash": "0a652f35504bb38e7101deb62ba89de15ee210dcbad22191cd50a9ef479a7193"
-    },
     "human-typed-plan": {
       "source": ".",
       "sourceType": "local",
@@ -230,6 +225,11 @@
       "source": ".",
       "sourceType": "local",
       "computedHash": "cb2a976639147733413f0ae0dcd696bc7bd6435025cee887fde6af4326ec5fcc"
+    },
+    "using-herdr": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "bb397a9b114c79501728dcf6931545dd817387a39271497b992e488c7ab1058c"
     },
     "using-omp": {
       "source": ".",

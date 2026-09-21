@@ -1,6 +1,6 @@
 ---
-name: herdr
-description: "Control herdr from inside it. Manage workspaces and tabs, split panes, spawn agents, read output, and wait for state changes - all via CLI commands that talk to the running herdr instance over a local unix socket. Use when running inside herdr (HERDR_ENV=1)."
+name: using-herdr
+description: "Use when running inside herdr (HERDR_ENV=1) to manage workspaces and tabs, split panes, spawn agents, read output, and wait for state changes through the herdr CLI and its local Unix socket."
 ---
 
 # herdr - agent skill
