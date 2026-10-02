@@ -1,6 +1,6 @@
 {
   "name": "void-grimoire",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Utility skills for coding agents",
   "private": true,
   "license": "MIT",
@@ -16,6 +16,9 @@
     "session-summary",
     "prompt-expansion"
   ],
+  "scripts": {
+    "test": "node --test tests/skill-references.test.mjs"
+  },
   "pi": {
     "skills": ["skills", ".agents/skills/void-install-skills"]
   }

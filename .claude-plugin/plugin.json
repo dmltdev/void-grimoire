@@ -1,7 +1,7 @@
 {
   "name": "void-grimoire",
   "description": "Additive coding-agent skills: session journaling, learned-correction persistence, prompt expansion, context discipline, safety checks, lookup helpers, and workflow assists",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "author": {
     "name": "Dmytro L.",
     "email": "dmltdev@proton.me"
