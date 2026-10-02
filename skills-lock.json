@@ -76,6 +76,11 @@
       "sourceType": "local",
       "computedHash": "aa2de871d33d691cee3957e2bc9dcd229aea2e6557a14b76f8f84b69bc40abbf"
     },
+    "gh-stacked-pr": {
+      "source": ".",
+      "sourceType": "local",
+      "computedHash": "255dc346595f35a2f15e6e10745db3e1c03d1f9be0bdb61509a38afbc9a0af61"
+    },
     "gh-workflow": {
       "source": ".",
       "sourceType": "local",
@@ -99,7 +104,7 @@
     "git-pr": {
       "source": ".",
       "sourceType": "local",
-      "computedHash": "93b1bb63a7fadd0f922baff7828e609817b61224d28533c994c8a622ec38922a"
+      "computedHash": "47b77e46dd418375f4bf3911a9010bc0e09da674186a089bea5fcfa1a6f9507d"
     },
     "git-push": {
       "source": ".",
@@ -109,7 +114,7 @@
     "git-workflow": {
       "source": ".",
       "sourceType": "local",
-      "computedHash": "0361340edc70c88efc01907c41cd68badf72479e634a962bb023de8fcfff4df7"
+      "computedHash": "e86e22958af854d3258b1adfc3be6a5eb6ba128c13bc15d758f08a3ee873dc17"
     },
     "glab-workflow": {
       "source": ".",

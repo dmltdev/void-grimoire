@@ -17,6 +17,10 @@ Create or update reviewer-facing PR/MR text only when explicitly requested. Resp
 | Procedure | Resolve active remote, choose host adapter, inspect diff/range, draft or apply PR/MR text. |
 | Proof | Report PR/MR URL or rendered title/body preview; no unrequested push/commit occurred. |
 
+## Stacked creation is opt-in
+
+When the user explicitly asks to create stacked GitHub PRs, use `gh-stacked-pr` for topology and creation order; this skill still owns each layer's title/body. An ordinary PR request does not load that skill or create a stack. Suggesting stacked reviews is allowed, but wait for an explicit creation request.
+
 ## Preconditions
 
 - PR/MR intent is explicit.

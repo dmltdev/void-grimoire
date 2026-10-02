@@ -33,7 +33,7 @@ Replace `session-summary` with any skill name from the list below.
 
 ## What You Get
 
-51 skills physically grouped across 12 domains, plus one repo-local operational skill. Pick by name:
+52 skills physically grouped across 12 domains, plus one repo-local operational skill. Pick by name:
 
 | Domain | Skills | Description |
 |--------|--------|-------------|
@@ -47,7 +47,7 @@ Replace `session-summary` with any skill name from the list below.
 | **documentation** | lookup-docs, index-docs, atlas-research, document-ideas, document-adr | Documentation lookup, indexing, research, idea capture, and architecture decisions |
 | **reasoning** | five-reasons-why, what-if | Causal analysis and bounded counterfactual exploration |
 | **tools** | using-herdr, using-codex, using-omp, omp-plugins, using-adhd, using-agent-browser, using-elevenlabs-tts, using-orx | External CLI and browser wrappers, invocation, preflight, fallbacks, and plugin operations |
-| **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-workflow, glab-workflow | Git safety, commit, push, branch policy, and GitHub or GitLab workflows |
+| **git** | enforce-git-safety, git-workflow, git-active-remote, git-commit, git-branch-policy, git-push, git-pr, gh-stacked-pr, gh-workflow, glab-workflow | Git safety, commit, push, branch policy, explicit-request stacked GitHub PRs, and GitHub or GitLab workflows |
 | **release** | enforce-release-safety | Package release and publication safety |
 
 ### Repo-local operational skill
@@ -62,6 +62,7 @@ Replace `session-summary` with any skill name from the list below.
 - **`quick-recap`** — Adds the final red/yellow/green status-line convention for finished, pending, or blocked responses.
 - **`engineering-recap`**: Reports completed engineering work as Problem, Decision, Check, and Next; use it for delivery summaries and handoffs, not generic document briefs.
 - **`document-adr`**: Creates convention-first Architecture Decision Records for accepted or proposed hard-to-reverse decisions.
+- **`gh-stacked-pr`**: Create stacked GitHub PRs only when explicitly requested. The ordinary workflow may suggest it but does not invoke it automatically.
 - **`learn-correction`** — When you correct the AI ("don't mock the DB", "always use snake_case"), persists the correction to your project's `AGENTS.md` / `CLAUDE.md` so it survives future sessions.
 - **`expand-prompt`** — Turn a terse request ("add dark mode") into a structured intent: relevant docs, learned rules, decomposed sub-tasks. Requires explicit user approval before any action.
 - **`strategic-compact`** — Suggests manual `/compact` at phase boundaries (planning -> implementing -> verifying) so context survives the next phase rather than waiting for arbitrary auto-compaction.

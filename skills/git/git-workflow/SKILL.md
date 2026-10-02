@@ -23,6 +23,7 @@ Route git work by explicit user intent. A later git action is never implied by a
 |---|---|---|
 | "commit this", "make a commit", "write/commit these changes" | `git-commit` | push, PR/MR |
 | "push this", "publish branch", "update remote" | `git-push` | commit, PR/MR |
+| "create stacked PRs", "create a stacked GitHub PR", "create a stack of GitHub pull requests" | `gh-stacked-pr` with `git-pr` for each layer | unrequested commit, push, branch/history changes, merge |
 | "open/create/update PR", "open/create/update MR", "draft PR description" | `git-pr` | commit, push |
 | "commit and push" | `git-commit` then `git-push` | PR/MR |
 | "commit, push, and open PR/MR" | `git-commit`, `git-push`, `git-pr` | nothing beyond named actions |
@@ -38,6 +39,8 @@ Route git work by explicit user intent. A later git action is never implied by a
 - Do not infer push from a successful commit.
 - Do not ask when the user already named the action sequence.
 - If a mutating next step is ambiguous, choose the narrower safe action and stop.
+- GitHub stacked PR creation is opt-in. Load `gh-stacked-pr` only after the user explicitly asks to create a stack, not because changes are dependent or a branch already belongs to one.
+- The ordinary workflow may suggest stacking when separate dependent reviews would help; wait for the user's explicit creation request before loading or executing the stack skill.
 
 ## Required companion contracts
 
