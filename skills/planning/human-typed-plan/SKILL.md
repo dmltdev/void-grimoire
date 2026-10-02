@@ -1,7 +1,7 @@
 ---
 name: human-typed-plan
 description: Use when a developer wants AI help with a feature, bugfix, refactor, or implementation approach while keeping human ownership of code, typing, decisions, and understanding; especially requests to plan, explain logic, compare approaches, or provide implementation steps for the developer to write.
-depends-on: ["test-driven-development"]
+depends-on: []
 chains-to: null
 suggests: ["ideal-example-clone", "refactor-transaction"]
 ---

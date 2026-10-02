@@ -76,6 +76,9 @@ Composition still works:
 - `chains-to` — the named skill is invoked after this one completes
 - `suggests` — soft recommendation, agent checks if relevant
 
+Composition fields refer to canonical shipped skill names, checked with `npm test`.
+If a skill intentionally uses an external helper, its body must identify the provider, installation source, required or optional status, and behavior when the helper is unavailable. Do not encode an external helper as an unresolved internal composition edge.
+
 The categorized `skills/` directory tree is the single domain map for shipped skills. The README mirrors that structure for humans. Claude Code loads relevant skills automatically via their descriptions; invoke any skill by name when you want it explicitly.
 
 Repo-local operational skills live in `.agents/skills`; `.claude/skills` points there by symlink.

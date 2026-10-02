@@ -3,7 +3,7 @@ name: audio-recap
 description: Turn changes made by an agent into a concise Markdown script for text-to-speech. Use only when the user explicitly asks for an audio recap, spoken recap, TTS-ready change summary, or invokes /audio-recap.
 depends-on: []
 chains-to: null
-suggests: ["using-elevenlabs-tts", "audio-plan", "visual-recap"]
+suggests: ["using-elevenlabs-tts", "audio-plan"]
 ---
 
 # Audio Recap
